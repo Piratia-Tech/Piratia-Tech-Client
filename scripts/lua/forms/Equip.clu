@@ -1,0 +1,856 @@
+
+function addEquip(x,y,name,form,skillid)
+	_G["img"..name] = UI_CreateCompent( form, IMAGE_TYPE, "img"..name, 36,36, x-2 ,y -2 )
+	UI_LoadImage( _G["img"..name], "texture/ui/ui2/eqform2/"..name..".png", NORMAL, 36,36, 0, 0 )
+	_G[name] = UI_CreateCompent( form, COMMAND_ONE_TYPE, name, 32, 32, x ,y )
+	if skillid then
+		UI_AddCompent( skillid, _G["img"..name] )
+		UI_AddCompent( skillid, _G[name] )
+	end
+end
+
+function addEquipGroup(X,Y,Xoff,Yoff,names,form,skillid)
+	for i,v in pairs(names) do
+		addEquip(X + (i-1)* Xoff ,Y + (i-1)* Yoff,v,form,skillid)
+	end
+end
+
+
+frmInv = UI_CreateForm( "frmInv", FALSE, 368, 468, 198, 160, TRUE, FALSE )
+UI_ShowForm( frmInv, FALSE )
+UI_AddFormToTemplete( frmInv, FORM_MAIN )
+UI_SetIsDrag( frmInv, TRUE )
+
+imgfrmInv = UI_CreateCompent( frmInv, IMAGE_TYPE, "imgfrmInv", 368, 468, 0, 0 )
+UI_LoadImage( imgfrmInv, "texture/ui/ui2/inventar.png", NORMAL, 368, 468, 0, 0 )
+
+-- Close Button
+btnClose = UI_CreateCompent( frmInv, BUTTON_TYPE, "btnClose", 25, 26, 342, 14 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/buttons.png", 25, 26, 381, 3, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- Title Bar
+labTitle = UI_CreateCompent( frmInv, LABELEX_TYPE, "labTitle", 400, 150, 10, 2 )
+UI_SetCaption( labTitle, "")
+UI_SetTextColor( labTitle, COLOR_BLACK )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+pgePublic = UI_CreateCompent( frmInv, PAGE_TYPE, "pgePublic", 192, 325, 8, 16 )
+UI_SetPageButton( pgePublic, PAGE_BUTTON_CUSTOM, 48, 16 )
+
+local tabX = 14
+local tabXoff= 56
+local tabY = 2
+
+local tabsX = 55
+local tabsY = 35
+
+--Equip Tab
+skillid = UI_CreatePageItem( pgePublic )
+ttlNum = UI_GetPageItemObj( skillid, PAGE_ITEM_TITLE )
+UI_LoadImage( ttlNum, "texture/ui/ui2/inventar.png", PAGE_ITEM_TITLE_ACTIVE, 36, 29, 377, 313 )
+UI_LoadImage( ttlNum, "texture/ui/ui2/inventar.png", PAGE_ITEM_TITLE_NORMAL, 36, 29, 414, 313 )
+UI_SetPos( ttlNum, 15, 15 )
+UI_SetSize( ttlNum, 36, 29 )
+UI_SetHint( ttlNum, "\193\238\229\226\224\255 \253\234\232\239\232\240\238\226\234\224" )
+
+
+-------------------------------------------------------------
+--Левая колонка
+addEquipGroup(23,50,0,40,{ "cmdNecklace","cmdPet","cmdWing"  },frmInv,skillid) 
+--2 колонка
+addEquipGroup(67,50,0,40,{   "cmdCirclet1","cmdRightHand"  },frmInv,skillid) 
+--3 колонка
+addEquipGroup(111,50,0,40,{  "cmdCirclet2","cmdArmet","cmdMount"   },frmInv,skillid)
+--4 колонка
+addEquipGroup(155,50,0,40,{  "cmdJewelry1","cmdBody","cmdCloak" },frmInv,skillid) 
+--5 колонка
+addEquipGroup(199,50,0,40,{  "cmdJewelry2","cmdGlove"   },frmInv,skillid) 
+--6 колонка
+addEquipGroup(243,50,0,40,{  "cmdJewelry3","cmdShoes"   },frmInv,skillid) 
+--Правая колонка
+addEquipGroup(287,50,0,40,{  "cmdJewelry4","cmdLeftHand","cmdRearPet"   },frmInv,skillid) 
+
+UI_SetHint( cmdArmet, "\216\235\229\236" )
+UI_SetHint( cmdBody, "\193\240\238\237\255" )
+UI_SetHint( cmdNecklace, "\206\230\229\240\229\235\252\229" )
+UI_SetHint( cmdRightHand, "\206\240\243\230\232\229" )
+UI_SetHint( cmdLeftHand, "\217\232\242" )
+UI_SetHint( cmdGlove, "\207\229\240\247\224\242\234\224" )
+UI_SetHint( cmdCirclet1, "\202\238\235\252\246\238 1" )
+UI_SetHint( cmdCirclet2, "\202\238\235\252\246\238 2" )
+UI_SetHint( cmdShoes, "\193\238\242\232\237\234\232" )
+UI_SetHint( cmdJewelry1, "\193\240\224\241\235\229\242 1" )
+UI_SetHint( cmdJewelry2, "\193\240\224\241\235\229\242 2" )
+UI_SetHint( cmdJewelry3, "\207\238\255\241" )
+UI_SetHint( cmdJewelry4, "\205\224\240\243\247\232" )
+UI_SetHint( cmdWing, "\202\240\251\235\252\255" )
+UI_SetHint( cmdMount, "\194\229\240\245\238\226\238\233 \207\232\242\238\236\229\246" )
+UI_SetHint( cmdCloak, "\207\235\224\249" )
+UI_SetHint( cmdRearPet, "\193\238\229\226\238\233 \207\232\242\238\236\229\246" )
+UI_SetHint( cmdPet, "\212\229\255" )
+
+UI_SetHint( cmdFaceApp, "\204\229\228\224\235\252 \208\229\241\229\242\224" )
+UI_SetTag( cmdFaceApp, 20 ) 
+UI_SetTag( cmdArmet, enumEQUIP_HEAD )
+UI_SetTag( cmdBody, enumEQUIP_BODY )
+UI_SetTag( cmdNecklace, enumEQUIP_NECK )
+UI_SetTag( cmdRightHand, enumEQUIP_RHAND )
+UI_SetTag( cmdLeftHand, enumEQUIP_LHAND )
+UI_SetTag( cmdGlove, enumEQUIP_GLOVE )
+UI_SetTag( cmdCirclet1, enumEQUIP_HAND1 )
+UI_SetTag( cmdCirclet2, enumEQUIP_HAND2 )
+UI_SetTag( cmdShoes, enumEQUIP_SHOES )
+UI_SetTag( cmdJewelry1, enumEQUIP_Jewelry1 )
+UI_SetTag( cmdJewelry2, enumEQUIP_Jewelry2 )
+UI_SetTag( cmdJewelry3, enumEQUIP_Jewelry3 )
+UI_SetTag( cmdJewelry4, enumEQUIP_Jewelry4 )
+UI_SetTag( cmdWing, enumEQUIP_WING )
+UI_SetTag( cmdCloak, 15 )
+UI_SetTag( cmdPet, 16 )
+UI_SetTag( cmdRearPet, 17 )
+UI_SetTag( cmdMount, 18 )
+
+
+--ui3dCha = UI_CreateCompent( frmInv, UI3D_COMPENT, "ui3dCha", 1024, 576, 138, 220 )
+
+btnChaLeft3d = UI_CreateCompent( frmInv, BUTTON_TYPE, "btnChaLeft3d", 33, 32, 80,378 )
+--UI_LoadButtonImage( btnChaLeft3d, "texture/ui/ui2/inventar.png", 33, 32, 35, 594, TRUE )
+
+btnChaRight3d = UI_CreateCompent( frmInv, BUTTON_TYPE, "btnChaRight3d", 33, 32, 165,378 )
+--UI_LoadButtonImage( btnChaRight3d, "texture/ui/ui2/inventar.png",  33, 32, 101, 530, TRUE )
+
+UI_AddCompent( skillid, btnChaLeft3d )
+UI_AddCompent( skillid, btnChaRight3d )
+--UI_AddCompent( skillid, ui3dCha )
+
+
+
+-------------------------------------------Apparel Tab
+skillid = UI_CreatePageItem( pgePublic )
+ttlNum = UI_GetPageItemObj( skillid, PAGE_ITEM_TITLE )
+UI_LoadImage( ttlNum, "texture/ui/ui2/inventar.png", PAGE_ITEM_TITLE_ACTIVE, 36, 29, 452, 347 )
+UI_LoadImage( ttlNum, "texture/ui/ui2/inventar.png", PAGE_ITEM_TITLE_NORMAL, 36, 29, 414, 347 )
+UI_SetPos( ttlNum, 55 , 15 )
+UI_SetSize( ttlNum, 36, 29 )
+UI_AddCompent( skillid, lstNum )
+UI_SetHint( ttlNum, "\192\239\224\240\229\235\232 \232 \253\244\244\229\234\242\251" )
+
+
+--Левая колонка
+addEquipGroup(23,50,0,40,{ "cmdStaffApp","cmdPet","cmdFaceApp"  },frmInv,skillid) 
+--2 колонка
+addEquipGroup(67,50,0,40,{   "cmdGreatSwordApp","cmdShieldApp"  },frmInv,skillid) 
+--3 колонка
+addEquipGroup(111,50,0,40,{  "cmdSword1App","cmdBowApp","cmdSword2App"   },frmInv,skillid)
+--4 колонка
+addEquipGroup(155,50,0,40,{  "cmdGunApp","cmdBodyApp","cmdCloak" },frmInv,skillid) 
+--5 колонка
+addEquipGroup(199,50,0,40,{  "cmdPetApp","cmdGlowApp"   },frmInv,skillid) 
+--6 колонка
+addEquipGroup(243,50,0,40,{  "cmdArmetApp","cmdShoesApp"   },frmInv,skillid) 
+--Правая колонка
+addEquipGroup(287,50,0,40,{  "cmdDaggerApp","cmdGloveApp","cmdRearPet"   },frmInv,skillid)
+
+UI_SetHint( cmdPetApp, "\192\239\224\240\229\235\252 \228\235\255 \212\229\232" ) --Апарель для Феи
+UI_SetTag( cmdPetApp, 24 ) 
+UI_SetHint( cmdDaggerApp, "\192\239\224\240\229\235\252 \202\232\237\230\224\235\224" ) --Апарель Кинжала
+UI_SetTag( cmdDaggerApp, 26 ) 
+UI_SetHint( cmdGunApp, "\192\239\224\240\229\235\252 \204\243\248\234\229\242\224" ) -- Апарель Мушкета
+UI_SetTag( cmdGunApp, 27 ) 
+UI_SetHint( cmdSword1App, "\192\239\224\240\229\235\252 \206\228\237\238\240\243\247\237\238\227\238 \236\229\247\224" ) --Апарель Одноручного меча
+UI_SetTag( cmdSword1App, 28 ) 
+UI_SetHint( cmdGreatSwordApp, "\192\239\224\240\229\235\252 \196\226\243\240\243\247\237\238\227\238 \236\229\247\224" ) --Апарель Двуручного меча
+UI_SetTag( cmdGreatSwordApp, 29 ) 
+UI_SetHint( cmdArmetApp, "\192\239\224\240\229\235\252 \216\235\229\236\224" ) -- Апарель Шлема
+UI_SetTag( cmdArmetApp, 19 ) 
+UI_SetHint( cmdFaceApp, "\192\239\224\240\229\235\252 \227\238\235\238\226\237\238\227\238 \243\225\238\240\224" ) -- Апарель головного убора 
+UI_SetTag( cmdFaceApp, 20 ) 
+UI_SetHint( cmdBodyApp, "\192\239\224\240\229\235\252 \193\240\238\237\232" ) -- Апарель Брони
+UI_SetTag( cmdBodyApp, 21 ) 
+UI_SetHint( cmdGloveApp, "\192\239\224\240\229\235\252 \207\229\240\247\224\242\238\234" ) -- Апарель Перчаток
+UI_SetTag( cmdGloveApp, 22 )
+UI_SetHint( cmdShoesApp, "\192\239\224\240\229\235\252 \193\238\242\232\237\238\234" ) -- Апарель Ботинок
+UI_SetTag( cmdShoesApp, 23 )
+UI_SetHint( cmdGlowApp, "\192\239\224\240\229\235\252 \221\244\244\229\234\242\224" ) -- Апарель Эффекта
+UI_SetTag( cmdGlowApp, 25 ) 
+UI_SetHint( cmdStaffApp, "\192\239\224\240\229\235\252 \207\238\241\238\245\224" ) -- Апарель Посоха
+UI_SetTag( cmdStaffApp, 30 )
+UI_SetHint( cmdBowApp, "\192\239\224\240\229\235\252 \203\243\234\224" ) -- Апарель Лука
+UI_SetTag( cmdBowApp, 31 ) 
+UI_SetHint( cmdSword2App, "\192\239\224\240\229\235\252 \206\228\237\238\240\243\247\237\238\227\238 \236\229\247\224" ) --Апарель Одноручного меча
+UI_SetTag( cmdSword2App, 32 ) 
+UI_SetHint( cmdShieldApp, "\192\239\224\240\229\235\252 \217\232\242\224" ) -- Апарель Щита
+UI_SetTag( cmdShieldApp, 33 )  
+
+
+-------------------------------------------Temp Tab
+skillid = UI_CreatePageItem( pgePublic )
+ttlNum = UI_GetPageItemObj( skillid, PAGE_ITEM_TITLE )
+UI_LoadImage( ttlNum, "texture/ui/ui2/inventar.png", PAGE_ITEM_TITLE_ACTIVE, 36, 29, 452, 279 )
+UI_LoadImage( ttlNum, "texture/ui/ui2/inventar.png", PAGE_ITEM_TITLE_NORMAL, 36, 29, 414, 279 )
+UI_SetPos( ttlNum, 305, 15 )
+UI_SetSize( ttlNum, 36, 29 )
+
+
+grid = UI_CreateCompent( frmInv, IMAGE_TYPE, "grid", 316,150, 19,54 )
+UI_LoadImage( grid, "texture/ui/ui2/inventar.png", NORMAL, 316,150, 253, 564 )
+UI_AddCompent( skillid, grid )
+
+
+grdTempBag = UI_CreateCompent( frmInv, GOODS_GRID_TYPE, "grdTempBag", 316, 150, 19, 54 ) 
+UI_SetGridSpace( grdTempBag, 6, 5 )
+UI_SetGridContent( grdTempBag, 3, 8 )
+UI_SetGridUnitSize( grdTempBag, 32, 32 )
+UI_SetMargin( grdTempBag, 3, 3, 0, 0 )
+
+UI_AddCompent( skillid, grdTempBag )
+
+--Скролл
+local scrollid = UI_GetScroll( grdTempBag )
+UI_SetSize( scrollid, 9, 1 )
+
+-- Скролл вверх
+local id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 55, true )
+UI_SetSize( id, 13, 9 )
+
+-- Скролл ползунок
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/ui2/buttons.png", COMPENT_BACK, 13, 8, 387, 84 )
+UI_SetSize( id, 13, 8 )
+
+-- Скролл вниз
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 69, true )
+UI_SetSize( id, 13, 9 )
+UI_SetPos( id, 0, 102 )   -- <<< добавь: 102 = 111 - 9  (подняли на 39 px)
+
+
+grdItem = UI_CreateCompent( frmInv, GOODS_GRID_TYPE, "grdItem", 269, 189, 66,190 ) 
+UI_SetGridSpace( grdItem, 6, 5 )
+UI_SetGridContent( grdItem, 15, 6 )
+UI_SetGridUnitSize( grdItem, 32, 32 )
+UI_SetMargin( grdItem, 3, 3, 0, 0 )
+
+local impgoldplacementX = 200
+local impgoldplacementY = 342
+
+labItemgoldnumber = UI_CreateCompent( frmInv, LABELEX_TYPE, "labItemgoldnumber", 108, 12, 57, 388 )
+UI_SetTextColor( labItemgoldnumber, COLOR_WHITE )
+UI_SetLabelExFont( labItemgoldnumber, DEFAULT_FONT, TRUE )
+UI_SetHint( labItemgoldnumber , "\199\238\235\238\242\238" )
+
+labItemgoldnumber = UI_CreateCompent( frmInv, LABELEX_TYPE, "labItemgoldnumber", 108, 12, 57, 388 )
+UI_SetTextColor( labItemgoldnumber, COLOR_WHITE )
+UI_SetLabelExFont( labItemgoldnumber, DEFAULT_FONT, TRUE )
+UI_SetHint( labItemgoldnumber , "\199\238\235\238\242\238" )
+
+labItemIMPnumber = UI_CreateCompent( frmInv, LABELEX_TYPE, "labItemIMPnumber", 108, 12, 57, 430 )
+UI_SetTextColor( labItemIMPnumber, COLOR_GREEN )
+UI_SetLabelExFont( labItemIMPnumber, DEFAULT_FONT, TRUE)
+UI_SetHint( labItemIMPnumber , "\202\240\232\241\242\224\235\251" )
+
+--Скролл
+local scrollid = UI_GetScroll( grdItem )
+UI_SetSize( scrollid, 9, 1 )
+
+-- Скролл вверх
+local id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 55, true )
+UI_SetSize( id, 13, 9 )
+
+-- Скролл ползунок
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/ui2/buttons.png", COMPENT_BACK, 13, 8, 387, 84 )
+UI_SetSize( id, 13, 8 )
+
+-- Скролл вниз
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 69, true )
+UI_SetSize( id, 13, 9 )
+
+--sort dir (which is upper left)
+local startX = 360
+local startY = 335
+
+local lockX = startX + 36
+local lockY = startY + 41
+
+local lockitemX = startX+52
+local lockitemY = lockY + -29
+
+local trashX = startX + 54
+local trashY = startY + 37
+
+btnLock = UI_CreateCompent( frmInv, BUTTON_TYPE, "btnLock", 20, 20, 260, 427 )
+imgLock = UI_CreateCompent( frmInv, IMAGE_TYPE, "imgLock", 13, 16, 260, 427 )
+UI_LoadImage( imgLock, "texture/ui/ui2/inventar.png",NORMAL, 15, 15, 455, 393, TRUE )
+UI_SetHint( imgLock, "\208\224\231\225\235\238\234\232\240\238\226\224\242\252 \232\237\226\229\237\242\224\240\252" )  --Разблокировать инвентарь
+
+imgUnLock = UI_CreateCompent( frmInv, IMAGE_TYPE, "imgUnLock", 20, 20, 260, 427)
+UI_LoadImage( imgUnLock, "texture/ui/ui2/inventar.png",NORMAL, 13, 16, 423, 392, TRUE )
+UI_SetHint( imgUnLock, "\199\224\225\235\238\234\232\240\238\226\224\242\252 \232\237\226\229\237\242\224\240\252" )  --Заблокировать инвентарь
+
+btnbrush = UI_CreateCompent( frmInv, BUTTON_TYPE, "btnbrush", 20, 20, 315, 425 )
+UI_LoadButtonImage( btnbrush, "texture/ui/ui2/inventar.png", 12, 16, 484, 392, TRUE ) 
+cmdLost = UI_CreateCompent( frmInv, COMMAND_ONE_TYPE, "cmdLost", 20, 20,315, 425 )
+UI_SetTag( cmdLost, 999 )
+UI_SetHint( cmdLost, "\211\228\224\235\232\242\252" ) --Удалить
+
+btnLockItem = UI_CreateCompent( frmInv, BUTTON_TYPE, "btnLockItem", 21, 20, 230,427 )
+UI_LoadImage( btnLockItem, "texture/ui/ui2/inventar.png", 0, 21, 20, 360, 534 )
+UI_LoadImage( btnLockItem, "texture/ui/ui2/inventar.png", 1, 21, 20, 381, 534 )
+UI_LoadImage( btnLockItem, "texture/ui/ui2/inventar.png", 2, 21, 20, 345, 657 )
+UI_SetHint( btnLockItem, "\199\224\225\235\238\234\232\240\238\226\224\242\252/\208\224\231\225\235\238\234\232\240\238\226\224\242\252 \239\240\229\228\236\229\242" ) -- Заблокировать/Разблокировать предмет
+
+
+openCards = UI_CreateCompent( frmInv, BUTTON_TYPE, "openCards", 0, 0, 0, 0 )
+--UI_LoadImage( openCards, "texture/ui/custom/coButtons.png", 0, 10, 10, 277,68 )
+--UI_LoadImage( openCards, "texture/ui/custom/coButtons.png", 1, 10, 10, 287,68 )
+--UI_LoadImage( openCards, "texture/ui/custom/coButtons.png", 2, 10, 10, 297,68 )
+--UI_SetHint( openCards, "Open Card Form" )
+
+
+
+-----------------------------------------------------------------------
+-- Cards window
+-----------------------------------------------------------------------
+
+formX = 194
+formY = 120
+frmCards = UI_CreateForm( "frmCards", FALSE, formX,formY, 198+242+242, 160, TRUE, FALSE )
+UI_ShowForm( frmCards, FALSE )
+UI_AddFormToTemplete( frmCards, FORM_MAIN )
+UI_SetIsDrag( frmCards, TRUE )
+
+imgItemTop = UI_CreateCompent( frmCards, IMAGE_TYPE, "imgItemTop", formX,formY, 0, 0 )
+UI_LoadImage( imgItemTop, "texture/ui/custom/frmCards.png", NORMAL, formX,formY, 0, 0 )
+
+btnClose = UI_CreateCompent( frmCards, BUTTON_TYPE, "btnClose", 14, 14, 173, 0 )
+UI_LoadButtonImage( btnClose, "texture/ui/PublicC.tga", 14, 14, 116, 175, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- Form Label
+labTitle = UI_CreateCompent( frmCards, LABELEX_TYPE, "labTitle", 400, 150, 10, 1 )
+UI_SetCaption( labTitle, "Cards GUI")
+UI_SetTextColor( labTitle, COLOR_BLACK )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+
+
+addEquipGroup(22,36,0,55,{"cmdCards"},frmCards)
+
+UI_SetHint( cmdCards, "Card" )
+UI_SetTag( cmdCards, 34 ) 
+
+
+
+
+-----------------------------------------------------------------------
+-- Навыки Боевые
+-----------------------------------------------------------------------
+frmSkill = UI_CreateForm( "frmSkill", FALSE, 198, 394, 396, 160, FALSE, FALSE )
+UI_FormSetHotKey( frmSkill, ALT_KEY, HOTKEY_S ) 
+UI_ShowForm( frmSkill, TRUE )
+UI_AddFormToTemplete( frmSkill, FORM_MAIN )
+UI_SetIsDrag( frmSkill, TRUE )
+--UI_SetFormStyle( frmSkill, 0 )
+--UI_SetAlpha( frmSkill, 200 )
+
+-- ���ر���ͼƬ
+imgSkillBTop = UI_CreateCompent( frmSkill, IMAGE_TYPE, "imgSkillBTop", 198, 256, 0, 0 )
+UI_LoadImage( imgSkillBTop, "texture/ui/ui2/PublicD.png", NORMAL, 198, 256, 0, 0 )
+imgSkillBDown = UI_CreateCompent( frmSkill, IMAGE_TYPE, "imgSkillBDown", 198, 138, 0, 256 )
+UI_LoadImage( imgSkillBDown, "texture/ui/ui2/PublicD2.png", NORMAL, 198, 138, 0, 0 )
+
+imgSkillTop = UI_CreateCompent( frmSkill, IMAGE_TYPE, "imgSkillTop", 177, 275, 7, 54 )
+UI_LoadImage( imgSkillTop, "texture/ui/ui2/Skill.png", NORMAL, 175, 275, 0, 0 )
+imgSkillDown = UI_CreateCompent( frmSkill, IMAGE_TYPE, "imgSkillDown", 177, 19, 7, 310 )
+UI_LoadImage( imgSkillDown, "texture/ui/ui2/ShipBuild2.png", NORMAL, 175, 18, 80, 233 )
+
+imgSkillD = UI_CreateCompent( frmSkill, IMAGE_TYPE, "imgSkillD", 184, 43, 7, 330 )
+UI_LoadImage( imgSkillD, "texture/ui/ui2/TalkM.png", NORMAL, 184, 43, 0, 213 )
+
+imgSkillDL = UI_CreateCompent( frmSkill, IMAGE_TYPE, "imgSkillDL", 36, 36, 15, 334 )
+UI_LoadImage( imgSkillDL, "texture/ui/ui2/PublicC.png", NORMAL, 36, 36, 167, 59 )
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+--����ʣ�༼�ܵ���Ϣ
+imgSkillP = UI_CreateCompent( frmSkill, IMAGE_TYPE, "imgSkillP", 39, 18, 132, 296 )
+UI_LoadImage( imgSkillP, "texture/ui/ui2/SysBotton4.png", NORMAL, 39, 18, 106, 99 )
+
+labFront = UI_CreateCompent( frmSkill, LABELEX_TYPE, "labFront", 59, 11, 69, 299 )
+UI_SetCaption( labFront, "Skill Pts" )
+UI_SetTextColor( labFront, COLOR_WHITE )
+UI_SetLabelExFont( labFront, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+--ս�����ܵ�
+labPoint = UI_CreateCompent( frmSkill, LABELEX_TYPE, "labPoint", 19, 11, 143, 299 )
+UI_SetCaption( labPoint, "100" )
+UI_SetTextColor( labPoint, COLOR_BLACK )
+UI_SetLabelExFont( labPoint, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+--����ܵ�
+labPoint1 = UI_CreateCompent( frmSkill, LABELEX_TYPE, "labPoint1", 19, 11, 143, 299 )
+UI_SetCaption( labPoint1, "100" )
+UI_SetTextColor( labPoint1, COLOR_BLACK )
+UI_SetLabelExFont( labPoint1, DEFAULT_FONT, TRUE, COLOR_WHITE )
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+--�����رհ�ť
+btnClose = UI_CreateCompent( frmSkill, BUTTON_TYPE, "btnClose", 20, 20, 177, 3 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/buttons.png", 25, 26, 381, 3, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+
+-- ���ؽ���title
+labTitle = UI_CreateCompent( frmSkill, LABELEX_TYPE, "labTitle", 400, 150, 10, 3 )
+UI_SetCaption( labTitle, "")
+UI_SetTextColor( labTitle, COLOR_BLACK )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+--����ս�������б�
+lstSkill = UI_CreateCompent( frmSkill, SKILL_LIST_TYPE, "lstSkill", 183, 275, 5, -20 )
+UI_SetMargin( lstSkill, 1, 4, 3, 5 )
+UI_SetListRowHeight( lstSkill, 38 )
+--UI_ListLoadSelectImage( lstSkill, "texture/ui/button.dds", 148, 32, 38, 175 )
+
+UI_LoadSkillListButtonImage( lstSkill, "texture/ui/ui2/Quest1.png", 17, 17, 4, 198, 17, 17 )
+
+
+--��ù�����
+scrollid = UI_GetScroll( lstSkill)
+UI_SetSize( scrollid, 11, 1 )
+--UI_LoadImage( scrollid, "texture/ui/PublicC.tga", COMPENT_BACK, 11, 1, 194, 13 )
+
+--�������ϰ�ť
+id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 55, true )
+UI_SetSize( id, 11, 9 )
+
+--���ع�����
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/ui2/buttons.png", COMPENT_BACK, 13, 8, 387, 84 )
+UI_SetSize( id, 11, 43 )
+
+--�������°�ť
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 69, true )
+UI_SetSize( id, 11, 9 )
+
+--����������б�
+lstSkillW = UI_CreateCompent( frmSkill, SKILL_LIST_TYPE, "lstSkillW", 183, 275, 5, -20 )
+UI_SetMargin( lstSkillW, 1, 4, 3, 5 )
+UI_SetListRowHeight( lstSkillW, 38 )
+--UI_ListLoadSelectImage( lstSkillW, "texture/ui/button.dds", 148, 32, 38, 175 )
+UI_LoadSkillListButtonImage( lstSkillW, "texture/ui/ui2/Quest1.png", 17, 17, 4, 198, 17, 17 )
+
+--��ù�����
+scrollid = UI_GetScroll( lstSkillW )
+UI_SetSize( scrollid, 11, 1 )
+--UI_LoadImage( scrollid, "texture/ui/PublicC.tga", COMPENT_BACK, 11, 1, 194, 13 )
+
+--�������ϰ�ť
+id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 55, true )
+UI_SetSize( id, 11, 9 )
+
+--���ع�����
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/ui2/buttons.png", COMPENT_BACK, 13, 8, 387, 84 )
+UI_SetSize( id, 11, 43 )
+
+--�������°�ť
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 69, true )
+UI_SetSize( id, 11, 9 )
+
+
+--�������ϼ����б�
+lstSkillS = UI_CreateCompent( frmSkill, SKILL_LIST_TYPE, "lstSkillS", 183, 275, 5, -20 )
+UI_SetMargin( lstSkillS, 1, 4, 3, 5 )
+UI_SetListRowHeight( lstSkillS, 38 )
+--UI_ListLoadSelectImage( lstSkillS, "texture/ui/button.dds", 148, 32, 38, 175 )
+
+UI_LoadSkillListButtonImage( lstSkillS, "texture/ui/ui2/Quest1.png", 17, 17, 4, 198, 17, 17 )
+
+
+--��ù�����
+scrollid = UI_GetScroll( lstSkillS )
+UI_SetSize( scrollid, 11, 1 )
+--UI_LoadImage( scrollid, "texture/ui/PublicC.tga", COMPENT_BACK, 11, 1, 194, 13 )
+
+--�������ϰ�ť
+id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 55, true )
+UI_SetSize( id, 11, 9 )
+
+--���ع�����
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/ui2/buttons.png", COMPENT_BACK, 13, 8, 387, 84 )
+UI_SetSize( id, 11, 43 )
+
+--�������°�ť
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 69, true )
+UI_SetSize( id, 11, 9 )
+
+--����ҳ��
+pgeSkill = UI_CreateCompent( frmSkill, PAGE_TYPE, "pgeSkill", 211, 233, 11, 79 )
+UI_SetPageButton( pgeSkill, PAGE_BUTTON_CUSTOM, 48, 16 )
+
+--ս������
+skillid = UI_CreatePageItem( pgeSkill )
+ttlBattle = UI_GetPageItemObj( skillid, PAGE_ITEM_TITLE )
+UI_LoadImage( ttlBattle, "texture/ui/ui2/player2.png", PAGE_ITEM_TITLE_NORMAL, 49, 35, 103, 113 )
+UI_LoadImage( ttlBattle, "texture/ui/ui2/player2.png", PAGE_ITEM_TITLE_ACTIVE, 49, 35, 48, 113 )
+UI_SetPos( ttlBattle, 12, -54 )
+UI_SetSize( ttlBattle, 49, 35 )
+UI_AddCompent( skillid, lstSkill )
+UI_AddCompent( skillid, imgSkillP )
+UI_AddCompent( skillid, labFront )
+UI_AddCompent( skillid, labPoint )
+
+--�����
+skillid = UI_CreatePageItem( pgeSkill )
+ttlLive = UI_GetPageItemObj( skillid, PAGE_ITEM_TITLE )
+UI_LoadImage( ttlLive, "texture/ui/ui2/player2.png", PAGE_ITEM_TITLE_NORMAL, 49, 35, 100, 154 )
+UI_LoadImage( ttlLive, "texture/ui/ui2/player2.png", PAGE_ITEM_TITLE_ACTIVE, 49, 35, 45, 154 )
+UI_SetPos( ttlLive, 61, -54 )
+UI_SetSize( ttlLive, 49, 35 )
+UI_AddCompent( skillid, lstSkillW )
+UI_AddCompent( skillid, imgSkillP )
+UI_AddCompent( skillid, labFront )
+UI_AddCompent( skillid, labPoint1 )
+
+--���ϼ���
+skillid = UI_CreatePageItem( pgeSkill )
+ttlSail = UI_GetPageItemObj( skillid, PAGE_ITEM_TITLE )
+UI_LoadImage( ttlSail, "texture/ui/ui2/player2.png", PAGE_ITEM_TITLE_NORMAL, 49, 35, 103, 70 )
+UI_LoadImage( ttlSail, "texture/ui/ui2/player2.png", PAGE_ITEM_TITLE_ACTIVE, 49, 35, 48, 70 )
+UI_SetPos( ttlSail, 110, -54 )
+UI_SetSize( ttlSail, 49, 35 )
+UI_AddCompent( skillid, lstSkillS )
+
+
+-------------------------------------------------
+-- Equipment Spy | Coded by Billy, GUI by Foxseiz
+-------------------------------------------------
+frmItemSpy = UI_CreateForm( "frmItemSpy", FALSE, 228,385, 198+242, 160, TRUE, FALSE )
+UI_ShowForm( frmItemSpy, FALSE )
+UI_AddFormToTemplete( frmItemSpy, FORM_MAIN )
+UI_SetIsDrag( frmItemSpy, TRUE )
+
+imgItemTop = UI_CreateCompent( frmItemSpy, IMAGE_TYPE, "imgItemTop", 228,385, 0, 0 )
+UI_LoadImage( imgItemTop, "texture/ui/ui2/eqform.png", NORMAL, 228,385, 0, 0 )
+
+-- Close Button
+btnClose = UI_CreateCompent( frmItemSpy, BUTTON_TYPE, "btnClose", 20, 20, 207, 1 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/buttons.png", 25, 26, 381, 3, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- Form Label
+labTitle = UI_CreateCompent( frmItemSpy, LABELEX_TYPE, "labTitle", 159, 12, 35, 20 )
+UI_SetCaption( labTitle, "Equip")
+UI_SetTextColor( labTitle, COLOR_YELLOW )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+--backdrop = UI_CreateCompent( frmItemSpy, IMAGE_TYPE, "backdrop", 108,200, 44,16 )
+--UI_LoadImage( backdrop, "texture/ui/ui2/eqform2.png",NORMAL, 108,200, 44, 16, TRUE )
+
+
+--left col
+addEquipGroup(26,64,0,49,{"cmdArmet","cmdWing","cmdNecklace","cmdRightHand","cmdJewelry4","cmdCloak"},frmItemSpy)
+--2nd col
+addEquipGroup(74,211,0,49,{"cmdCirclet1","cmdJewelry1","cmdRearPet"},frmItemSpy)
+--3rd col
+addEquipGroup(122,211,0,49,{"cmdCirclet2","cmdJewelry2","cmdPet"},frmItemSpy)
+--right col
+addEquipGroup(170,64,0,49,{"cmdBody","cmdGlove","cmdShoes","cmdLeftHand","cmdJewelry3","cmdMount"},frmItemSpy)
+
+UI_SetHint( cmdArmet, "\216\235\229\236" )
+UI_SetHint( cmdBody, "\193\240\238\237\255" )
+UI_SetHint( cmdNecklace, "\206\230\229\240\229\235\252\229" )
+UI_SetHint( cmdRightHand, "\206\240\243\230\232\229" )
+UI_SetHint( cmdLeftHand, "\217\232\242" )
+UI_SetHint( cmdGlove, "\207\229\240\247\224\242\234\224" )
+UI_SetHint( cmdCirclet1, "\202\238\235\252\246\238 1" )
+UI_SetHint( cmdCirclet2, "\202\238\235\252\246\238 2" )
+UI_SetHint( cmdShoes, "\193\238\242\232\237\234\232" )
+UI_SetHint( cmdJewelry1, "\193\240\224\241\235\229\242 1" )
+UI_SetHint( cmdJewelry2, "\193\240\224\241\235\229\242 2" )
+UI_SetHint( cmdJewelry3, "\207\238\255\241" )
+UI_SetHint( cmdJewelry4, "\205\224\240\243\247\232" )
+UI_SetHint( cmdWing, "\202\240\251\235\252\255" )
+UI_SetHint( cmdMount, "\194\229\240\245\238\226\238\233 \207\232\242\238\236\229\246" )
+UI_SetHint( cmdCloak, "\207\235\224\249" )
+UI_SetHint( cmdRearPet, "\193\238\229\226\238\233 \207\232\242\238\236\229\246" )
+UI_SetHint( cmdPet, "\212\229\255" )
+
+
+-- PLAYER MODEL
+ui3dEqSpyCha = UI_CreateCompent( frmItemSpy, UI3D_COMPENT, "ui3dEqSpyCha", 0, 0, 110, 200 )
+
+btnLeft3d = UI_CreateCompent( frmItemSpy, BUTTON_TYPE, "btnLeft3d", 15, 15, 65,190 )
+UI_LoadButtonImage( btnLeft3d, "texture/ui/ui2/eqform.png", 30, 29, 0, 388, TRUE )
+
+btnRight3d = UI_CreateCompent( frmItemSpy, BUTTON_TYPE, "btnRight3d", 15, 15, 148,190 )
+UI_LoadButtonImage( btnRight3d, "texture/ui/ui2/eqform.png", 30, 29, 0, 421, TRUE )
+
+
+
+---------------------------------------------------------------------
+------Поиск NPS и монстров-------------------------------------------
+---------------------------------------------------------------------
+frmNpcShow= UI_CreateForm( "frmNpcShow", FALSE, 641, 532, 0, 0, FALSE, FALSE )
+UI_ShowForm( frmNpcShow, TRUE )
+UI_AddFormToTemplete( frmNpcShow, FORM_MAIN )
+UI_SetIsDrag( frmNpcShow, TRUE )
+UI_SetFormStyleEx( frmNpcShow, 1 )
+
+UI_FormSetHotKey( frmNpcShow, ALT_KEY, HOTKEY_Z )
+
+imgSkilld1 = UI_CreateCompent( frmNpcShow, IMAGE_TYPE, "imgSkilld1", 641,532, 0, 0 )
+UI_LoadImage( imgSkilld1, "texture/ui/ui2/coordinator.png", NORMAL, 641, 532, 0, 0 )
+
+
+
+UI_LoadImage( imgSkilld2, "texture/ui/devui/NPCList02.tga", NORMAL, 256, 169, 0, 0 ) 
+
+
+UI_LoadImage( imgSkilld3, "texture/ui/devui/NPCList03.tga", NORMAL, 79, 253, 0, 3 )
+
+
+--创建关闭按钮
+btnClose = UI_CreateCompent( frmNpcShow, BUTTON_TYPE, "btnClose", 28, 28, 611, 17 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/buttons.png", 25, 26, 381, 3, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+--加载寻路锁定框
+chkID = UI_CreateCompent( frmNpcShow, CHECK_TYPE, "chkID", 14, 14, 329, 501 )
+UI_LoadImage( chkID, "texture/ui/ui2/coordinator.png", UNCHECKED, 14, 14, 237,541 )
+UI_LoadImage( chkID, "texture/ui/ui2/coordinator.png", CHECKED, 14, 14, 255, 541 )
+UI_SetHint( chkID, "Walks automatically towards the target" )
+
+
+--------------Заголовки у таблицы
+labNPC= UI_CreateCompent( frmNpcShow, LABELEX_TYPE, "labNPC", 128, 11,40,8 )
+UI_SetCaption( labNPC, "\200\236\229 \207\229\240\241\238\237\224\230\224" )
+UI_SetTextColor( labNPC, COLOR_RED )
+
+labNpcPos= UI_CreateCompent( frmNpcShow, LABELEX_TYPE, "labNpcPos", 219, 11, 300, 8)
+UI_SetCaption( labNpcPos, "\203\238\234\224\246\232\255" )
+UI_SetTextColor( labNpcPos, COLOR_RED )
+
+labPOS= UI_CreateCompent( frmNpcShow, LABELEX_TYPE, "labPOS", 219, 11, 500,8)
+UI_SetCaption( labPOS, "\202\238\238\240\228\232\237\224\242\251" )
+UI_SetTextColor( labPOS, COLOR_RED )
+
+--创建NPC列表
+lstNpcList = UI_CreateCompent( frmNpcShow, LIST_TYPE, "lstNpcList", 592, 390, 10, 17 )
+lstHelpButton = UI_GetList(lstNpcList)
+UI_SetListRowHeight(lstNpcList,15)
+UI_SetListIsMouseFollow( lstNpcList, TRUE )
+
+--Скролл
+local scrollid = UI_GetScroll( lstNpcList )
+UI_SetSize( scrollid, 11, 1 )
+
+-- Скролл вверх
+local id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 55, true )
+UI_SetSize( id, 13, 9 )
+
+-- Скролл ползунок
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/ui2/buttons.png", COMPENT_BACK, 13, 8, 387, 84 )
+UI_SetSize( id, 13, 8 )
+
+-- Скролл вниз
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 69, true )
+UI_SetSize( id, 13, 9 )
+
+------------------------------------------------------------
+labMonster= UI_CreateCompent( frmNpcShow, LABELEX_TYPE, "labMonster", 61, 11, 40,8 )
+UI_SetCaption( labMonster, "\200\236\255 \236\238\237\241\242\240\224" )
+UI_SetTextColor( labMonster, COLOR_RED )
+
+labMonsterLV= UI_CreateCompent( frmNpcShow, LABELEX_TYPE, "labMonsterLV", 61, 11,300,8 )
+UI_SetCaption( labMonsterLV, "\211\240\238\226\229\237\252" )
+UI_SetTextColor( labMonsterLV, COLOR_RED )
+
+labMPOS= UI_CreateCompent( frmNpcShow, LABELEX_TYPE, "labMPOS",216, 11, 500,8 )
+UI_SetCaption( labMPOS, "\202\238\238\240\228\232\237\224\242\251" )
+UI_SetTextColor( labMPOS, COLOR_RED )
+
+--创建怪物列表
+lstMonsterList = UI_CreateCompent( frmNpcShow, LIST_TYPE, "lstMonsterList", 592, 390, 10, 17 )
+lstHelpButton = UI_GetList(lstMonsterList)
+UI_SetListRowHeight(lstMonsterList,15)
+UI_SetListIsMouseFollow( lstMonsterList, TRUE )
+
+--Скролл
+local scrollid = UI_GetScroll( lstMonsterList )
+UI_SetSize( scrollid, 11, 1 )
+
+-- Скролл вверх
+local id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 55, true )
+UI_SetSize( id, 13, 9 )
+
+-- Скролл ползунок
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/ui2/buttons.png", COMPENT_BACK, 13, 8, 387, 84 )
+UI_SetSize( id, 13, 8 )
+
+-- Скролл вниз
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 69, true )
+UI_SetSize( id, 13, 9 )
+
+------------------------------------------------------------------------------------
+--创建页面
+pgeSkill = UI_CreateCompent( frmNpcShow, PAGE_TYPE, "pgeSkill", 211, 233, 9, 82 )
+UI_SetPageButton( pgeSkill, PAGE_BUTTON_CUSTOM, 48, 16 )
+
+--NPC列表
+skillid = UI_CreatePageItem( pgeSkill )
+ttlBattle = UI_GetPageItemObj( skillid, PAGE_ITEM_TITLE )
+UI_LoadImage( ttlBattle, "texture/ui/ui2/coordinator.png", PAGE_ITEM_TITLE_NORMAL, 84, 30, 13, 535 )
+UI_LoadImage( ttlBattle, "texture/ui/ui2/coordinator.png", PAGE_ITEM_TITLE_ACTIVE, 84, 30, 108, 536 )
+UI_SetPos( ttlBattle, 20, -30 )
+UI_SetSize( ttlBattle, 85,30 )
+UI_AddCompent( skillid, lstNpcList )
+UI_AddCompent( skillid, labNPC )
+UI_AddCompent( skillid, labNpcPos )
+UI_AddCompent( skillid, labPOS )
+
+--怪物列表
+skillid = UI_CreatePageItem( pgeSkill )
+ttlBattle = UI_GetPageItemObj( skillid, PAGE_ITEM_TITLE )
+UI_LoadImage( ttlBattle, "texture/ui/ui2/coordinator.png", PAGE_ITEM_TITLE_NORMAL, 84, 30, 12, 568 )
+UI_LoadImage( ttlBattle, "texture/ui/ui2/coordinator.png", PAGE_ITEM_TITLE_ACTIVE, 84, 30, 107, 569 )
+UI_SetPos( ttlBattle, 105, -30 )
+UI_SetSize( ttlBattle, 85, 30 )
+UI_AddCompent( skillid, lstMonsterList )
+UI_AddCompent( skillid, labMonster )
+UI_AddCompent( skillid, labMonsterLV )
+UI_AddCompent( skillid, labMPOS )
+
+
+---------------------------
+
+stateDrags = UI_CreateForm( "stateDrags", FALSE, 250, 120, 0, 160, TRUE, FALSE )	--198, 394
+UI_ShowForm( stateDrags, TRUE )
+UI_AddFormToTemplete( stateDrags, FORM_MAIN )
+UI_SetIsDrag( stateDrags, TRUE )
+UI_FormSetIsEscClose( stateDrags, FALSE )
+
+
+
+------------------------------------------------------
+--			daily	Reward test 
+--------------------------------------------
+
+function addReward(x,y,name,form,skillid)
+
+	_G[name] = UI_CreateCompent (form, COMMAND_ONE_TYPE, name,32, 32, x, y)
+
+	if skillid then
+
+		--UI_AddCompent(skillid, _G[name])
+
+	end
+
+end
+function addRewardsToServer(X, Y, Xoff, Yoff, form, skillid)
+
+	for i = 1,31,1 do
+
+		local buf = "serverday"..i
+
+		addReward( X+ ( ((i-1) - math.floor((i-1)/7)*7) * Xoff) , Y + (math.floor((i-1)/7) * Yoff), buf, form, skillid)
+
+	end
+
+end
+
+
+function addRewardImages(x,y,name,form,skillid)
+
+	_G["imgClaimed"..name] = UI_CreateCompent(form, IMAGE_TYPE, "imgClaimed"..name, 52,52, x, y)
+
+	UI_LoadImage( _G["imgClaimed"..name], "texture/ui/custom/dailyReward2.png", NORMAL, 52,52, 445, 215)
+
+	_G["imgBlocked"..name] = UI_CreateCompent(form, IMAGE_TYPE, "imgBlocked"..name, 52,52, x,y)
+
+	UI_LoadImage( _G["imgBlocked"..name], "texture/ui/custom/dailyReward2.png", NORMAL, 52,52, 445, 272)
+
+	_G["imgLocked"..name] = UI_CreateCompent(form, IMAGE_TYPE, "imgLocked"..name, 52,52, x,y)
+
+	UI_LoadImage( _G["imgLocked"..name], "texture/ui/custom/dailyReward2.png", NORMAL, 52,52, 445, 329)
+
+end
+
+
+function addImagesToServer(X, Y, Xoff, Yoff, form, skillid)
+
+	for i = 1,31,1 do
+
+		local buf = "serverday"..i
+
+		addRewardImages( X+ ( ((i-1) - math.floor((i-1)/7)*7) * Xoff) , Y + (math.floor((i-1)/7) * Yoff), buf, form, skillid)
+
+	end
+
+end
+
+
+---------------------------------------------------
+frmDailyRewards = UI_CreateForm( "frmDailyRewards", FALSE, 420, 432, 160, 160, TRUE, FALSE)
+
+--UI_FormSetHotKey (frmDailyRewards, ALT_KEY, HOTKEY_L)
+
+UI_ShowForm( frmDailyRewards, FALSE)
+
+UI_AddFormToTemplete(frmDailyRewards, FORM_MAIN)
+
+UI_SetIsDrag( frmDailyRewards, TRUE)
+--
+
+imgfrmDailyRewards = UI_CreateCompent (frmDailyRewards, IMAGE_TYPE, "imgfrmDailyRewards", 420, 432, 0, 0)
+
+UI_LoadImage(imgfrmDailyRewards, "texture/ui/custom/dailyReward2.png", NORMAL, 420, 432, 4, 4)
+
+-- Close Button
+
+btnClose = UI_CreateCompent ( frmDailyRewards, BUTTON_TYPE, "btnClose", 14,14, 402, 5)
+
+UI_LoadButtonImage (btnClose, "texture/ui/PublicC.tga", 14, 14, 116, 175, TRUE)
+
+UI_SetButtonModalResult(btnClose, BUTTON_CLOSE)
+---------------------------------
+-- Reward button
+btnReward = UI_CreateCompent( frmDailyRewards, BUTTON_TYPE, "btnReward", 92, 24, 270, 392 )
+
+UI_LoadButtonImage( btnReward, "texture/ui/custom/dailyReward2.png", 92, 24, 116, 453, TRUE )
+
+-- Server page fill
+
+local offsetX = 52
+
+local offsetY = 49
+
+local offsetX2 = 52
+
+local offsetY2  = 49
+
+addRewardsToServer( 34 + 3 , 122 + 3, offsetX, offsetY, frmDailyRewards, skillid)
+
+addImagesToServer( 29 -4, 120 -5, offsetX2, offsetY2, frmDailyRewards, skillid)
+
+
+

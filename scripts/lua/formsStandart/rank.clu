@@ -1,0 +1,194 @@
+frmRank = UI_CreateForm( "frmRank", false, 699, 382, 0, 150, true, false )
+UI_ShowForm( frmRank, false )
+UI_AddFormToTemplete( frmRank, FORM_MAIN )
+UI_FormSetIsEscClose( frmRank, true )
+UI_SetIsDrag( frmRank,true)
+UI_SetFormStyle( frmRank,2)
+
+-- Фон формы
+imgBackGround = UI_CreateCompent( frmRank, IMAGE_TYPE, "imgBackGround", 699, 505, 0, 0 )
+UI_LoadImage( imgBackGround, "texture/ui/Rank.png", NORMAL, 699, 508, 0, 0 )
+
+
+-- Закрыть
+local btnClose = UI_CreateCompent( frmRank, BUTTON_TYPE, "btnClose", 22, 22, 680, 15 )
+UI_LoadButtonImage( btnClose, "texture/ui/fairy.png", 24, 26, 0, 445, false )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+lstRankList = UI_CreateListView( frmRank, "lstRankList", 480,420, 217, 55, 10, 10 )
+UI_SetListRowHeight( lstRankList, 20 )
+UI_SetMargin( lstRankList, 5, 0, 0, 0 )		
+UI_FormSetIsEscClose( lstRankList, TRUE )
+UI_ListViewSetTitle( lstRankList, 0, 30, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstRankList, 1, 180, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstRankList, 2, 45, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstRankList, 3, 160, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstRankList, 4, 0, "", 0, 0, 0, 0 )
+UI_SetListIsMouseFollow( lstRankList, TRUE)
+
+--Скролл
+local scrollid = UI_GetScroll( lstRankList )
+UI_SetSize( scrollid, 17, 1 )
+
+-- Скролл вверх
+local id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/buttons.png", 13, 9, 387, 55, true )
+UI_SetSize( id, 13, 9 )
+
+-- Скролл ползунок
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/buttons.png", COMPENT_BACK, 13, 8, 387, 84 )
+UI_SetSize( id, 13, 8 )
+
+-- Скролл вниз
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/buttons.png", 13, 9, 387, 69, true )
+UI_SetSize( id, 13, 9 )
+
+lstRankGoldList = UI_CreateListView( frmRank, "lstRankGoldList", 480,420, 217, 56, 10, 10 )
+UI_SetListRowHeight( lstRankGoldList, 20 )
+UI_SetMargin( lstRankGoldList, 5, 0, 0, 0 )		
+UI_FormSetIsEscClose( lstRankGoldList, TRUE )
+UI_ListViewSetTitle( lstRankGoldList, 0, 30, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstRankGoldList, 1, 180, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstRankGoldList, 2, 170, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstRankGoldList, 3, 0, "", 0, 0, 0, 0 )
+UI_SetListIsMouseFollow( lstRankGoldList, TRUE)
+
+--Скролл
+local scrollid = UI_GetScroll( lstRankGoldList )
+UI_SetSize( scrollid, 17, 1 )
+
+-- Скролл вверх
+local id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/buttons.png", 13, 9, 387, 55, true )
+UI_SetSize( id, 13, 9 )
+
+-- Скролл ползунок
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/buttons.png", COMPENT_BACK, 13, 8, 387, 84 )
+UI_SetSize( id, 13, 8 )
+
+-- Скролл вниз
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/buttons.png", 13, 9, 387, 69, true )
+UI_SetSize( id, 13, 9 )
+
+lstRankPVPList = UI_CreateListView( frmRank, "lstRankPVPList", 480,420, 217, 56, 10, 10 )
+UI_SetListRowHeight( lstRankPVPList, 20 )
+UI_SetMargin( lstRankPVPList, 5, 0, 0, 0 )		
+UI_FormSetIsEscClose( lstRankPVPList, TRUE )
+UI_ListViewSetTitle( lstRankPVPList, 0, 30, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstRankPVPList, 1, 180, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstRankPVPList, 2, 200, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstRankPVPList, 3, 0, "", 0, 0, 0, 0 )
+UI_SetListIsMouseFollow( lstRankPVPList, TRUE)
+
+
+--Скролл
+local scrollid = UI_GetScroll( lstRankPVPList )
+UI_SetSize( scrollid, 17, 1 )
+
+-- Скролл вверх
+local id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/buttons.png", 13, 9, 387, 55, true )
+UI_SetSize( id, 13, 9 )
+
+-- Скролл ползунок
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/buttons.png", COMPENT_BACK, 13, 8, 387, 84 )
+UI_SetSize( id, 13, 8 )
+
+-- Скролл вниз
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/buttons.png", 13, 9, 387, 69, true )
+UI_SetSize( id, 13, 9 )
+
+lstPowerList = UI_CreateListView( frmRank, "lstPowerList", 480,420, 217, 56, 10, 10 )
+UI_SetListRowHeight( lstPowerList, 20 )
+UI_SetMargin( lstPowerList, 5, 0, 0, 0 )		
+UI_FormSetIsEscClose( lstPowerList, TRUE )
+UI_ListViewSetTitle( lstPowerList, 0, 30, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstPowerList, 1, 180, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstPowerList, 2, 200, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstPowerList, 3, 0, "", 0, 0, 0, 0 )
+UI_SetListIsMouseFollow( lstPowerList, TRUE)
+
+
+--Скролл
+local scrollid = UI_GetScroll( lstPowerList )
+UI_SetSize( scrollid, 17, 1 )
+
+-- Скролл вверх
+local id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/buttons.png", 13, 9, 387, 55, true )
+UI_SetSize( id, 13, 9 )
+
+-- Скролл ползунок
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/buttons.png", COMPENT_BACK, 13, 8, 387, 84 )
+UI_SetSize( id, 13, 8 )
+
+-- Скролл вниз
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/buttons.png", 13, 9, 387, 69, true )
+UI_SetSize( id, 13, 9 )
+
+pgeSkill = UI_CreateCompent( frmRank, PAGE_TYPE, "pgeSkill", 211, 233, 0, 0 )
+UI_SetPageButton( pgeSkill, PAGE_BUTTON_CUSTOM, 48, 26 )
+
+skillid = UI_CreatePageItem( pgeSkill )
+ttlBattle = UI_GetPageItemObj( skillid, PAGE_ITEM_TITLE )
+UI_LoadImage( ttlBattle, "texture/ui/Rank.png", PAGE_ITEM_TITLE_NORMAL, 161, 25, 710, 30 )
+UI_LoadImage( ttlBattle, "texture/ui/Rank.png", PAGE_ITEM_TITLE_ACTIVE, 161, 25, 710, 57 )
+UI_SetPos( ttlBattle, 24, 63 )
+UI_SetSize( ttlBattle, 161,25 )
+
+grid = UI_CreateCompent( frmRank, IMAGE_TYPE, "grid", 470,421, 209,49 )
+UI_LoadImage( grid, "texture/ui/Rank.png", NORMAL, 470,421, 209, 49 )
+UI_AddCompent( skillid, grid )
+
+UI_AddCompent( skillid, lstRankList )
+
+skillid = UI_CreatePageItem( pgeSkill )
+ttlBattle = UI_GetPageItemObj( skillid, PAGE_ITEM_TITLE )
+UI_LoadImage( ttlBattle, "texture/ui/Rank.png", PAGE_ITEM_TITLE_NORMAL, 161, 25, 710, 86 )
+UI_LoadImage( ttlBattle, "texture/ui/Rank.png", PAGE_ITEM_TITLE_ACTIVE, 161, 25, 710, 115 )
+UI_SetPos( ttlBattle, 24, 92 )
+UI_SetSize( ttlBattle, 161, 25 )
+
+
+grid = UI_CreateCompent( frmRank, IMAGE_TYPE, "grid", 470,421, 209,49 )
+UI_LoadImage( grid, "texture/ui/Rank.png", NORMAL, 470,421, 0, 517 )
+UI_AddCompent( skillid, grid )
+
+UI_AddCompent( skillid, lstRankGoldList )
+
+
+skillid = UI_CreatePageItem( pgeSkill )
+ttlBattle = UI_GetPageItemObj( skillid, PAGE_ITEM_TITLE )
+UI_LoadImage( ttlBattle, "texture/ui/Rank.png", PAGE_ITEM_TITLE_NORMAL, 161, 25, 710, 143 )
+UI_LoadImage( ttlBattle, "texture/ui/Rank.png", PAGE_ITEM_TITLE_ACTIVE, 161, 25, 710, 171 )
+UI_SetPos( ttlBattle, 24, 121 )
+UI_SetSize( ttlBattle, 161, 25 )
+
+
+grid = UI_CreateCompent( frmRank, IMAGE_TYPE, "grid", 470,421, 209,49 )
+UI_LoadImage( grid, "texture/ui/Rank.png", NORMAL, 470,421, 481, 517 )
+UI_AddCompent( skillid, grid )
+
+UI_AddCompent( skillid, lstRankPVPList )
+
+skillid = UI_CreatePageItem( pgeSkill )
+ttlBattle = UI_GetPageItemObj( skillid, PAGE_ITEM_TITLE )
+UI_LoadImage( ttlBattle, "texture/ui/Rank.png", PAGE_ITEM_TITLE_NORMAL, 161, 25, 710, 199 )
+UI_LoadImage( ttlBattle, "texture/ui/Rank.png", PAGE_ITEM_TITLE_ACTIVE, 161, 25, 710, 227 )
+UI_SetPos( ttlBattle, 24, 150 )
+UI_SetSize( ttlBattle, 161, 25 )
+
+
+grid = UI_CreateCompent( frmRank, IMAGE_TYPE, "grid", 470,421, 209,49 )
+UI_LoadImage( grid, "texture/ui/Rank.png", NORMAL, 470,421, 908, 29 )
+UI_AddCompent( skillid, grid )
+
+UI_AddCompent( skillid, lstPowerList )

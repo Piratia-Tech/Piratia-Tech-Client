@@ -1,0 +1,427 @@
+-----------------------------------------------------------------------
+-- Guild Form
+-----------------------------------------------------------------------
+--创建公会面板
+frmManage = UI_CreateForm( "frmManage", FALSE, 594, 461, 350, 200, TRUE, FALSE )
+UI_ShowForm( frmManage, FALSE )
+UI_AddFormToTemplete( frmManage, 1 )
+UI_SetIsDrag( frmManage, TRUE )
+UI_SetFormStyleEx( frmManage, FORM_BOTTOM, 0, 45)
+UI_FormSetHotKey( frmManage, ALT_KEY, HOTKEY_C ) 
+
+-- 加载背景图片
+imgTradeTop = UI_CreateCompent( frmManage, IMAGE_TYPE, "imgTradeTop", 594, 461, 0, 0 )
+UI_LoadImage( imgTradeTop, "texture/ui/ui2/guild.png", NORMAL, 594, 461, 0, 0 )
+
+
+btnClose = UI_CreateCompent( frmManage, BUTTON_TYPE, "btnClose", 28, 28, 567, 2 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/buttons.png", 25, 26, 381, 3, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+--创建公会成员
+lstNum = UI_CreateListView( frmManage, "lstNum", 322, 254, 150, 12, 6, 2 )
+UI_ListViewSetTitle( lstNum, 0, 163, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstNum, 1, 163, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstNum, 2, 163, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstNum, 3, 78, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstNum, 4, 78, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstNum, 6, 80, "", 0, 0, 0, 0 )
+UI_SetListRowHeight( lstNum, 18 )
+
+
+--Скролл
+local scrollid = UI_GetScroll( lstNum )
+UI_SetSize( scrollid, 11, 1 )
+
+-- Скролл вверх
+local id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 55, true )
+UI_SetSize( id, 13, 9 )
+
+-- Скролл ползунок
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/ui2/buttons.png", COMPENT_BACK, 13, 8, 387, 84 )
+UI_SetSize( id, 13, 8 )
+
+-- Скролл вниз
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 69, true )
+UI_SetSize( id, 13, 9 )
+
+--创建申请成员列表
+lstAsk = UI_CreateListView( frmManage, "lstAsk", 322, 254, 150, 14, 6, 2 )
+UI_ListViewSetTitle( lstAsk, 0, 163, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstAsk, 1, 163, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstAsk, 2, 163, "", 0, 0, 0, 0 )
+UI_SetListRowHeight( lstAsk, 18 )
+
+
+--Скролл
+local scrollid = UI_GetScroll( lstAsk )
+UI_SetSize( scrollid, 11, 1 )
+
+-- Скролл вверх
+local id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 55, true )
+UI_SetSize( id, 13, 9 )
+
+-- Скролл ползунок
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/ui2/buttons.png", COMPENT_BACK, 13, 8, 387, 84 )
+UI_SetSize( id, 13, 8 )
+
+-- Скролл вниз
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 69, true )
+UI_SetSize( id, 13, 9 )
+
+--创建页面
+pgePublic = UI_CreateCompent( frmManage, PAGE_TYPE, "pgePublic", 185, 275, 11, 79 )
+UI_SetPageButton( pgePublic, PAGE_BUTTON_CUSTOM, 48, 16 )
+
+-- Вкладка всех участников
+skillid = UI_CreatePageItem( pgePublic )
+ttlNum = UI_GetPageItemObj( skillid, PAGE_ITEM_TITLE )
+UI_LoadImage( ttlNum, "texture/ui/ui2/guild.png", PAGE_ITEM_TITLE_NORMAL, 84, 29, 0, 465 )
+UI_LoadImage( ttlNum, "texture/ui/ui2/guild.png", PAGE_ITEM_TITLE_ACTIVE, 84, 29, 86, 465 )
+UI_SetPos( ttlNum, 139, -60 )
+UI_SetSize( ttlNum, 84, 29 )
+UI_AddCompent( skillid, lstNum )
+
+chkSortName = UI_CreateCompent(frmManage, CHECK_TYPE, "chkSortName", 10, 10, 225, -11)
+UI_LoadImage(chkSortName, "texture/ui/ui2/guild.png", UNCHECKED, 13, 9, 1083, 308)
+UI_LoadImage(chkSortName, "texture/ui/ui2/guild.png", CHECKED, 13, 9, 1083, 322)
+
+chkSortClass = UI_CreateCompent(frmManage, CHECK_TYPE, "chkSortClass", 10, 10, 356, -11)
+UI_LoadImage(chkSortClass, "texture/ui/ui2/guild.png", UNCHECKED, 13, 9, 1083, 308)
+UI_LoadImage(chkSortClass, "texture/ui/ui2/guild.png", CHECKED, 13, 9, 1083, 322)
+
+chkSortLevel = UI_CreateCompent(frmManage, CHECK_TYPE, "chkSortLevel", 10, 10, 534, -11)
+UI_LoadImage(chkSortLevel, "texture/ui/ui2/guild.png", UNCHECKED, 13, 9, 1083, 308)
+UI_LoadImage(chkSortLevel, "texture/ui/ui2/guild.png", CHECKED, 13, 9, 1083, 322)
+
+UI_AddCompent( skillid, chkSortName )
+UI_AddCompent( skillid, chkSortClass )
+UI_AddCompent( skillid, chkSortLevel )
+
+
+-- Прием участников в гильдию
+skillid = UI_CreatePageItem( pgePublic )
+ttlLive = UI_GetPageItemObj( skillid, PAGE_ITEM_TITLE )
+UI_LoadImage( ttlLive, "texture/ui/ui2/guild.png", PAGE_ITEM_TITLE_NORMAL, 84, 29, 0, 528 )
+UI_LoadImage( ttlLive, "texture/ui/ui2/guild.png", PAGE_ITEM_TITLE_ACTIVE, 84, 29, 86, 527 )
+UI_SetPos( ttlLive, 233, -60 )
+UI_SetSize( ttlLive, 84, 29 )
+
+UI_AddCompent( skillid, lstAsk )
+
+
+--Ги банк
+skillid = UI_CreatePageItem( pgePublic )
+ttlNum = UI_GetPageItemObj( skillid, PAGE_ITEM_TITLE )
+UI_LoadImage( ttlNum, "texture/ui/ui2/guild.png", PAGE_ITEM_TITLE_NORMAL, 84, 29, 0, 496 )
+UI_LoadImage( ttlNum, "texture/ui/ui2/guild.png", PAGE_ITEM_TITLE_ACTIVE, 84, 29, 86, 496 )
+UI_SetPos( ttlNum, 237+207, -60 )
+UI_SetSize( ttlNum, 84, 29 )
+
+guildBank = UI_CreateCompent( frmManage, GOODS_GRID_TYPE, "guildBank", 440, 352, 170, -11 ) 
+id1 = UI_CreateCompent( frmManage, IMAGE_TYPE, "id1", 440, 352, 127, -25 )
+UI_LoadImage( id1, "texture/ui/ui2/guild.png", NORMAL, 440, 352, 621, 0 )
+UI_AddCompent( skillid, id1 )
+UI_SetGridSpace( guildBank, 10, 10 )
+UI_SetGridContent( guildBank, 4, 8 )
+UI_SetGridUnitSize( guildBank, 32, 32 )
+UI_SetMargin( guildBank, 10, 0, 10, 0 )
+
+-- Guild Deposit
+btngoldput = UI_CreateCompent( frmManage, BUTTON_TYPE, "btngoldput", 92, 27, 303, 284 )
+UI_LoadButtonImage( btngoldput, "texture/ui/ui2/guild.png", 92, 27, 601, 358, TRUE )
+
+-- Guild Withdraw
+btngoldtake = UI_CreateCompent( frmManage, BUTTON_TYPE, "btngoldtake", 92, 27, 400, 284 )
+UI_LoadButtonImage( btngoldtake, "texture/ui/ui2/guild.png", 92, 27, 601, 387, TRUE )
+
+-- Guild Money Label
+labGuildMoney = UI_CreateCompent( frmManage, LABELEX_TYPE, "labGuildMoney", 108, 15, 185, 291 )
+UI_SetCaption( labGuildMoney, "0" )
+UI_SetTextColor( labGuildMoney, COLOR_WHITE )
+UI_SetLabelExFont( labGuildMoney, DEFAULT_FONT, TRUE, COLOR_RED )
+
+-- Guild Money Box
+imgMoneyLogo = UI_CreateCompent( frmManage, IMAGE_TYPE, "imgMoneyLogo", 24, 24, 150, 287 )
+UI_LoadImage( imgMoneyLogo, "texture/ui/ui2/guild.png", NORMAL, 24, 24, 981, 357 )
+
+UI_AddCompent( skillid, btngoldtake )
+UI_AddCompent( skillid, btngoldput )
+UI_AddCompent( skillid, labGuildMoney )
+UI_AddCompent( skillid, imgMoneyLogo )
+UI_AddCompent( skillid, guildBank )
+
+bankLocked = UI_CreateCompent( frmManage, IMAGE_TYPE, "bankLocked", 340, 290, 172, -15 )
+UI_LoadImage( bankLocked, "texture/ui/ui2/guild.png", NORMAL, 340, 290, 538*2, 0 )
+UI_AddCompent( skillid, bankLocked )
+
+-- Guild Properties
+--labLevel = UI_CreateCompent( frmManage, LABELEX_TYPE, "labLevel", 95, 13, 23, 40 )
+--UI_SetCaption( labLevel, "Lv99" )
+--UI_SetTextColor( labLevel, COLOR_BLACK )
+--UI_SetLabelExFont( labLevel, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- Guild Name
+labName = UI_CreateCompent( frmManage, LABELEX_TYPE, "labName", 95, 13, 25, 84 )
+UI_SetCaption( labName, "Forbidden words" )
+UI_SetTextColor( labName, COLOR_WHITE )
+
+-- Founder
+labPeople = UI_CreateCompent( frmManage, LABELEX_TYPE, "labPeople", 95, 13, 25, 125 )
+UI_SetCaption( labPeople, "Forbidden words" )
+UI_SetTextColor( labPeople, COLOR_RED )
+
+
+-- Members / Maximum
+labNum = UI_CreateCompent( frmManage, LABELEX_TYPE, "labNum", 95, 13, 25, 166 )
+UI_SetCaption( labNum, "Pirate Guild" )
+UI_SetTextColor( labNum, COLOR_WHITE )
+
+-- EXP
+labExp = UI_CreateCompent( frmManage, LABELEX_TYPE, "labExp", 95, 13, 25, 207 )
+UI_SetCaption( labExp, "11111111" )
+UI_SetTextColor( labExp, COLOR_WHITE )
+
+-- Guild Level
+labLevel = UI_CreateCompent( frmManage, LABELEX_TYPE, "labLevel", 50, 13, 50, 251 )
+UI_SetCaption( labLevel, "Lv.????" )
+UI_SetTextColor( labLevel, COLOR_WHITE )
+
+-- Gold Coins
+labMen = UI_CreateCompent( frmManage, LABELEX_TYPE, "labMen", 50, 13, 50, 292 )
+UI_SetCaption( labMen, "11111111" )
+UI_SetTextColor( labMen, COLOR_WHITE )
+
+-- Recruit Button
+btnYes = UI_CreateCompent( frmManage, BUTTON_TYPE, "btnYes", 93, 29, 368, 409 )
+UI_LoadButtonImage( btnYes, "texture/ui/ui2/guild.png", 93, 29, 741, 834, TRUE )
+
+-- отказать
+btnNo = UI_CreateCompent( frmManage, BUTTON_TYPE, "btnNo", 93, 29, 467, 409 )
+UI_LoadButtonImage( btnNo, "texture/ui/ui2/guild.png", 93, 29, 271, 846, TRUE )
+
+-- Remove / Kick Button
+btnkick = UI_CreateCompent( frmManage, BUTTON_TYPE, "btnkick", 93, 29, 24, 314 )
+UI_LoadButtonImage( btnkick, "texture/ui/ui2/guild.png", 93, 29, 271, 913, TRUE )
+
+-- Disband Button
+btnSan = UI_CreateCompent( frmManage, BUTTON_TYPE, "btnSan", 93, 29, 24, 344 ) ---разобраться с этим дерьмом
+UI_LoadButtonImage( btnSan, "texture/ui/ui2/guild.png", 93, 29, 271, 880, TRUE )
+
+
+-- Permissions Button
+btnperm = UI_CreateCompent( frmManage, BUTTON_TYPE, "btnperm", 93, 29, 269, 409 )
+UI_LoadButtonImage( btnperm, "texture/ui/ui2/guild.png", 93, 29, 271, 948, TRUE )
+
+-- Motto Button
+btnMaxim = UI_CreateCompent( frmManage, BUTTON_TYPE, "btnMaxim", 93, 29, 170, 409 )
+UI_LoadButtonImage( btnMaxim, "texture/ui/ui2/guild.png", 93, 29, 741, 802, TRUE )
+
+-- Colour Button
+btnColour = UI_CreateCompent( frmManage, BUTTON_TYPE, "btnColour", 93, 29, 24, 374 )
+UI_LoadButtonImage( btnColour, "texture/ui/ui2/guild.png", 93, 29, 271, 980, TRUE )
+
+-- Motto
+labMaxim = UI_CreateCompent( frmManage, LABELEX_TYPE, "labMaxim", 108, 14, 41, 418 )
+UI_SetCaption( labMaxim, "Forbidden words" )
+UI_SetTextColor( labMaxim, COLOR_WHITE )
+
+-- Guild House Button
+btnHouse = UI_CreateCompent( frmManage, BUTTON_TYPE, "btnHouse", 23, 21, 20, 19 )
+UI_LoadImage( btnHouse, "texture/ui/ui2/guild.png", 0, 23, 21, 137, 624 )
+UI_LoadImage( btnHouse, "texture/ui/ui2/guild.png", 1, 23, 21, 160, 624 )
+UI_LoadImage( btnHouse, "texture/ui/ui2/guild.png", 2, 23, 21, 183, 624 )
+UI_SetHint( btnHouse, "\206\242\239\240\224\226\232\242\252\241\255 \226 \196\238\236 \195\232\235\252\228\232\232" )
+
+-----------------------------------------------------------------------
+-- Guild Motto
+-----------------------------------------------------------------------
+frmEditMaxim = UI_CreateForm( "frmEditMaxim",  FALSE, 242, 126, 397, 500, TRUE, FALSE )
+UI_LoadFormImage( frmEditMaxim, "texture/ui/ui2/guild.png", 242, 126, 15, 851, "", 15, 851 )
+UI_ShowForm( frmEditMaxim, FALSE )
+UI_AddFormToTemplete( frmEditMaxim, FORM_MAIN )
+UI_SetFormStyle( frmEditMaxim, 0 )
+UI_SetIsDrag( frmEditMaxim, TRUE )
+
+
+btnClose = UI_CreateCompent( frmEditMaxim, BUTTON_TYPE, "btnClose", 14, 14, 225, 2 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/guild.png", 14, 14, 0, 631, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+edtMaxim = UI_CreateCompent( frmEditMaxim, EDIT_TYPE, "edtMaxim", 179, 11, 25, 44 )
+UI_SetTextColor( edtMaxim, COLOR_WHITE )
+UI_SetEditCursorColor( edtMaxim, COLOR_GREEN )
+UI_SetEditMaxNum( edtMaxim, 30 )
+UI_SetEditMaxNumVisible( edtMaxim, 30 )
+
+btnYes = UI_CreateCompent( frmEditMaxim, BUTTON_TYPE, "btnYes", 93, 29, 23, 79 )
+UI_LoadButtonImage( btnYes, "texture/ui/ui2/guild.png", 93, 29, 741, 871, TRUE )
+UI_SetEditEnterButton( edtTradeGold, btnYes )
+
+btnNo = UI_CreateCompent( frmEditMaxim, BUTTON_TYPE, "btnNo", 93, 29, 127, 79 )
+UI_LoadButtonImage( btnNo, "texture/ui/ui2/guild.png", 93, 29, 741, 905, TRUE )
+UI_SetButtonModalResult( btnNo, BUTTON_CLOSE )
+
+
+----------------------------------------------------------------
+-- Guild Permissions | Coded by Billy , GUI by Foxseiz
+----------------------------------------------------------------
+frmGuildPerm = UI_CreateForm( "frmGuildPerm", FALSE, 243, 380, 805, 351, FALSE, FALSE )
+UI_ShowForm( frmGuildPerm, FALSE )
+UI_AddFormToTemplete( frmGuildPerm, 1 )
+UI_SetIsDrag( frmGuildPerm, TRUE )
+
+imgVideoT = UI_CreateCompent( frmGuildPerm, IMAGE_TYPE, "imgVideoT", 243, 380, 0, 0 )
+UI_LoadImage( imgVideoT, "texture/ui/ui2/guild.png", NORMAL, 243, 380, 809, 992 )
+
+btnClose = UI_CreateCompent( frmGuildPerm, BUTTON_TYPE, "btnClose", 28, 28, 211, 0 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/buttons.png", 25, 26, 381, 3, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+btnYesPerm = UI_CreateCompent( frmGuildPerm, BUTTON_TYPE, "btnYesPerm", 36, 24, 115, 235+99 )
+UI_LoadButtonImage( btnYesPerm, "texture/ui/ui2/guild.png", 36, 24, 0, 710, TRUE )
+UI_SetButtonModalResult( btnYesPerm, BUTTON_CLOSE )
+
+btnNo = UI_CreateCompent( frmGuildPerm, BUTTON_TYPE, "btnNo", 67, 24, 155, 235+99 )
+UI_LoadButtonImage( btnNo, "texture/ui/ui2/guild.png", 67, 24, 0, 746, TRUE )
+UI_SetButtonModalResult( btnNo, BUTTON_CLOSE )
+
+
+
+local perms = {
+	"\204\238\230\229\242 \207\232\241\224\242\252 \226 \215\224\242",
+	"\211\239\240\224\226\235\255\242\252 \240\224\231\240\229\248\229\237\232\255\236\232",
+	"\208\224\231\240\229\248\232\242\252 \241\236\238\242\240\229\242\252 \225\224\237\234",
+	"\207\238\235\238\230\232\242\252 \226 \225\224\237\234 \227\232\235\252\228\232\232",
+	"\194\231\255\242\252 \232\231 \225\224\237\234\224 \227\232\235\252\228\232\232",
+	"\207\240\232\237\232\236\224\242\252 \226 \195\232\235\252\228\232\254",
+	"\200\231\227\237\224\242\252 \232\231 \195\232\235\252\228\232\232",
+	"\200\231\236\229\237\255\242\252 \196\229\226\232\231",
+	"\211\239\240\224\226\235\255\242\252 \245\224\240\224\234\242\229\240\232\241\242\232\234\224\236\232",	
+	"\194\245\238\228\232\242\252 \226 \196\238\236 \227\232\235\252\228\232\232",
+	"\208\224\231\236\229\249\224\242\252 \238\225\250\229\234\242\251",
+	"\211\228\224\235\255\242\252 \238\225\250\229\234\242\251",
+	"\208\224\241\244\238\240\236\232\240\238\226\224\242\252 \227\232\235\252\228\232\254",
+	"\203\232\228\229\240 \227\232\235\252\228\232\232",
+}
+
+trvEditor = UI_CreateCompent( frmGuildPerm, TREE_TYPE, "trvEditor", 192, 260, 0, 47 )
+for i,v in ipairs(perms) do			
+	itemid = UI_CreateTextItem( v, COLOR_RED )--permission name
+	sndNode = UI_CreateSingleNode( trvEditor, itemid, -1 )--add to tree list
+end
+UI_SetIsDrag( trvEditor, TRUE )
+
+UI_TreeLoadImage( trvEditor, enumTreeAddImage, "texture/ui/ui2/QQ2.tga", 25,25,85,222, 25, 25)
+UI_TreeLoadImage( trvEditor, enumTreeSubImage, "texture/ui/ui2/QQ2.tga", 25,25,85,240, 25, 25)
+
+--Скролл
+local scrollid = UI_GetScroll( trvEditor )
+UI_SetSize( scrollid, -24, 1 )
+
+-- Скролл вверх
+local id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 55, true )
+UI_SetSize( id, 13, 9 )
+
+-- Скролл ползунок
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/ui2/buttons.png", COMPENT_BACK, 13, 8, 387, 84 )
+UI_SetSize( id, 13, 8 )
+
+-- Скролл вниз
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 69, true )
+UI_SetSize( id, 13, 9 )
+
+btnPredef = UI_CreateCompent( frmGuildPerm, BUTTON_TYPE, "btnPredef", 92, 24, 21, 334 )
+UI_LoadButtonImage( btnPredef, "texture/ui/ui2/guild.png", 92, 24, 277, 1124, TRUE )
+
+
+for i = 1,6 do
+	predef = UI_CreateCompent( frmGuildPerm, BUTTON_TYPE, "btnPredef"..i, 92, 24, 21, 334-(24*i) )
+	UI_LoadImage( predef, "texture/ui/ui2/guild.png", 0, 92,24,204 + ( i-1) * 92, 1177 )
+	UI_LoadImage( predef, "texture/ui/ui2/guild.png", 2, 92,24,204 + ( i-1) * 92, 1201 )
+	UI_LoadImage( predef, "texture/ui/ui2/guild.png", 1, 92,24,204 + ( i-1) * 92, 1225 )
+	UI_SetIsShow(predef,0)
+end
+------------------------------------------------------------------
+-- Guild Colour Picker | Coded by Billy | Image by Foxseiz
+------------------------------------------------------------------
+frmGuildColour = UI_CreateForm( "frmGuildColour", FALSE, 252, 175, 805, 351, FALSE, FALSE )
+UI_ShowForm( frmGuildColour, FALSE )
+UI_AddFormToTemplete( frmGuildColour, 1 )
+UI_SetIsDrag( frmGuildColour, TRUE )
+
+imgPreviewBG = UI_CreateCompent( frmGuildColour, IMAGE_TYPE, "imgPreviewBG", 92, 61, 19,34 )
+UI_LoadImage( imgPreviewBG, "texture/ui/ui2/guild.png", NORMAL, 92, 61, 307, 1052 )
+
+imgPreview = UI_CreateCompent( frmGuildColour, IMAGE_TYPE, "imgPreview", 60, 60, 35,35 )
+UI_LoadImage( imgPreview, "texture/effect/guild_6star.tga", NORMAL, 128, 128, 0, 0 )
+
+imgVideoT = UI_CreateCompent( frmGuildColour, IMAGE_TYPE, "imgVideoT", 252, 175, 0, 0 )
+UI_LoadImage( imgVideoT, "texture/ui/ui2/guild.png", NORMAL, 252, 175, 10, 993 )
+
+btnClose = UI_CreateCompent( frmGuildColour, BUTTON_TYPE, "btnClose", 14, 14, 235, 2 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/guild.png", 14, 14, 0, 631, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+
+btnConfCol = UI_CreateCompent( frmGuildColour, BUTTON_TYPE, "btnConfCol", 93, 29, 35,136 )
+UI_LoadButtonImage( btnConfCol, "texture/ui/ui2/guild.png", 93, 29, 272, 1013, TRUE )
+
+btnDisCol = UI_CreateCompent( frmGuildColour, BUTTON_TYPE, "btnDisCol", 93, 29, 130,136 )
+UI_LoadButtonImage( btnDisCol, "texture/ui/ui2/guild.png", 93, 29, 739, 941, TRUE )
+
+btnNext = UI_CreateCompent( frmGuildColour, BUTTON_TYPE, "btnNext", 25, 23, 86,105 )
+UI_LoadButtonImage( btnNext, "texture/ui/ui2/guild.png", 25, 23, 112, 673, TRUE )
+
+btnPrev = UI_CreateCompent( frmGuildColour, BUTTON_TYPE, "btnPrev", 25, 23, 20,105 )
+UI_LoadButtonImage( btnPrev, "texture/ui/ui2/guild.png", 25, 23, 0, 669, TRUE )
+
+
+
+edtRed = UI_CreateCompent( frmGuildColour, EDIT_TYPE, "edtRed", 179, 11, 192, 36 )
+UI_SetTextColor( edtRed, COLOR_WHITE )
+edtGreen = UI_CreateCompent( frmGuildColour, EDIT_TYPE, "edtGreen", 179, 11, 192, 58 )
+UI_SetTextColor( edtGreen, COLOR_WHITE )
+edtBlue = UI_CreateCompent( frmGuildColour, EDIT_TYPE, "edtBlue", 179, 11, 192, 80 )
+UI_SetTextColor( edtBlue, COLOR_WHITE )
+
+UI_SetEditMaxNum( edtRed , 3 )
+UI_SetEditMaxNum( edtGreen, 3 )
+UI_SetEditMaxNum( edtBlue , 3 )
+
+guild_circles = {
+	{"6star",8 },
+	{"circle",9},
+	{"crosshair",10},
+	{"heart",11},
+	{"penta",12},
+	{"trianglecircle",13},
+	{"5star",14 },
+	{"pent",15 },
+	{"hex",16 },
+	{"diamond",17 },
+	{"square",18},
+	{"squarcle",19},
+	--{"test",20},
+}
+
+for i,v in pairs(guild_circles) do
+	local lab = UI_CreateCompent( frmGuildColour, LABELEX_TYPE, "gCircle"..i-1, 0, 0, 0, 0 )
+	UI_SetCaption( lab, v[1] )
+	UI_SetIsShow(lab,0)
+	local lab = UI_CreateCompent( frmGuildColour, LABELEX_TYPE, "gCircleID"..i-1, 0, 0, 0, 0 )
+	UI_SetCaption( lab, v[2].." " )
+	UI_SetIsShow(lab,0)
+end
+gCircleCount = UI_CreateCompent( frmGuildColour, LABELEX_TYPE, "gCircleCount", 0, 0, 0, 0 )
+UI_SetCaption( gCircleCount, (table.getn(guild_circles)-1).." " )
+UI_SetIsShow(gCircleCount,0)

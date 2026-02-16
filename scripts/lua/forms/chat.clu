@@ -1,0 +1,695 @@
+-----------------------------------------------------------------------
+-- 定义QQ
+-----------------------------------------------------------------------
+-- 创建QQ最小化表单
+frmQQMin = UI_CreateForm( "frmQQMin", FALSE, 146, 20, 0, 160, TRUE, FALSE )
+--UI_FormSetHotKey( frmQQMin, ALT_KEY, HOTKEY_N )
+UI_ShowForm( frmQQMin, FALSE )
+UI_AddFormToTemplete( frmQQMin, 1 )
+UI_SetIsDrag( frmQQMin, TRUE )
+
+-- 加载背景图片
+imgQQMin = UI_CreateCompent( frmQQMin, IMAGE_TYPE, "imgQQMin", 146, 20, 0, 0 )
+UI_LoadImage( imgQQMin, "texture/ui/Word.dds", NORMAL, 146, 20, 1, 157 )
+
+--创建最大化按钮
+btnQQMinMax = UI_CreateCompent( frmQQMin, BUTTON_TYPE, "btnQQMinMax", 14, 14, 115, 3 )
+UI_LoadButtonImage( btnQQMinMax, "texture/ui/PublicC.tga", 14, 14, 161, 175, TRUE )
+
+--创建关闭按钮
+btnClose = UI_CreateCompent( frmQQMin, BUTTON_TYPE, "btnClose", 14, 14, 130, 3 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/buttons.png", 25, 26, 381, 3, TRUE )
+
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+
+-- 加载界面title
+labTitle = UI_CreateCompent( frmQQMin, LABELEX_TYPE, "labTitle", 400, 150, 10, 4 )
+UI_SetCaption( labTitle, "Friend List")
+UI_SetTextColor( labTitle, COLOR_BLACK )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+
+-----------------------------------------------------------------------
+-- форма список друзей
+-----------------------------------------------------------------------
+frmQQ = UI_CreateForm( "frmQQ", FALSE, 207, 394, 652, 230, TRUE, FALSE )
+UI_FormSetHotKey( frmQQ, ALT_KEY, HOTKEY_F )
+UI_ShowForm( frmQQ, FALSE )
+UI_AddFormToTemplete( frmQQ, 1 )
+UI_SetIsDrag( frmQQ, TRUE )
+
+
+imgQQTop = UI_CreateCompent( frmQQ, IMAGE_TYPE, "imgQQTop", 207, 394, 0, 0 )
+UI_LoadImage( imgQQTop, "texture/ui/ui2/frmQQ.png", NORMAL, 207, 394, 0, 0 )
+
+
+-- Имя персонажа
+labMineName = UI_CreateCompent( frmQQ, LABELEX_TYPE, "labMineName", 164, 15, 30, 25 )
+UI_SetCaption( labMineName, "Child of Demon what is that" )
+UI_SetTextColor( labMineName, COLOR_BLACK )
+UI_SetLabelExFont( labMineName, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- Close Button
+btnClose = UI_CreateCompent( frmQQ, BUTTON_TYPE, "btnClose", 28, 28, 177, 0 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/buttons.png", 25, 26, 381, 3, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+
+-- Добавить в друзья
+btnAdd = UI_CreateCompent( frmQQ, BUTTON_TYPE, "btnAdd", 16, 16, 30, 370 )
+UI_LoadButtonImage( btnAdd, "texture/ui/ui2/frmQQ.png", 16, 16, 216, 73, TRUE )
+UI_SetHint( btnAdd, "Add" )
+
+
+-- О себе
+btnEdit = UI_CreateCompent( frmQQ, BUTTON_TYPE, "btnEdit", 15, 15, 53, 370 )
+UI_LoadButtonImage( btnEdit, "texture/ui/ui2/frmQQ.png", 15, 15, 217, 0, TRUE )
+UI_SetHint( btnEdit, "Info" )
+
+
+-- Block button
+btnBlock = UI_CreateCompent( frmQQ, BUTTON_TYPE, "btnBlock", 14, 14, 76, 370 )
+UI_LoadButtonImage( btnBlock, "texture/ui/ui2/frmQQ.png", 14, 14, 213, 22, TRUE )
+UI_SetHint( btnBlock, "Block" )
+
+-- Построение дерева
+trvEditor = UI_CreateCompent( frmQQ, TREE_TYPE, "trvEditor", 180, 230, 25, 80 )
+
+itemid = UI_CreateNoteGraphItem( "texture/ui/ui2/frmQQ.png", 130, 11, 22, 401, 0, "Chat", 15,-2 )
+gridid = UI_CreateGridNode( trvEditor, itemid, 1, 32, 32, -1 )
+	
+itemid = UI_CreateNoteGraphItem( "texture/ui/ui2/frmQQ.png", 130, 11, 22, 401, 0, "Friend", 15,-2 )
+gridid = UI_CreateGridNode( trvEditor, itemid, 1, 32, 32, -1 )
+	
+itemid = UI_CreateNoteGraphItem( "texture/ui/ui2/frmQQ.png", 130, 11, 22, 401, 0, "Party", 15,-2 )
+gridid = UI_CreateGridNode( trvEditor, itemid, 1, 32, 32, -1 )
+	
+itemid = UI_CreateNoteGraphItem( "texture/ui/ui2/frmQQ.png", 130, 11, 22, 401, 0, "Guild", 15,-2 )
+gridid = UI_CreateGridNode( trvEditor, itemid, 1, 32, 32, -1 )
+
+--itemid = UI_CreateNoteGraphItem( "texture/ui/QQ2.tga", 87,16,105,222, 0, "Passer-by", 5,2 )
+--gridid = UI_CreateGridNode( trvEditor, itemid, 1, 32, 32, -1 )
+
+itemid = UI_CreateNoteGraphItem( "texture/ui/ui2/frmQQ.png", 130, 11, 22, 401, 0, "Mentor", 15,-2 )
+gridid = UI_CreateGridNode( trvEditor, itemid, 1, 32, 32, -1 )
+
+itemid = UI_CreateNoteGraphItem( "texture/ui/ui2/frmQQ.png", 130, 11, 22, 401, 0, "Disciple", 15,-2 )
+gridid = UI_CreateGridNode( trvEditor, itemid, 1, 32, 32, -1 )
+
+itemid = UI_CreateNoteGraphItem( "texture/ui/frmQQ.png", 130, 11, 22, 401, 0, "GM", 15,-2 )
+gridid = UI_CreateGridNode( trvEditor, itemid, 1, 32, 32, -1 )
+
+itemid = UI_CreateNoteGraphItem( "texture/ui/frmQQ.png", 130, 11, 22, 401, 0, "Blocked", 15,-2 )
+gridid = UI_CreateGridNode( trvEditor, itemid, 1, 32, 32, -1 )
+
+UI_SetIsDrag( trvEditor, TRUE )
+
+--Плюсы (Alt+F)
+UI_TreeLoadImage( trvEditor, enumTreeAddImage, "texture/ui/ui2/frmQQ.png", 22, 11, 0, 401, 22, 11) --22, 11, 0, 341, 22, 11)
+UI_TreeLoadImage( trvEditor, enumTreeSubImage, "texture/ui/ui2/frmQQ.png", 22, 11, 0, 412, 22, 11)
+
+--Скролл
+local scrollid = UI_GetScroll( trvEditor )
+UI_SetSize( scrollid, 24, 1 )
+
+-- Скролл вверх
+local id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 55, true )
+UI_SetSize( id, 13, 9 )
+
+-- Скролл ползунок
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/ui2/buttons.png", COMPENT_BACK, 13, 8, 387, 84 )
+UI_SetSize( id, 13, 8 )
+
+-- Скролл вниз
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 69, true )
+UI_SetSize( id, 13, 9 )
+
+
+-----------------------------------------------------------------------
+-- 定义右键菜单
+-----------------------------------------------------------------------
+--Нажатие правой кнопкой мыши во вкладке чатов
+frndMouseRight = UI_CreateCompent( frmQQ, MENU_TYPE, "frndMouseRight", 165, 97, 240, 468 )
+UI_MenuLoadImage( frndMouseRight, TRUE, FALSE, "texture/ui/ui2/right.png", 5, 5, 10, 10, "texture/ui/ui2/right.png", 5, 5 )
+UI_SetMargin( frndMouseRight, 10, 5, 5, 5 )
+
+UI_MenuLoadSelect( frndMouseRight, "texture/ui/ui2/chat.png", 79, 13, 94, 73  )
+
+-- 增加菜单
+UI_MenuAddText( frndMouseRight, "Detailed Info" )
+UI_MenuAddText( frndMouseRight, "Send message" )
+UI_MenuAddText( frndMouseRight, "Delete Friend" )
+UI_MenuAddText( frndMouseRight, "PM" )
+
+--------------------------------------------------------------------------
+--правая кнопка при наведение на иконку игрока в пати
+groupMouseRight = UI_CreateCompent( frmQQ, MENU_TYPE, "groupMouseRight", 155, 300, 240, 468 )
+UI_MenuLoadImage( groupMouseRight, TRUE, FALSE, "texture/ui/ui2/right.png", 5, 5, 10, 10, "texture/ui/ui2/right.png", 5, 5 )
+UI_SetMargin( groupMouseRight, 10, 5, 5, 5 )
+
+UI_MenuLoadSelect( groupMouseRight, "texture/ui/ui2/chat.png", 79, 13, 94, 73  )
+-- 增加菜单
+UI_MenuAddText( groupMouseRight, "Add Friend" )
+UI_MenuAddText( groupMouseRight, "Send message" )
+UI_MenuAddText( groupMouseRight, "PM" )
+UI_MenuAddText( groupMouseRight, "Kick" )
+
+---
+roadMouseRight = UI_CreateCompent( frmQQ, MENU_TYPE, "roadMouseRight", 92, 97, 240, 468 )
+UI_MenuLoadImage( roadMouseRight, TRUE, FALSE, "texture/ui/ui2/right.png", 5, 5, 10, 10, "texture/ui/ui2/right.png", 5, 5 )
+UI_SetMargin( roadMouseRight, 10, 5, 5, 5 )
+
+UI_MenuLoadSelect( roadMouseRight, "texture/ui/ui2/chat.png", 79, 13, 94, 73  )
+
+-- 增加菜单
+UI_MenuAddText( roadMouseRight, "Add Friend" )
+UI_MenuAddText( roadMouseRight, "Party Invite" )
+UI_MenuAddText( roadMouseRight, "Send message" )
+UI_MenuAddText( roadMouseRight, "PM" )
+
+---创建当前会话右键表单
+ChatMouseRight = UI_CreateCompent( frmQQ, MENU_TYPE, "ChatMouseRight", 92, 97, 240, 468 )
+UI_MenuLoadImage( ChatMouseRight, TRUE, FALSE, "texture/ui/ui2/right.png", 5, 5, 10, 10, "texture/ui/ui2/right.png", 5, 5 )
+UI_SetMargin( ChatMouseRight, 10, 5, 5, 5 )
+
+UI_MenuLoadSelect( ChatMouseRight, "texture/ui/ui2/chat.png", 79, 13, 94, 73  )
+
+-- 增加菜单
+UI_MenuAddText( ChatMouseRight, "Exit conversation" )
+
+--创建导师的右键菜单
+MasterRight = UI_CreateCompent( frmQQ, MENU_TYPE, "MasterRight", 92, 97, 240, 468 )
+UI_MenuLoadImage( MasterRight, TRUE, FALSE, "texture/ui/ui2/right.png", 5, 5, 10, 10, "texture/ui/ui2/right.png", 5, 5 )
+UI_SetMargin( MasterRight, 10, 5, 5, 5 )
+--
+UI_MenuLoadSelect( MasterRight, "texture/ui/ui2/chat.png", 79, 13, 94, 73  )
+
+-- 增加菜单
+UI_MenuAddText( MasterRight, "Friend" )
+UI_MenuAddText( MasterRight, "Party" )
+UI_MenuAddText( MasterRight, "Message" )
+UI_MenuAddText( MasterRight, "PM" )
+UI_MenuAddText( MasterRight, "Delete" )
+
+--创建学徒的右键菜单
+--
+StudentRight = UI_CreateCompent( frmQQ, MENU_TYPE, "StudentRight", 92, 97, 240, 468 )
+UI_MenuLoadImage( StudentRight, TRUE, FALSE, "texture/ui/ui2/right.png", 5, 5, 10, 10, "texture/ui/ui2/right.png", 5, 5 )
+UI_SetMargin( StudentRight, 10, 5, 5, 5 )
+
+--装载菜单选择条的图片
+UI_MenuLoadSelect( StudentRight, "texture/ui/ui2/chat.png", 79, 13, 94, 73  )
+
+-- 增加菜单
+UI_MenuAddText( StudentRight, "Friend" )
+UI_MenuAddText( StudentRight, "Party" )
+UI_MenuAddText( StudentRight, "Message" )
+UI_MenuAddText( StudentRight, "PM" )
+UI_MenuAddText( StudentRight, "Delete" )
+
+-- Block
+BlockedRight = UI_CreateCompent( frmQQ, MENU_TYPE, "BlockedRight", 92, 97, 240, 468 )
+UI_MenuLoadImage( BlockedRight, TRUE, FALSE, "texture/ui/ui2/right.png", 5, 5, 10, 10, "texture/ui/ui2/right.png", 5, 5 )
+UI_SetMargin( BlockedRight, 10, 5, 5, 5 )
+--
+UI_MenuLoadSelect( BlockedRight, "texture/ui/ui2/chat.png", 79, 13, 94, 73  )
+
+-- 增加菜单
+UI_MenuAddText( BlockedRight, "Delete" )
+-----------------------------------------------------------------------
+-- 定义对话框
+-----------------------------------------------------------------------
+-- 创建对话框表单
+frmChat = UI_CreateForm( "frmChat", FALSE, 463, 300, 232, 163, TRUE, FALSE )
+UI_ShowForm( frmChat, FALSE )
+UI_AddFormToTemplete( frmChat, 1 )
+UI_SetIsDrag( frmChat, TRUE )
+
+-- текстура окна чата
+imgChatTL = UI_CreateCompent( frmChat, IMAGE_TYPE, "imgChatTL", 463, 300, 0, 0 )
+UI_LoadImage( imgChatTL, "texture/ui/ui2/index.png", NORMAL, 463, 300, 0, 0 )
+
+-- "Беседа с *Игроком*"
+labName1 = UI_CreateCompent( frmChat, LABELEX_TYPE, "labName1", 202, 15, 41, 22 )
+UI_SetCaption( labName1, "012" )
+UI_SetTextColor( labName1, COLOR_WHITE )
+
+
+-- Close Button
+btnClose = UI_CreateCompent( frmChat, BUTTON_TYPE, "btnClose", 28, 28, 433, 1 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/buttons.png", 25, 26, 381, 3, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+
+-- Свернуть
+btnMin = UI_CreateCompent( frmChat, BUTTON_TYPE, "btnMin", 14, 14, 342, 3 )
+UI_LoadButtonImage( btnMin, "texture/ui/ui2/index.png", 14, 14, 0, 334, TRUE )
+
+-- Отправить сообщение
+btnSend = UI_CreateCompent( frmChat, BUTTON_TYPE, "btnSend", 16, 16, 315, 238 )
+UI_LoadButtonImage( btnSend, "texture/ui/ui2/frmQQ.png", 16, 16, 216, 74, TRUE )
+UI_SetHint( btnSend, "Alt+X to send message" )
+
+
+-- строка написания сообшения
+edtChat = UI_CreateCompent( frmChat, EDIT_TYPE, "edtChat", 260, 19, 41, 241 )
+UI_SetTextColor( edtChat, COLOR_WHITE )
+UI_SetEditMaxNum( edtChat, 250 )
+UI_SetEditMaxNumVisible( edtChat, 250 )
+UI_SetEditCursorColor( edtChat, COLOR_BLUE )
+UI_SetEditEnterButton( edtChat, btnSend )
+
+memChat = UI_CreateCompent( frmChat, RICHMEMO_TYPE, "memChat", 272, 153, 39, 49 )
+UI_SetTextColor( memChat, COLOR_GREEN )
+UI_SetListFontColor( memChat, COLOR_RED, COLOR_RED )
+UI_SetLabelExFont( memChat, DEFAULT_FONT, TRUE, COLOR_GREEN )
+
+--Скролл
+local scrollid = UI_GetScroll( memChat )
+UI_SetSize( scrollid, 24, 1 )
+
+-- Скролл вверх
+local id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 55, true )
+UI_SetSize( id, 13, 9 )
+
+-- Скролл ползунок
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/ui2/buttons.png", COMPENT_BACK, 13, 8, 387, 84 )
+UI_SetSize( id, 13, 8 )
+
+-- Скролл вниз
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 69, true )
+UI_SetSize( id, 13, 9 )
+
+lstChat = UI_CreateCompent( frmChat, LIST_TYPE, "lstChat", 101, 205, 340, 50 )
+UI_SetMargin( lstChat, 1, 4, 3, 5 )
+UI_SetListRowHeight( lstChat, 38 )
+
+--Скролл
+local scrollid = UI_GetScroll( lstChat )
+UI_SetSize( scrollid, 24, 1 )
+
+-- Скролл вверх
+local id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 55, true )
+UI_SetSize( id, 13, 9 )
+
+-- Скролл ползунок
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/ui2/buttons.png", COMPENT_BACK, 13, 8, 387, 84 )
+UI_SetSize( id, 13, 8 )
+
+-- Скролл вниз
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 69, true )
+UI_SetSize( id, 13, 9 )
+
+--创建参与者
+labParty = UI_CreateCompent( frmChat, LABELEX_TYPE, "labParty", 92, 15, 335, 22 )
+UI_SetCaption( labParty, "Members (36)" )
+UI_SetTextColor( labParty, COLOR_BLACK )
+UI_SetLabelExFont( labParty, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- кнопка Смайлики
+btnBrow = UI_CreateCompent( frmChat, BUTTON_TYPE, "btnBrow", 14, 14, 280, 212 )
+UI_LoadButtonImage( btnBrow, "texture/ui/ui2/chat.png", 14, 14, 0, 52, TRUE )
+UI_SetHint( btnBrow, "Emoticon" )
+
+-- Очистить экран
+btnClean = UI_CreateCompent( frmChat, BUTTON_TYPE, "btnClean", 14, 14, 260, 212 )
+UI_LoadButtonImage( btnClean, "texture/ui/ui2/frmQQ.png", 14, 14, 213, 22, TRUE )
+UI_SetHint( btnClean, "Clear Screen" )
+
+--Сохранить журнал сообщений
+btnChat = UI_CreateCompent( frmChat, BUTTON_TYPE, "btnChat", 15, 15, 240, 212 )
+UI_LoadButtonImage( btnChat, "texture/ui/ui2/frmQQ.png", 15, 15, 217, 0, TRUE )
+UI_SetHint( btnChat, "Save message log" )
+
+--Закончить беседу
+btnQuit = UI_CreateCompent( frmChat, BUTTON_TYPE, "btnQuit", 93, 24, 334, 262 )
+UI_LoadButtonImage( btnQuit, "texture/ui/ui2/index.png", 93, 24, 0, 308, TRUE )
+UI_SetHint( btnQuit, "Exit conversation" )
+
+--表情表格
+grdFace = UI_CreateCompent( frmChat, GRID_TYPE, "grdFace", 142, 170, 0, 0 ) 
+UI_LoadImage( grdFace,  "texture/ui/ui2/chat.png", NORMAL, 142, 170, 369, 0 )
+UI_SetGridUnitSize( grdFace, 16, 16 )
+UI_SetIsShow( grdFace, FALSE )
+UI_SetMargin( grdFace, 11, 5, 5, 5 )
+UI_SetGridSpace( grdFace, 4, 4 )
+UI_SetGridIsDragSize( grdFace, FALSE )
+UI_GridLoadSelectImage( grdFace, "texture/ui/StartF.dds", 32, 32, 123, 99 )
+n=0
+while 1 do
+	name = "texture/ui/face/"..(n+1)..".tga"   	
+    	UI_AddFaceToGrid( grdFace, name, 16, 16, 0, 0, 1, 0 )	
+	UI_SetTextParse( n , name, 16, 16 , 0 , 0 ,1  )
+	n = n + 1    	
+    	if n>=21 then break end
+end
+
+--- выподаюшее меню добавить в др в чате
+ListMouseRight = UI_CreateCompent( frmChat, MENU_TYPE, "ListMouseRight", 92, 97, 240, 468 )
+UI_MenuAddText( ListMouseRight, "Friend" )
+
+-----------------------------------------------------------------------
+-- 定义对话框(中)
+-----------------------------------------------------------------------
+-- 创建对话框表单
+frmChatMd = UI_CreateForm( "frmChatMd", FALSE, 203, 135, 232, 163, TRUE, FALSE )
+--UI_FormSetHotKey( frmChatMd, ALT_KEY, HOTKEY_C )
+UI_ShowForm( frmChatMd, FALSE )
+UI_AddFormToTemplete( frmChatMd, 1 )
+UI_SetIsDrag( frmChatMd, TRUE )
+UI_FormSetIsEscClose( frmChatMd, FALSE )
+
+-- 加载背景图片
+imgChatA = UI_CreateCompent( frmChatMd, IMAGE_TYPE, "imgChatA", 203, 135, 0, 0 )
+UI_LoadImage( imgChatA, "texture/ui/TalkM.dds", NORMAL, 203, 135, 0, 0 )
+
+--创建对方名字
+labName = UI_CreateCompent( frmChatMd, LABELEX_TYPE, "labName", 96, 11, 7, 4 )
+--UI_SetCaption( labName, "012345678901234567890123456789" )
+UI_SetTextColor( labName, COLOR_BLACK )
+UI_SetLabelExFont( labName, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+--创建关闭按钮
+btnClose = UI_CreateCompent( frmChatMd, BUTTON_TYPE, "btnClose", 14, 14, 182, 3 )
+UI_LoadButtonImage( btnClose, "texture/ui/PublicC.tga", 14, 14, 116, 175, TRUE )
+
+--创建最小化按钮
+btnMin = UI_CreateCompent( frmChatMd, BUTTON_TYPE, "btnMin", 14, 14, 152, 3 )
+UI_LoadButtonImage( btnMin, "texture/ui/PublicC.tga", 14, 14, 116, 175, TRUE )
+
+--创建还原按钮
+btnReturn = UI_CreateCompent( frmChatMd, BUTTON_TYPE, "btnReturn", 14, 14, 167, 3 )
+UI_LoadButtonImage( btnReturn, "texture/ui/PublicC.tga", 14, 14, 116, 175, TRUE )
+
+--创建发送按钮
+btnSend = UI_CreateCompent( frmChatMd, BUTTON_TYPE, "btnSend", 16, 13, 185, 117 )
+UI_LoadButtonImage( btnSend, "texture/ui/PublicC.tga", 16, 13, 49, 89, TRUE )
+
+--加载对话输入框
+edtTradeGold = UI_CreateCompent( frmChatMd, EDIT_TYPE, "edtTradeGold", 171, 25, 17, 112 )
+UI_SetTextColor( edtTradeGold, COLOR_BLACK )
+UI_SetEditMaxNum( edtTradeGold, 29 )
+UI_SetEditMaxNumVisible( edtTradeGold, 29 )
+
+--加载聊天对话
+--memCtrl = UI_CreateCompent( frmChatMd, MEMO_TYPE, "memCtrl", 183, 79, 13, 23 )
+--UI_SetTextColor( memCtrl, COLOR_BLACK )
+--UI_SetCaption( memCtrl, "" ) 
+--UI_SetMemoMaxNumPerRow(memCtrl, 42 )
+--UI_SetMemoPageShowNum(memCtrl, 6 )
+--UI_SetMemoRowHeight( memCtrl , 21 )
+
+--加载聊天对话
+memCtrl = UI_CreateCompent( frmChatMd, LIST_TYPE, "memCtrl", 183, 79, 13, 23 )
+listid1 = UI_GetList( memCtrl )
+UI_SetListRowHeight( listid1, 18 )
+UI_SetMargin( memChat, 2, 2, 2, 2 )
+UI_SetIsShow( memChat , TRUE)
+
+
+UI_SetEditEnterButton( edtTradeGold,btnSend )
+
+--获得滚动条
+scrollid = UI_GetScroll( memCtrl )
+UI_SetSize( scrollid, 11, 1 )
+UI_LoadImage( scrollid, "texture/ui/PublicC.tga", COMPENT_BACK, 11, 1, 194, 13 )
+
+--加载向上按钮
+id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/PublicC.tga", 11, 9, 166, 0, TRUE )
+UI_SetSize( id, 11, 9 )
+
+--加载滚动条
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/PublicC.tga", COMPENT_BACK, 11, 43, 166, 10 )
+UI_SetSize( id, 11, 20 )
+
+--加载向下按钮
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/PublicC.tga", 11, 9, 166, 0, TRUE )
+UI_SetSize( id, 11, 9 )
+
+-----------------------------------------------------------------------
+-- свёрнутое окно чата mini chat bar
+-----------------------------------------------------------------------
+frmChatMin = UI_CreateForm( "frmChatMin", FALSE, 185, 32, 0, 0, TRUE, FALSE )
+UI_ShowForm( frmChatMin, FALSE )
+UI_AddFormToTemplete( frmChatMin, 1 )
+UI_SetIsDrag( frmChatMin, TRUE )
+UI_FormSetIsEscClose( frmChatMin, FALSE )
+
+-- текстура св. окна чата
+imgItemMin = UI_CreateCompent( frmChatMin, IMAGE_TYPE, "imgItemMin", 185, 32, 0, 0 )
+UI_LoadImage( imgItemMin, "texture/ui/ui2/index.png", NORMAL, 185, 32, 62, 337 )
+labTitle = UI_CreateCompent( imgChatTL, LABELEX_TYPE, "labTitle", 60, 14, 14, 12 )
+UI_SetAlpha( imgItemMin, 210 )
+
+-- кнопка свернуть
+btnMax = UI_CreateCompent( frmChatMin, BUTTON_TYPE, "btnMax", 14, 14, 145, 9 )
+UI_LoadButtonImage( btnMax, "texture/ui/ui2/index.png", 14, 14, 0, 360, TRUE )
+UI_SetAlpha( btnMax, 190 )
+
+-- кнопка закрыть
+btnClose = UI_CreateCompent( frmChatMin, BUTTON_TYPE, "btnClose", 14, 14, 163, 9 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/buttons.png", 25, 26, 381, 3, TRUE )
+UI_SetAlpha( btnClose, 190 )
+
+-- заголовок свернутого окна
+labName = UI_CreateCompent( frmChatMin, LABELEX_TYPE, "labName", 127, 16, 15, 11 )
+UI_SetCaption( labName, "TestMinimalChat" )
+UI_SetTextColor( labName, COLOR_WHITE )
+
+
+-----------------------------------------------------------------------
+-- Форма добавить друга, по нику, имени - add player as friend window
+-----------------------------------------------------------------------
+frmAddFriend = UI_CreateForm( "frmAddFriend",  FALSE, 220, 131, 397, 500, FALSE, FALSE )
+UI_LoadFormImage( frmAddFriend, "texture/ui/ui2/frmQQ.png", 220, 131, 220, 200, "", 220, 200 )
+UI_ShowForm( frmAddFriend, FALSE )
+UI_AddFormToTemplete( frmAddFriend, FORM_MAIN )
+UI_SetFormStyle( frmAddFriend, 0 )
+UI_SetIsDrag( frmAddFriend, TRUE )
+
+-- кнопка закрыть
+btnClose = UI_CreateCompent( frmAddFriend, BUTTON_TYPE, "btnClose", 14, 14, 204, 2 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/buttons.png", 25, 26, 381, 3, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- надпись, добавить в друзья на форме
+labTradeGold = UI_CreateCompent( frmAddFriend, LABELEX_TYPE, "labTradeGold", 23, 11, 50, 30 )
+
+-- 加载输入区背景
+imgTradeGoldBak = UI_CreateCompent( frmAddFriend, IMAGE_TYPE, "imgTradeGoldBak", 109, 19, 50, 50 )
+--UI_LoadImage( imgTradeGoldBak, "texture/ui/PublicC.tga", NORMAL, 109, 19, 47, 68 )
+
+-- форма ввода имени
+edtTradeGold = UI_CreateCompent( frmAddFriend, EDIT_TYPE, "edtTradeGold", 115, 14, 81, 72 )
+UI_SetTextColor( edtTradeGold, COLOR_WHITE )
+UI_SetEditMaxNum( edtTradeGold, 16 )
+UI_SetEditMaxNumVisible( edtTradeGold, 16 )
+
+-- кнопка окей
+btnYes = UI_CreateCompent( frmAddFriend, BUTTON_TYPE, "btnYes", 34, 24, 95, 97 )
+UI_LoadButtonImage( btnYes, "texture/ui/ui2/frmQQ.png", 34, 24, 304, 142, TRUE )
+
+
+-- кнопка отмены
+btnNo = UI_CreateCompent( frmAddFriend, BUTTON_TYPE, "btnNo", 65, 24, 133, 97 )
+UI_LoadButtonImage( btnNo, "texture/ui/ui2/frmQQ.png", 65, 24, 258, 169, TRUE )
+UI_SetButtonModalResult( btnNo, BUTTON_CLOSE )
+
+--- ( не обнаружил Оо : )
+styMenu = UI_CreateCompent( frmQQ, MENU_TYPE, "styMenu", 92, 97, 240, 468 )
+UI_MenuLoadImage( styMenu, TRUE, FALSE, "texture/ui/xDesign/right.png", 5, 5, 10, 10, "texture/ui/ui2/right.png", 5, 5 )
+UI_SetMargin( styMenu, 10, 5, 5, 5 )
+
+UI_MenuLoadSelect( styMenu, "texture/ui/ui2/system.png", 79, 13, 25, 227  )
+
+
+
+-----------------------------------------------------------------------
+-- форма добавить подпись после ника
+-----------------------------------------------------------------------
+frmEdit = UI_CreateForm( "frmEdit",  FALSE, 220, 131, 397, 500, TRUE, FALSE )
+UI_LoadFormImage( frmEdit, "texture/ui/ui2/frmQQ.png", 220, 131, 305, 6, "", 305, 6 )
+UI_ShowForm( frmEdit, FALSE )
+UI_AddFormToTemplete( frmEdit, FORM_MAIN )
+UI_SetFormStyle( frmEdit, 0 )
+UI_SetIsDrag( frmEdit, TRUE )
+
+-- кнопка закрыть
+btnClose = UI_CreateCompent( frmEdit, BUTTON_TYPE, "btnClose", 14, 14, 204, 2 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/buttons.png", 25, 26, 381, 3, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- поле ввода подписи
+edtTradeGold = UI_CreateCompent( frmEdit, EDIT_TYPE, "edtTradeGold", 115, 14, 81, 72 )
+UI_SetTextColor( edtTradeGold, 4294631710 )
+UI_SetEditMaxNum( edtTradeGold, 16 )
+UI_SetEditMaxNumVisible( edtTradeGold, 16 )
+
+-- чекбокс блкировки
+chkChat = UI_CreateCompent( frmEdit, CHECK_TYPE, "chkChat", 14, 14, 75, 101 )
+UI_LoadImage( chkChat, "texture/ui/ui2/frmQQ.png", UNCHECKED, 14, 14, 226, 106 )
+UI_LoadImage( chkChat, "texture/ui/ui2/frmQQ.png", CHECKED, 14, 14, 244, 106 )
+
+
+-- кнопка окей
+btnYes = UI_CreateCompent( frmEdit, BUTTON_TYPE, "btnYes", 34, 24, 95, 97 )
+UI_LoadButtonImage( btnYes, "texture/ui/ui2/frmQQ.png", 34, 24, 304, 142, TRUE )
+UI_SetEditEnterButton( edtTradeGold, btnYes )
+
+-- кнопка отмены
+btnNo = UI_CreateCompent( frmEdit, BUTTON_TYPE, "btnNo", 65, 24, 133, 97 )
+UI_LoadButtonImage( btnNo, "texture/ui/ui2/frmQQ.png", 65, 24, 258, 169, TRUE )
+UI_SetButtonModalResult( btnNo, BUTTON_CLOSE )
+
+
+--  ник персоонажа
+labName = UI_CreateCompent( frmEdit, LABELEX_TYPE, "labName", 400, 150, 35, 13 )
+UI_SetCaption( labName, "Child of Demon what is that" )
+UI_SetTextColor( labName, 4294631710 )
+UI_SetLabelExFont( labName, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+--  ( не обнаружил Оо : )
+imgMhead = UI_CreateCompent( frmEdit, IMAGE_TYPE, "imgMhead", 32, 32, 20, 35 )
+UI_SetAlpha( imgMhead, 0 )
+
+-----------------------------------------------------------------------
+-- характеристики друзей, детали из меню прав клика на друзьях friend details
+-----------------------------------------------------------------------
+frmdetails = UI_CreateForm( "frmdetails",  FALSE, 220, 227, 397, 500, TRUE, FALSE )
+UI_LoadFormImage( frmdetails, "texture/ui/ui2/frmQQ.png", 220, 227, 456, 146, "", 456, 146 )
+UI_ShowForm( frmdetails, FALSE )
+UI_AddFormToTemplete( frmdetails, FORM_MAIN )
+UI_SetFormStyle( frmdetails, 0 )
+UI_SetIsDrag( frmdetails, TRUE )
+
+-- кнопка обновить
+btnRefurbish = UI_CreateCompent( frmdetails, BUTTON_TYPE, "btnRefurbish", 0, 0, 0, 0 )
+UI_LoadButtonImage( btnRefurbish, "texture/ui/xDesign/Button1.tga", 0, 0, 0, 0, TRUE )
+
+-- кнопка отмены
+btnNo = UI_CreateCompent( frmdetails, BUTTON_TYPE, "btnNo", 65, 24, 132, 194 )
+UI_LoadButtonImage( btnNo, "texture/ui/ui2/frmQQ.png", 65, 24, 258, 169, TRUE )
+UI_SetButtonModalResult( btnNo, BUTTON_CLOSE )
+
+--创建Title
+--imgDeTitle = UI_CreateCompent( frmdetails, IMAGE_TYPE, "imgDeTitle", 49, 13, 8, 3 )
+--UI_LoadImage( imgDeTitle, "texture/ui/Word.dds", NORMAL, 49, 13, 120, 58 )
+
+-- ник персоонажа
+labDeName = UI_CreateCompent( frmdetails, LABELEX_TYPE, "labDeName", 96, 11, 100, 45 )
+UI_SetTextColor( labDeName, COLOR_YELLOW )
+UI_SetLabelExFont( labDeName, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- 加载角色头像
+--imgDeHead = UI_CreateCompent( frmdetails, IMAGE_TYPE, "imgDeHead", 32, 32, 4, 24 )
+--UI_LoadImage( imgDeHead, "texture/ui/main800.tga", NORMAL, 32, 32, 37, 201 )
+
+-- профессия
+labJob = UI_CreateCompent( frmdetails, LABELEX_TYPE, "labJob", 96, 11, 85, 67 )
+UI_SetTextColor( labJob, FONT1, COLOR_WHITE )
+UI_SetLabelExFont( labJob, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- уровень
+labLv = UI_CreateCompent( frmdetails, LABELEX_TYPE, "labLv", 96, 11, 85, 84 )
+UI_SetTextColor( labLv, FONT1, COLOR_WHITE )
+UI_SetLabelExFont( labLv, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- гильдия
+labConsortia = UI_CreateCompent( frmdetails, LABELEX_TYPE, "labConsortia", 96, 11, 85, 101 )
+--UI_SetCaption( labConsortia, "AhAhAh" )
+UI_SetTextColor( labConsortia, FONT1, COLOR_WHITE )
+UI_SetLabelExFont( labConsortia, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+
+-----------------------------------------------------------------------
+-- Block
+-----------------------------------------------------------------------
+frmBlockPlayer = UI_CreateForm( "frmBlockPlayer",  FALSE, 220, 131, 397, 500, FALSE, FALSE )
+UI_LoadFormImage( frmBlockPlayer, "texture/ui/ui2/frmQQ.png", 220, 131, 220, 341, "", 220, 341 )
+UI_ShowForm( frmBlockPlayer, FALSE )
+UI_AddFormToTemplete( frmBlockPlayer, FORM_MAIN )
+UI_SetFormStyle( frmBlockPlayer, 0 )
+UI_SetIsDrag( frmBlockPlayer, TRUE )
+
+-- кнопка закрыть
+btnClose = UI_CreateCompent( frmBlockPlayer, BUTTON_TYPE, "btnClose", 14, 14, 204, 2 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/buttons.png", 25, 26, 381, 3, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- поле ввода подписи
+edtTradeGold = UI_CreateCompent( frmBlockPlayer, EDIT_TYPE, "edtTradeGold", 115, 14, 81, 72 )
+UI_SetTextColor( edtTradeGold, 4294631710 )
+UI_SetEditMaxNum( edtTradeGold, 16 )
+UI_SetEditMaxNumVisible( edtTradeGold, 16 )
+UI_SetEditCursorColor( edtTradeGold, 4278255360 )
+
+-- кнопка окей
+btnYes = UI_CreateCompent( frmBlockPlayer, BUTTON_TYPE, "btnYes", 34, 24, 95, 97 )
+UI_LoadButtonImage( btnYes, "texture/ui/ui2/frmQQ.png", 34, 24, 304, 142, TRUE )
+UI_SetEditEnterButton( edtTradeGold, btnYes )
+
+-- кнопка отмены
+btnNo = UI_CreateCompent( frmBlockPlayer, BUTTON_TYPE, "btnNo", 65, 24, 133, 97 )
+UI_LoadButtonImage( btnNo, "texture/ui/ui2/frmQQ.png", 65, 24, 258, 169, TRUE )
+UI_SetButtonModalResult( btnNo, BUTTON_CLOSE )
+
+-----------------------------------------------------------------------
+-- окно уведомления о сообшении в дружеский чат
+-----------------------------------------------------------------------
+frmRemind = UI_CreateForm( "frmRemind",  TRUE, 185, 101, 397, 500, FALSE, FALSE )
+UI_LoadFormImage( frmRemind, "texture/ui/ui2/index.png", 185, 101, 279, 334, "", 279, 334 )
+UI_SetFormStyle( frmRemind, 0 )
+UI_ShowForm( frmRemind, FALSE )
+UI_AddFormToTemplete( frmRemind, FORM_MAIN )
+UI_SetIsDrag( frmRemind, TRUE )
+UI_SetAlpha( frmRemind, 230 )
+
+-- отрывок текста сообшения
+btnCheck = UI_CreateCompent( frmRemind, BUTTON_TYPE, "btnCheck", 121, 11, 20, 44 )
+UI_SetCaption( labCheck, "012345678901234567890123456789" )
+UI_SetTextColor( labCheck, COLOR_WHITE )
+
+-- заголовок
+labTitle = UI_CreateCompent( frmRemind, LABELEX_TYPE, "labTitle", 400, 150, 10, 7 )
+UI_SetTextColor( labTitle, COLOR_GREEN )
+
+-- кнопка Принять
+btnYes = UI_CreateCompent( frmRemind, BUTTON_TYPE, "btnYes", 36, 24, 40, 69 )
+UI_LoadButtonImage( btnYes, "texture/ui/ui2/index.png", 36, 24, 0, 404, TRUE )
+
+-- кнопка Закрыть
+btnNo = UI_CreateCompent( frmRemind, BUTTON_TYPE, "btnNo", 67, 24, 89, 69 )
+UI_LoadButtonImage( btnNo, "texture/ui/ui2/index.png", 67, 24, 0, 435, TRUE )
+
+-----------------------------------------------------------------------
+-- (2005.4.11-Arcol: ) в розыске
+-----------------------------------------------------------------------
+frmChatManage = UI_CreateForm( "frmChatManage",  FALSE, 130, 200, 397, 500, FALSE, FALSE )
+UI_LoadFormImage( frmChatManage, "texture/ui/check.dds", 185, 101, 0, 0, "", 0, 0 )
+UI_ShowForm( frmChatManage, FALSE )
+UI_AddFormToTemplete( frmChatManage, FORM_MAIN )
+UI_SetFormStyle( frmChatManage, 0 )
+UI_FormSetIsEscClose( frmChatManage, FALSE )
+
+trvChatManage = UI_CreateCompent( frmChatManage, TREE_TYPE, "trvChatManage", 120, 160, 5, 40 )
+-- UI_LoadImage( trvChatManage,  "texture/ui/editor/frame.dds", NORMAL, 1, 1, 0, 0 )
+scrollid = UI_GetScroll( trvChatManage )
+UI_SetSize( scrollid, 15, 15 )
+-- UI_LoadImage( scrollid, "texture/ui/editor/chat.dds", COMPENT_BACK, 9, 9, 0, 51 )
+scrollid = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( scrollid, "texture/ui/editor/scroll.dds", COMPENT_BACK, 16, 32, 0, 0 )
+UI_SetSize( scrollid, 10, 32 )
+UI_SetSize( scrollid, 10, 32 )

@@ -1,0 +1,961 @@
+function GetTextureID(texture_file)
+	return CLU_Call("GetTextureID", texture_file)
+end
+
+function ARGB(a, r, g, b)
+	return CLU_Call("ARGB", a, r, g, b)
+end
+
+function GetTerrainTextureID(terrain_id)
+	local tex_id = CLU_Call("GetTerrainTextureID", terrain_id) 	
+	if tex_id==0 then 
+	  return nil 
+	end
+	return tex_id
+end
+
+function GetChaPhotoTexID(cha_id)
+
+	local tex = CLU_Call("GetChaPhotoTexID", cha_id)
+	if tex==0 then 
+ 	    return nil
+	end
+	return tex
+end
+
+function GetSceneObjPhotoTexID(obj_id)
+
+	local tex = CLU_Call("GetSceneObjPhotoTexID", obj_id)
+	if tex==0 then 
+ 	    return nil
+	end
+	return tex
+end
+
+function GetEffectPhotoTexID(eff_id)
+
+	local tex = CLU_Call("GetEffectPhotoTexID", eff_id)
+	if tex==0 then 
+ 	    return nil
+	end
+	return tex
+end
+
+function GetTerrainTextureType(terrain_id)
+	local tex_id = CLU_Call("GetTerrainTextureType", terrain_id) 	
+	if tex_id==-1 then 
+	  return nil 
+	end
+	return tex_id
+end
+
+
+function GetSceneObjPhotoTexType(id)
+	local tex_id = CLU_Call("GetSceneObjPhotoTexType", id) 	
+	if tex_id==-1 then 
+	  return nil 
+	end
+	return tex_id
+end
+
+function UI_CreateWindow(name, x, y, w, h)
+	CLU_Call("UI_CreateWindow", name, x, y, w, h)
+end
+
+
+
+function UI_CreateButton(name, x, y, w, h, parent)
+	CLU_Call("UI_CreateButton", name, x, y, w, h, parent)
+end
+
+function UI_SetButtonCheckBox(name, check)
+	CLU_Call("UI_SetButtonCheckBox", name, check)
+end
+
+function UI_SetButtonGroup(name, group)
+	CLU_Call("UI_SetButtonGroup", name, group)
+end
+
+function UI_SetButtonLabel(name, label)
+	CLU_Call("UI_SetButtonLabel", name, label)
+end
+
+function UI_SetImage(name, state, tx, ty, tw, th, scale_x, scale_y, texture)
+	CLU_Call("UI_SetImage", name, state,  tx, ty, tw, th, scale_x, scale_y, texture)
+end
+
+function UI_SetFrameImage(name, state, tx, ty, tw, th, scale_x, scale_y, texture)
+	CLU_Call("UI_SetFrameImage", name, state,  tx, ty, tw, th, scale_x, scale_y, texture)
+end
+
+function UI_SetOpaque(name, opaque)
+	CLU_Call("UI_SetOpaque", name, opaque)
+end
+
+function UI_SetAccessory(name, data)
+	CLU_Call("UI_SetAccessory", name, data)
+end
+
+NORMAL  = 0
+HOVER   = 1
+DOWN    = 2
+DISABLE = 3
+ALL     = 4
+
+
+-----------------------------------------------------------------------
+-- �����
+-----------------------------------------------------------------------
+
+-- ���ֵ
+TRUE = 1
+FALSE = 0
+
+-- �ؼ���ʾ��ʽ
+caLeft =1
+caLeftUp =2
+caUp = 3
+caRightUp = 4
+caRight = 5
+caRightBottom = 6
+caBottom = 7
+caLeftBottom = 8
+caClient = 9
+caCenter  = 10          -- ��ȫ����
+caWidthCenter = 11      -- ˮƽ����
+caHeightCenter = 12     -- ���¾��� 
+
+-- �ؼ�����
+LABEL_TYPE		= 0
+LABELEX_TYPE		= 1
+BUTTON_TYPE		= 2
+COMBO_TYPE		= 3
+EDIT_TYPE		= 4
+IMAGE_TYPE		= 5
+LIST_TYPE		= 6
+PROGRESS_TYPE		= 7
+CHECK_TYPE		= 8
+CHECK_GROUP_TYPE 	= 9
+GRID_TYPE		= 10
+PAGE_TYPE		= 11
+FIX_LIST_TYPE		= 12
+CHECK_FIX_LIST_TYPE	= 13
+DRAG_TITLE_TYPE		= 14
+TREE_TYPE		= 15
+IMAGE_FRAME_TYPE	= 16
+UI3D_COMPENT_TYPE	= 17
+MEMO_TYPE		= 18
+MEMOEX_TYPE		= 19
+GOODS_GRID_TYPE		= 20
+FAST_COMMANG_TYPE	= 21
+COMMAND_ONE_TYPE	= 22
+IMAGE_FLASH_TYPE	= 23
+SCROLL_TYPE		= 24
+SKILL_LIST_TYPE		= 25
+LISTEX_TYPE		= 26
+MENU_TYPE		= 27
+RICHMEMO_TYPE		= 28
+TITLE_TYPE 		= 29
+RICHEDIT_TYPE 		= 30 
+
+UI3D_COMPENT = UI3D_COMPENT_TYPE
+
+-- ��ɫ
+COLOR_BLACK = 4278190080
+COLOR_RED = 4294901760
+COLOR_WHITE = 4294967295
+COLOR_PURPLE = 4293990336		-- ��ɫ
+COLOR_YELLOW = 4289000470           -- ��ɫ ODS
+COLOR_BLUE = 4278190335 --��ɫ
+COLOR_GREEN = 4278255360 --��ɫ
+COLOR_PINK = 4294902015  --��ɫ
+COLOR_OFFGREEN = 4289000470 -- ODS 
+COLOR_CLOUD = 4288060058
+COLOR_BLANK = 16777215 -- ODS
+
+TREE_TEXT_COLOR = COLOR_WHITE
+
+
+-- ��ť������״̬����ͨ��������£�����
+NORMAL  = 0
+HOVER   = 1
+DOWN    = 2
+DISABLE = 3
+
+-- ����ͼ
+COMPENT_BACK = 0		-- �ؼ�����
+
+-- ��������������
+PROGRESS_PROGRESS = 1 		-- ������
+
+-- ѡ����������
+UNCHECKED = 0			-- δѡ��״̬
+CHECKED = 1			-- ѡ��״̬
+
+-- ��������ʾ���
+PROGRESS_HORIZONTAL = 0		-- ˮƽ��,�������ҵ�
+PROGRESS_VERTICAL = 1		-- ��ֱ�ģ�����ֱ�ϵ�
+
+
+-- ������ʽ
+-- 0 :��ͨ; 1��ȫ���У�2��x������У� 3 Y������У� 4������ 5�����ң�6�����ϣ�7 ������ �� 8 ���Ͻǣ�9 ���Ͻǣ�10 ���½� 11 ���½�
+FORM_NONE=0			-- ��ͨ
+FORM_ALLCENTER=1		-- ȫ����
+FORM_XCENTER=2			-- x�������
+FORM_YCENTER=3			-- Y�������
+FORM_LEFT=4			-- ����
+FORM_RIGHT=5			-- ����
+FORM_TOP=6			-- ����
+FORM_BOTTOM=7			-- ����
+FORM_LEFTTOP=8			-- ���Ͻ�
+FORM_RIGHTTOP=9			-- ���Ͻ�
+FORM_LEFTBOTTOM=10		-- ���½�
+FORM_RIGHTBOTTOM=11		-- ���½�
+
+
+-----------------------------------------------------------------------
+-- ����Ҫ���õĺ���
+-----------------------------------------------------------------------
+-- ����ֵ��δ����˵������Ϊ�ɹ�1��ʧ��-1
+
+-- װ��UI�ű�
+function UI_LoadScript( file )
+	CLU_Call("UI_LoadScript", file )
+end	
+
+-- ������������������Ϊ���������ƣ��Ƿ�ģ̬�����������ߣ�X���꣬Y���꣬�Ƿ�ƽ����ʾ���Ƿ���ʾ����
+-- ����ֵ��ʧ��-1���ɹ�Ϊ����ID
+function UI_CreateForm( name, ismodal, w, h, x, y, isTitle, isShowFrame )
+	local id = CLU_Call("UI_CreateForm", name, ismodal, w, h, x, y, isTitle, isShowFrame )
+	if id==-1 then 
+ 	    return nil
+	end
+	return id	
+end
+
+-- ���ñ����Ƿ���԰�ESC�ر�
+function UI_FormSetIsEscClose( nFormID, IsEscClose )
+	CLU_Call("UI_FormSetIsEscClose", nFormID, IsEscClose )
+end
+
+-- ���ñ�����Enterʱ,ִ���Ǹ���ť���¼�
+function UI_FormSetEnterButton( nFormID, nButtonID )
+	CLU_Call("UI_FormSetEnterButton", nFormID, nButtonID )
+end
+
+ALT_KEY = 0
+CTRL_KEY = 1
+SHIFT_KEY = 2
+-- ������ʾ������Form���ȼ�
+function UI_FormSetHotKey( id, control_key, key )
+	CLU_Call("UI_FormSetHotKey", id, control_key, key )
+end
+
+-- ����Formģ�����ֵ,���������
+function UI_SetFormTempleteMax( max )
+	CLU_Call("UI_SetFormTempleteMax", max )
+end
+
+-- ��Form����nTempleteNoģ����,nTempleteNoҪС��max,���ڵ�����
+function UI_AddFormToTemplete( formid, nTempleteNo )
+	CLU_Call("UI_AddFormToTemplete", formid, nTempleteNo )
+end
+
+-- ��Form����ÿһ��nTempleteNoģ����
+function UI_AddAllFormTemplete( form_id )
+	CLU_Call("UI_AddAllFormTemplete", form_id )
+end
+
+-- �л���ǰFormģ��,���nTempleteNoС����,���л���Ĭ��ģ��
+function UI_SwitchTemplete( nTempleteNo )
+	CLU_Call("UI_SwitchTemplete", nTempleteNo )
+end
+
+-- װ��formͼƬ��client��ƽ�̵�Ԫ�ļ���cw,ch��ƽ�̵�Ԫ���ߣ�bw,bh��ָ�߿�Ԫ�Ŀ��ߣ���λ������
+function UI_LoadFormImage( id, client, cw, ch, tx, ty, board, bw, bh )
+	CLU_Call("UI_LoadFormImage", id, client, cw, ch, tx, ty, board, bw, bh )
+end
+
+-- �趨form�����ͣ����У����µ�.
+--0 :��ͨ; 1��ȫ���У�2��x������У� 3 Y������У� 4������ 5�����ң�6�����ϣ�7 ������ �� 8 ���Ͻǣ�9 ���Ͻǣ�10 ���½� 11 ���½�
+function UI_SetFormStyle( id, index )
+	CLU_Call("UI_SetFormStyle", id, index)
+end
+
+-- �趨form�����ͣ����У����µ�.
+--0 :��ͨ; 1��ȫ���У�2��x������У� 3 Y������У� 4������ 5�����ң�6�����ϣ�7 ������ �� 8 ���Ͻǣ�9 ���Ͻǣ�10 ���½� 11 ���½�
+--offWidth ������ڱߵ�ˮƽλ��
+--offHeight ������ڱߵĴ�ֱλ��
+function UI_SetFormStyleEx( id, index, offWidth, offHeight )
+	CLU_Call("UI_SetFormStyleEx", id, index, offWidth, offHeight)
+end
+
+-- װ��FrameImageͼƬ��client��ƽ�̵�Ԫ�ļ���cw,ch��ƽ�̵�Ԫ���ߣ�bw,bh��ָ�߿�Ԫ�Ŀ��ߣ���λ������
+function UI_LoadFrameImage( id, client, cw, ch, tx, ty, board, bw, bh )
+	CLU_Call("UI_LoadFrameImage", id, client, cw, ch, tx, ty, board, bw, bh )
+end
+
+-- ��ʾ�����ر���������ID���Ƿ���ʾ
+function UI_ShowForm( id, show )
+	CLU_Call("UI_ShowForm", id, show )
+end
+
+-- �����ؼ��������������ؼ����ͣ��ؼ����ƣ����ߣ�X,Y
+-- ��������Ϊ��1-��ť��2-��Ͽ�3-�༭��4-ͼƬ��5-�ı���6-�б�
+-- ����ֵ��ʧ��-1���ɹ�Ϊ�ؼ�ID
+function UI_CreateCompent( formid, type, name, w, h, x, y )
+	local ret = CLU_Call( "UI_CreateCompent", formid, type, name, w, h, x, y )
+	if ret==-1 then 
+ 	    return nil
+	end
+	return ret
+end
+
+-- ���ÿؼ��������������Ƿ�����϶�
+function UI_SetIsDrag( id, isDrag )
+	CLU_Call("UI_SetIsDrag", id, isDrag )
+end
+
+-- ���ÿؼ���ʾ
+function UI_SetHint( id, hint )
+	CLU_Call("UI_SetHint", id, hint )
+end
+
+-- ���������б�,ʧ�ܷ���-1
+-- ����styleΪ������
+eSimpleTitle = 0		-- �򵥱�ͷ,����һ��ͼƬ
+eWindowTitle = 1		-- ��windowsһ���ı�ͷ,��Ҫ����ÿһ����ͷ��ͼƬ
+eNoTitle     = 2 		-- û�б�����
+function UI_CreateListView( formid, name, w, h, x, y, col, style )
+	local ret = CLU_Call( "UI_CreateListView", formid, name, w, h, x, y, col, style )
+	if ret==-1 then 
+ 	    return nil
+	end
+	return ret
+end
+
+-- ����listview��ͷ,��������Ϊ:id,���õı�ͷ����,��ͷ����,��ͷͼƬ,ͼƬ������ʼ����
+function UI_ListViewSetTitle( listviewid, index, width, titleimage, w, h, sx, sy )
+	CLU_Call( "UI_ListViewSetTitle", listviewid, index, width, titleimage, w, h, sx, sy )
+end
+
+-- ����listview��ͷ�߶�
+function UI_ListViewSetTitleHeight( listviewid, height )
+	CLU_Call( "UI_ListViewSetTitleHeight", listviewid, height )
+end
+
+-- ���õ�ѡ�����Ƿ�������
+function UI_SetListIsMouseFollow( listid, IsFollow )
+	CLU_Call( "UI_SetListIsMouseFollow", listid, IsFollow )
+end
+
+-- ���ÿؼ�Я������,tagΪ����
+function UI_SetTag( id, tag )
+	CLU_Call( "UI_SetTag", id, tag )
+end
+
+-- ���ÿؼ���С
+function UI_SetSize( id, w, h )
+	CLU_Call( "UI_SetSize", id, w, h )
+end
+
+-- ���ÿؼ�λ��
+function UI_SetPos( id, x, y )
+	CLU_Call( "UI_SetPos", id, x, y )
+end
+
+-- ���ÿؼ��Ƿ���Ӧ���̽���
+function UI_SetIsKeyFocus( id, IsKeyFocus )
+	CLU_Call( "UI_SetIsKeyFocus", id, IsKeyFocus )
+end
+
+-- ���ÿؼ�����ʾ����
+function UI_SetCaption( id, caption )
+	CLU_Call( "UI_SetCaption", id, caption )
+end
+
+-- ������һ���ؼ���ͼƬ��������Ҫ����
+-- ����ֵ���ɹ�1��ʧ��-1
+function UI_CopyImage( targetid, sourceid )
+	CLU_Call( "UI_CopyImage", targetid, sourceid )
+end
+
+-- ���ÿؼ���alpha,��͸��Ϊ255,ȫ͸��Ϊ:0
+function UI_SetAlpha( id, alpha )
+	CLU_Call( "UI_SetAlpha", id, alpha )
+end
+
+-- ���ÿؼ��ı���alpha,��͸��Ϊ255,ȫ͸��Ϊ:0
+function UI_SetImageAlpha( id, alpha )
+	CLU_Call( "UI_SetImageAlpha", id, alpha )
+end
+
+-- ���ÿؼ���ʾ��ʽ
+function UI_SetAlign( id, align )
+	CLU_Call( "UI_SetAlign", id, align )
+end
+
+-- �����Ƿ���ʾ�ؼ�
+function UI_SetIsShow( id, isshow )
+	CLU_Call( "UI_SetIsShow", id, isshow )
+end
+
+-- ���ÿؼ��Ƿ����
+function UI_SetIsEnabled( id, isEnabled )
+	CLU_Call( "UI_SetIsEnabled", id, isEnabled )
+end
+
+-- ���ÿؼ������ܵı߾�
+function UI_SetMargin( id, left, top, right, bottom )
+	CLU_Call( "UI_SetMargin", id, left, top, right, bottom )
+end
+
+-- ����˵������ɫ������Ϊ������,·��,����,����,GM,ϵͳ,����,˽��
+function UI_SetChatColor( p1, p2, p3, p4, p5, p6, p7, p8 )
+	CLU_Call( "UI_SetChatColor", p1, p2, p3, p4, p5, p6, p7, p8 )
+end
+
+-- װ�ؿؼ���ͼƬ���ؼ�id��ͼƬ���ƣ��ڼ�����ͼƬ�����ߣ�ͼƬ��ʼX,Y
+function UI_LoadImage( id, file, frame, w, h, tx, ty )
+	CLU_Call( "UI_LoadImage", id, file, frame, w, h, tx, ty )
+end
+
+-- ���ÿؼ��ı���ͼƬ֡��
+function UI_SetMaxImage( id, max )
+	CLU_Call( "UI_SetMaxImage", id, max )
+end
+
+-- װ�ؿؼ���ͼƬ(�й̶�����)���ؼ�id��ͼƬ���ƣ��ڼ�����ͼƬ�����ߣ�ͼƬ��ʼX,Y
+function UI_LoadScaleImage( id, file, frame, w, h, tx, ty, scalex, scaley )
+	CLU_Call( "UI_LoadScaleImage", id, file, frame, w, h, tx, ty, scalex, scaley )
+end
+
+
+-- װ�ؿؼ���ͼƬ(�й̶�����)���ؼ�id��ͼƬ���ƣ��ڼ�����ͼƬ�����ߣ�ͼƬ��ʼX,Y
+function UI_LoadFlashScaleImage( id, flash, file, frame, w, h, tx, ty, scalex, scaley )
+	CLU_Call( "UI_LoadFlashScaleImage", id, flash, file, frame, w, h, tx, ty, scalex, scaley )
+end
+
+-- װ��SkillList��������ťͼƬ
+function UI_LoadSkillListButtonImage( id, file, w, h, sx, sy, item_w, item_h )
+	CLU_Call( "UI_LoadSkillListButtonImage", id, file, w, h, sx, sy, item_w, item_h )
+end
+
+-- װ�ذ�ť��ͼƬ
+function UI_LoadButtonImage( id, file, w, h, sx, sy, isHorizontal )
+	CLU_Call( "UI_LoadButtonImage", id, file, w, h, sx, sy, isHorizontal )
+end
+
+BUTTON_NONE  	= 0
+BUTTON_CLOSE	= 1
+BUTTON_YES	= 2
+BUTTON_NO	= 3
+BUTTON_OK	= 4
+BUTTON_CANCLE	= 5
+
+-- ���ð�ť�ķ���ֵ
+function UI_SetButtonModalResult( id, modal )
+	CLU_Call( "UI_SetButtonModalResult", id, modal )
+end
+
+
+-- ���ð�ť��Hint
+function UI_ButtonSetHint( id, strHint )
+	CLU_Call( "UI_ButtonSetHint", id, strHint )
+end
+
+-- ���combo��list��scroll�����ڼ���scroll��ͼƬ�����ô�С
+function UI_GetScroll( id )
+	local ret = CLU_Call( "UI_GetScroll", id )
+	if ret==-1 then 
+ 	    return nil
+	end
+	return ret	
+end
+
+-- ���combo����CListView��list
+function UI_GetList( id )
+	local ret = CLU_Call( "UI_GetList", id )
+	if ret==-1 then 
+ 	    return nil
+	end
+	return ret	
+end
+
+-- װ�ر����ѡ����
+function UI_GridLoadSelectImage( id, file, w, h, tx, ty )
+	CLU_Call( "UI_GridLoadSelectImage", id, file, w, h, tx, ty )
+end
+
+-- ���ñ����Ƿ�����϶����½Ǳ���С
+function UI_SetGridIsDragSize( id, IsEnabled )
+	CLU_Call( "UI_SetGridIsDragSize", id, IsEnabled )
+end
+
+-- �õ��������еĶ���:up��ť,down��ť,scrollͼƬ
+SCROLL_UP = 0
+SCROLL_DOWN = 1
+SCROLL_SCROLL = 2
+function UI_GetScrollObj( id, scrolltype )
+	local ret = CLU_Call( "UI_GetScrollObj", id, scrolltype )
+	if ret==-1 then 
+ 	    return nil
+	end
+	return ret	
+end
+
+-- װ��combo��ͼƬ��editΪ�����������ļ���w,hΪ��Ӧ����,ex,eyͼƬλ��,buttonΪ�ұ߰�ť�����ļ���bw,bhΪ��ť����,bx,byΪͼƬλ��,isHorizontalΪͼƬ�Ƿ�ˮƽ����
+function UI_LoadComboImage( id, edit, ew, eh, ex, ey, button, bw, bh, bx, by, isHorizontal )
+	CLU_Call( "UI_LoadComboImage", id, edit, ew, eh, ex, ey, button, bw, bh, bx, by, isHorizontal )
+end
+
+-- ����combo��list����,��������
+function UI_ComboSetStyle( id, IsDown )
+	CLU_Call( "UI_ComboSetStyle", id, IsDown )
+end
+
+-- ����combo��text������ɫ
+function UI_ComboSetTextColor( id, color )
+	CLU_Call( "UI_ComboSetTextColor", id, color )
+end
+
+-- װ��FixList��ѡ���ͼ��
+function UI_LoadListFixSelect( id, imagefile, w, h, sx, sy )
+	CLU_Call( "UI_LoadListFixSelect", id, imagefile, w, h, sx, sy )
+end
+
+-- ������һ���ؼ�������״̬���������ͬ���Ϳؼ���������ʧ��
+function UI_CopyCompent( targetid, sourceid )
+	CLU_Call( "UI_CopyCompent", targetid, sourceid )
+end
+
+-- ����list���ı�
+function UI_AddListText( id, text )
+	CLU_Call( "UI_AddListText", id, text )
+end
+
+-- ����List��ѡ��������ͼƬ
+function UI_ListLoadSelectImage( id, file, w, h, sx, sy )
+	CLU_Call( "UI_ListLoadSelectImage", id, file, w, h, sx, sy )
+end
+
+-- ����List����Ŀ������ͼƬ
+function UI_LoadListItemImage( id, file, w, h, sx, sy, item_w, item_h )
+	CLU_Call( "UI_LoadListItemImage", id, file, w, h, sx, sy, item_w, item_h )
+end
+
+-- ����List��ÿһ��Item�ı߾�
+function UI_ListSetItemMargin( id, left, top )
+	CLU_Call( "UI_ListSetItemMargin", id, left, top )
+end
+
+-- ����List��ÿһ��Item�ı���ͼ�߾�
+function UI_ListSetItemImageMargin( id, left, top )
+	CLU_Call( "UI_ListSetItemImageMargin", id, left, top )
+end
+
+-- ����list���ı�(��������),prgressΪ����,0.0~1.0
+function UI_AddListBarText( id, text, prgress )
+	CLU_Call( "UI_AddListBarText", id, text, prgress )
+end
+
+-- ����List�����ֱ���ɫ�Լ�ѡ��ʱ����ɫ
+function UI_SetListFontColor( listid, nBackColor, nSelectColor )
+	CLU_Call( "UI_SetListFontColor", listid, nBackColor, nSelectColor )
+end
+
+
+-- ����List�и�
+function UI_SetListRowHeight( id, height )
+	CLU_Call( "UI_SetListRowHeight", id, height )
+end
+
+-- ����checkbox������
+function UI_AddGroupBox( id, checkbox )
+	CLU_Call( "UI_AddGroupBox", id, checkbox )
+end
+
+	
+-- ���ý�������ʾ���
+function UI_SetProgressStyle( id, style )
+	CLU_Call( "UI_SetProgressStyle", id, style )
+end
+
+PROGRESS_HINT_NUM = 0
+PROGRESS_HINT_PERCENT = 1
+-- ���ý�������ʾ�����ʾ���
+function UI_SetProgressHintStyle( id, style )
+	CLU_Call( "UI_SetProgressHintStyle", id, style )
+end
+
+function UI_SetProgressActiveMouse( id, style )
+	CLU_Call( "UI_SetProgressActiveMouse", id, style )
+end
+
+
+-- ���ù�������ʾ���
+function UI_SetScrollStyle( id, style )
+	CLU_Call( "UI_SetScrollStyle", id, style )
+end
+
+-- ��������������������,��λ:byte
+function UI_SetEditMaxNum( id, num )
+	CLU_Call( "UI_SetEditMaxNum", id, num )
+end
+
+-- �������������ɫ
+function UI_SetEditCursorColor( id, color )
+	CLU_Call( "UI_SetEditCursorColor", id, color )
+end
+
+-- ���������س�ʱ��Ӧ�İ�ť
+function UI_SetEditEnterButton( nEditID, nButtonID )
+	CLU_Call( "UI_SetEditEnterButton", nEditID, nButtonID )
+end
+
+-- ��������������������,��λ:byte
+function UI_SetEditMaxNumVisible( id, num )
+	CLU_Call( "UI_SetEditMaxNumVisible", id, num )
+end
+
+-- ���ÿؼ�������ɫ
+function UI_SetTextColor( id, color )
+	CLU_Call( "UI_SetTextColor", id, color )
+end
+
+-- ����grid��Ԫ���,Ĭ��Ϊ2
+function UI_SetGridSpace( id, x, y )
+	CLU_Call( "UI_SetGridSpace", id, x, y )
+end
+
+-- ����grid����,����������Ϊ��
+function UI_SetGridContent( id, nRow, nCol )
+	CLU_Call( "UI_SetGridContent", id, nRow, nCol )
+end
+
+-- ����GoodGrid�еĵ�Ԫ�񱳾�
+function UI_GoodGridLoadUnitImage( id, file, w, h, tx, ty )
+	CLU_Call( "UI_GoodGridLoadUnitImage", id, file, w, h, tx, ty )
+end
+
+-- ����grid��Ԫ����,���������,��Ϊ40
+function UI_SetGridUnitSize( id, w, h )
+	CLU_Call( "UI_SetGridUnitSize", id, w, h )
+end
+
+-- ���ӱ��鵽Grid��,����frameΪ���鶯��֡��
+function UI_AddFaceToGrid( id, file, w, h, sx, sy, frame, nTag )
+	CLU_Call( "UI_AddFaceToGrid", id, file, w, h, sx, sy, frame, nTag )
+end
+
+-- �����������
+function UI_FixListSetMaxNum( id, num )
+	CLU_Call( "UI_FixListSetMaxNum", id, num )
+end
+
+-- �趨ÿ����ʾ��Ӣ������
+function UI_SetMemoMaxNumPerRow(id, num) 
+    CLU_Call( "UI_SetMemoMaxNumPerRow", id, num )
+end
+
+-- �趨Memoÿҳ��ʾ������
+function UI_SetMemoPageShowNum(id, num) 
+    CLU_Call( "UI_SetMemoPageShowNum", id, num )
+end
+
+-- �趨Memoÿ����ʾ�ĸ߶�
+function UI_SetMemoRowHeight(id, num) 
+    CLU_Call( "UI_SetMemoRowHeight", id, num )
+end
+
+-- ����Rich�Ĳü���
+function UI_RichSetClipRect(id, x0, y0, x1, y1) 
+    CLU_Call( "UI_RichSetClipRect", id, x0, y0, x1, y1 )
+end
+
+-- ����Rich�������������
+function UI_RichSetMaxLine(id, line) 
+    CLU_Call( "UI_RichSetMaxLine", id, line )
+end
+
+-- ����ÿһ�ж�Ӧ���ı�
+function UI_FixListSetText( id, index, text )
+	CLU_Call( "UI_FixListSetText", id, index, text )
+end
+
+-- �����о�
+function UI_FixListSetRowSpace( id, height )
+	CLU_Call( "UI_FixListSetRowSpace", id, height )
+end
+
+-- ����CheckFixList��Check����ʾ�߾�
+function UI_CheckFixListSetCheckMargin( id, left, top )
+	CLU_Call( "UI_CheckFixListSetCheckMargin", id, left, top )
+end
+
+function UI_LoadCheckFixListCheck( id, checkimage, cw, ch, csx, csy, uncheckimage, uw, uh, usx, usy )
+	CLU_Call( "UI_LoadCheckFixListCheck", id, checkimage, cw, ch, csx, csy, uncheckimage, uw, uh, usx, usy )
+end
+
+enumTreeAddImage = 0
+enumTreeSubImage = 1
+-- װ�����Ϳؼ�ͼƬ,nTypeΪװ��������ͼƬ,ͼƬ��С����16x16,��ʾ����itemw,itemh
+function UI_TreeLoadImage( nTreeID, nType, imagefile, w, h, sx, sy, itemw, itemh )
+	CLU_Call( "UI_TreeLoadImage", nTreeID, nType, imagefile, w, h, sx, sy, itemw, itemh )
+end
+
+-- ����һ���ı�Item,���ڷ���treenode��
+function UI_CreateTextItem( text, color )
+	local ret = CLU_Call( "UI_CreateTextItem", text, color )
+	if ret==-1 then 
+ 	    return nil
+	end
+	return ret	
+end
+
+-- ����һ��ͼ��Item,���ڷ���treenode��
+function UI_CreateGraphItem( file, w, h, sx, sy, frame )
+	local ret = CLU_Call( "UI_CreateGraphItem", file, w, h, sx, sy, frame )
+	if ret==-1 then 
+ 	    return nil
+	end
+	return ret	
+end
+
+-- ����һ����������Item,���ڷ���treenode��
+function UI_CreateNoteGraphItem( file, w, h, sx, sy, frame, text, textx, texty )
+	local ret = CLU_Call( "UI_CreateNoteGraphItem", file, w, h, sx, sy, frame, text, textx, texty )
+	if ret==-1 then 
+ 	    return nil
+	end
+	return ret	
+end
+
+-- ����һ������treenode,��������Ϊ:treeid,�Ѿ�������item,���ڵ�id(Ϊ-1,��ֱ�Ӳ��뵽���ڵ���)
+function UI_CreateSingleNode( treeid, itemid, nodeid_parent )
+	local ret = CLU_Call( "UI_CreateSingleNode", treeid, itemid, nodeid_parent )
+	if ret==-1 then 
+ 	    return nil
+	end
+	return ret	
+end
+
+-- ����һ������ʽ��treenode,��������Ϊ:treeid,ÿ������,��Ԫ����,���ڵ�id(Ϊ-1,��ֱ�Ӳ��뵽���ڵ���)
+function UI_CreateGridNode( treeid, itemid, maxcol, uw, uh, nodeid_parent )
+	local ret = CLU_Call( "UI_CreateGridNode", treeid, itemid, maxcol, uw, uh, nodeid_parent )
+	if ret==-1 then 
+ 	    return nil
+	end
+	return ret	
+end
+
+-- ����һ��Graph
+function UI_CreateGraphItemTex( tx, ty, tw, th, scale_x, scale_y, nTextureID, nTag )
+	local ret = CLU_Call( "UI_CreateGraphItemTex", tx, ty, tw, th, scale_x, scale_y, nTextureID, nTag )
+	if ret==-1 then 
+ 	    return nil
+	end
+	return ret
+end
+
+
+-- ��itemid���뵽nodeid��
+function UI_GridNodeAddItem( nodeid, itemid )
+	CLU_Call( "UI_GridNodeAddItem", nodeid, itemid )
+end
+
+-- ��Page�����д���һ��PageItem����
+function UI_CreatePageItem( page_id )
+	local ret = CLU_Call( "UI_CreatePageItem", page_id )
+	if ret==-1 then 
+ 	    return nil
+	end
+	return ret
+end
+
+-- ����һ��Page�ĵ����ť�ڷŷ�ʽ�Լ���Ԫ����
+PAGE_BUTTON_LEFT_UP=0		-- ���ΰ�������
+PAGE_BUTTON_FULL_UP=1		-- �����ϲ�
+PAGE_BUTTON_CUSTOM =2		-- �Զ�
+function UI_SetPageButton( page_id, button_style, bw, bh )
+	CLU_Call( "UI_SetPageButton", page_id, button_style, bw, bh )
+end
+
+-- ���PageItem�еĶ���
+PAGE_ITEM_IMAGE=0
+PAGE_ITEM_TITLE=1	
+function UI_GetPageItemObj( page_item_id, type )
+	local ret = CLU_Call( "UI_GetPageItemObj", page_item_id, type )
+	if ret==-1 then 
+ 	    return nil
+	end
+	return ret
+end
+
+-- װ��PAGE_ITEM_TITLE��ͼƬʱ������״̬
+PAGE_ITEM_TITLE_NORMAL=0
+PAGE_ITEM_TITLE_ACTIVE=1
+
+-- ��һ��������뵽һ��������
+function UI_AddCompent( container_id, compent_id )
+	CLU_Call( "UI_AddCompent", container_id, compent_id )
+end
+
+-- ������չLabel����Ӱ������ɫ
+function UI_SetLabelExShadowColor( label_id, color )
+	CLU_Call( "UI_SetLabelExShadowColor", label_id, color )
+end
+
+-- �϶�ʱ����ı���ĵ�Ԫ����
+function UI_SetDragSnapToGrid( nGridWidth, nGridHeight )
+	CLU_Call( "UI_SetDragSnapToGrid", nGridWidth, nGridHeight )
+end
+
+-- ����������ͼ���ӳ��,nIndex������,������ͼƬ
+function UI_SetTextParse( nIndex, file, w, h, sx, sy, frame )
+	CLU_Call( "UI_SetTextParse", nIndex, file, w, h, sx, sy, frame )
+end
+
+-- װ�ش������������ֵĽ�����
+function UI_ItemBarLoadImage( file, w, h, tx, ty )
+	CLU_Call( "UI_ItemBarLoadImage", file, w, h, tx, ty )
+end
+
+-- װ�ز˵�����ͼƬ
+function UI_MenuLoadImage( id, IsShowFrame, IsTitle, clientfile, cw, ch, tx, ty, framefile, w, h )
+	CLU_Call( "UI_MenuLoadImage", id, IsShowFrame, IsTitle, clientfile, cw, ch, tx, ty, framefile, w, h )
+end
+
+-- װ�ز˵�ѡ������ͼƬ
+function UI_MenuLoadSelect( menuid, imagefile, w, h, tx, ty )
+	CLU_Call( "UI_MenuLoadSelect", menuid, imagefile, w, h, tx, ty )
+end
+
+-- ���Ӳ˵�
+function UI_MenuAddText( id, text )
+	CLU_Call( "UI_MenuAddText", id, text )
+end
+
+
+-- ���������û����Ĺ����ַ�
+function UI_AddFilterTextToNameTable(text )
+	CLU_Call( "UI_AddFilterTextToNameTable",text )
+end
+
+-- ���������������ݵĹ����ַ�
+function UI_AddFilterTextToDialogTable(text )
+	CLU_Call( "UI_AddFilterTextToDialogTable",text )
+end
+
+-- �ı�ͷ��������ʱ�ı�����ɫ
+function UI_SetHeadSayBkgColor( color )
+	CLU_Call( "UI_SetHeadSayBkgColor", color )
+end
+
+-- ����Title�������Լ���ɫ
+function UI_SetTitleFont( id, font, color, height )
+	CLU_Call( "UI_SetTitleFont", id, font, color, height )
+end
+
+-- ������չLabel������,�Լ��Ƿ���ʾ��Ӱ
+function UI_SetLabelExFont( id, nFontIndex, IsShadow, dwShadowColor )
+	CLU_Call("UI_SetLabelExFont", id, nFontIndex, IsShadow, dwShadowColor )
+end
+
+-- װ�ؼ��ܼ���ʱ�ı߿�
+function UI_LoadSkillActiveImage( file, maxframe, w, h, sx, sy )
+	CLU_Call("UI_LoadSkillActiveImage", file, maxframe, w, h, sx, sy )
+end
+
+-- װ�ر��ǳ���ͼƬ
+function UI_LoadChargeImage( link, file, maxframe, w, h, sx, sy )
+	CLU_Call("UI_LoadChargeImage", link, file, maxframe, w, h, sx, sy )
+end
+
+-- �������ı������������飬����frameΪ���鶯��֡��
+--UI_SetTextParse( 0 , "texture/ui/face/em001.tga", 40, 40 , 0 , 0 ,4  )
+--UI_SetTextParse( 1 , "texture/ui/face/em003.tga", 40, 40 , 0 , 0 ,4  )
+--UI_SetTextParse( 2 , "texture/ui/face/em001.tga", 40, 40 , 0 , 0 ,4  )
+--UI_SetTextParse( 3 , "texture/ui/face/em003.tga", 40, 40 , 0 , 0 ,4  )
+--UI_SetTextParse( 4 , "texture/ui/face/em001.tga", 40, 40 , 0 , 0 ,4  )
+--UI_SetTextParse( 5 , "texture/ui/face/em003.tga", 40, 40 , 0 , 0 ,4  )
+--UI_SetTextParse( 6 , "texture/ui/face/em001.tga", 40, 40 , 0 , 0 ,4  )
+--UI_SetTextParse( 7 , "texture/ui/face/em003.tga", 40, 40 , 0 , 0 ,4  )
+--UI_SetTextParse( 8 , "texture/ui/face/em001.tga", 40, 40 , 0 , 0 ,4  )
+--UI_SetTextParse( 9 , "texture/ui/face/em003.tga", 40, 40 , 0 , 0 ,4  )
+
+UI_ItemBarLoadImage( "texture/ui/system/progress.tga", 64, 16, 0, 0 )
+
+
+-- ASCII�ٲ��,���ڿ�ݼ�
+HOTKEY_A  = 65
+HOTKEY_B  = 66
+HOTKEY_C  = 67
+HOTKEY_D  = 68
+HOTKEY_E  = 69
+HOTKEY_F  = 70
+HOTKEY_G  = 71
+HOTKEY_H  = 72
+HOTKEY_I  = 73
+HOTKEY_J  = 74
+HOTKEY_K  = 75
+HOTKEY_L  = 76
+HOTKEY_M  = 77
+HOTKEY_N  = 78
+HOTKEY_O  = 79
+HOTKEY_P  = 80
+HOTKEY_Q  = 81
+HOTKEY_R  = 82
+HOTKEY_S  = 83
+HOTKEY_T  = 84
+HOTKEY_U  = 85
+HOTKEY_V  = 86
+HOTKEY_W  = 87
+HOTKEY_X  = 88
+HOTKEY_Y  = 89
+HOTKEY_Z  = 90
+
+UI_SetDragSnapToGrid( 4, 4 )
+
+-- �������еı���ģ�壬����ģ���л�,��Ӧ�ڳ���UITemplete.h
+FORM_LOGIN = 0
+FORM_MAIN = 1
+FORM_SELECT_CHA = 2
+FORM_EDITOR = 3
+FORM_SWITCH_SCENE = 4
+FORM_CREATE_CHA = 5
+FORM_SELECT = 6
+UI_SetFormTempleteMax( 7 )	-- �������ģ����
+
+FORM_DIALOG = FORM_SWITCH_SCENE	-- �Ի���ģ��-4
+
+-- װ����ؽ���ű�
+UI_LoadScript("scripts/lua/forms/main.clu")
+--UI_LoadScript("scripts/lua/forms/selectcha.clu")
+UI_LoadScript("scripts/lua/forms/login.clu")
+UI_LoadScript("scripts/lua/forms/loading.clu")
+UI_LoadScript("scripts/lua/forms/NPC.clu")
+UI_LoadScript("scripts/lua/forms/Player.clu")
+--UI_LoadScript("scripts/lua/textparse.clu")
+
+UI_LoadScript("scripts/lua/forms/minimap.clu")	-- С��ͼ
+UI_LoadScript("scripts/lua/forms/help.clu")		-- ����
+UI_LoadScript("scripts/lua/forms/system.clu")	-- ϵͳ
+UI_LoadScript("scripts/lua/forms/equip.clu")	-- ����,����
+UI_LoadScript("scripts/lua/forms/chat.clu")		-- ����
+UI_LoadScript("scripts/lua/forms/preperty.clu")	-- ��ɫ����
+UI_LoadScript("scripts/lua/forms/mission.clu")	-- ����
+UI_LoadScript("scripts/lua/forms/coze.clu")		-- ���½ǵ�����
+UI_LoadScript("scripts/lua/forms/dialog.clu")	-- ���öԻ���
+UI_LoadScript("scripts/lua/forms/ship.clu")		-- �촬
+UI_LoadScript("scripts/lua/forms/traderoom.clu")	-- ������
+UI_LoadScript("scripts/lua/forms/manage.clu")	-- �������
+UI_LoadScript("scripts/lua/forms/select.clu")
+--UI_LoadScript("scripts/lua/forms/achievements.clu")
+--UI_LoadScript("scripts/lua/forms/medalinfo.clu")
+--UI_LoadScript("scripts/lua/forms/ranksystem.clu")
+--UI_LoadScript("scripts/lua/forms/appwardrobe.clu")
+--UI_LoadScript("scripts/lua/forms/tasksystem.clu")
+
+--�ַ����˱�
+UI_LoadScript("scripts/lua/filter.clu")

@@ -1,0 +1,7 @@
+isenable=0
+Distance= 600
+[Ignored NPCS]
+1548
+1545
+1546
+1547

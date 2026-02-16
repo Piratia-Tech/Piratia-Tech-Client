@@ -1,0 +1,658 @@
+-----------------------------------------------------------------------
+-- Выбор области
+-----------------------------------------------------------------------	
+frmArea = UI_CreateForm( "frmArea", false, 456, 319, 396, 160, false, false )
+UI_SetFormStyle( frmArea , 2 )
+UI_AddFormToTemplete( frmArea, FORM_LOGIN )
+--UI_SetAlpha( frmArea, 200 )
+UI_FormSetIsEscClose( frmArea, false )
+
+-- Фон формы
+imgBakArea = UI_CreateCompent( frmArea, IMAGE_TYPE, "imgBakArea", 456, 319, 0, 0 )
+UI_LoadImage( imgBakArea, "texture/ui/ui2/server.png", NORMAL, 456, 319, 0, 0 )
+
+-- Заголовок
+labTitle = UI_CreateCompent( frmArea, LABELEX_TYPE, "labTitle", 470, 150, 210, 20 )
+UI_SetCaption( labTitle, "\206\225\235\224\241\242\252")
+UI_SetTextColor( labTitle, COLOR_YELLOW )
+
+-- Регионы левая колонка
+lstRegion0 = UI_CreateCompent( frmArea, LIST_TYPE, "lstRegion0", 200, 150, 16, 45 )
+UI_SetMargin( lstRegion0, 19, 20, 15, 0 )
+UI_ListSetItemMargin( lstRegion0, 20, 9 )
+UI_SetListRowHeight( lstRegion0, 23 )
+UI_SetListIsMouseFollow( lstRegion0, true)
+UI_ListLoadSelectImage( lstRegion0, "texture/ui/ui2/server.png", 180, 24, 0, 383 )
+UI_SetListFontColor( lstRegion0, COLOR_WHITE, COLOR_WHITE )
+
+-- Регионы правая колонка
+lstRegion1 = UI_CreateCompent( frmArea, LIST_TYPE, "lstRegion1", 200, 150, 220, 45 )
+UI_SetMargin( lstRegion1, 19, 20, 15, 0 )
+UI_ListSetItemMargin( lstRegion1, 20, 9 )
+UI_SetListRowHeight( lstRegion1, 23 )
+UI_SetListIsMouseFollow( lstRegion1, true)
+UI_ListLoadSelectImage( lstRegion1, "texture/ui/ui2/server.png", 180, 24, 0, 383 )
+UI_SetListFontColor( lstRegion1, COLOR_WHITE, COLOR_WHITE )
+
+-- Выйти
+btnNo = UI_CreateCompent( frmArea, BUTTON_TYPE, "btnNo", 93, 27, 183, 260 )
+UI_LoadButtonImage( btnNo, "texture/ui/ui2/server.png", 93, 27, 0, 322, true )
+
+
+
+-----------------------------------------------------------------------
+-- Выбор сервера
+-----------------------------------------------------------------------	
+frmServer = UI_CreateForm( "frmServer", false, 456, 319, 396, 160, false, false )
+UI_SetFormStyle( frmServer , 2 )
+UI_AddFormToTemplete( frmServer, FORM_LOGIN )
+UI_FormSetIsEscClose( frmServer, false )
+
+-- Фон формы
+imgBakServer = UI_CreateCompent( frmServer, IMAGE_TYPE, "imgBakServer", 471, 319, 0, 0 )
+UI_LoadImage( imgBakServer, "texture/ui/ui2/server.png", NORMAL, 471, 319, 0, 0 )
+
+labTitle = UI_CreateCompent( frmServer, LABELEX_TYPE, "labTitle", 400, 150, 210, 20 )
+UI_SetCaption( labTitle, "\209\229\240\226\229\240\224")
+UI_SetTextColor( labTitle, COLOR_YELLOW )
+
+imgServerIcon0 = UI_CreateCompent( frmServer, IMAGE_TYPE, "imgServerIcon0", 12, 12, 175, 27 )
+
+-- Сервера левая колонка
+lvServer0 = UI_CreateListView( frmServer, "lvServer0", 200, 150, 16, 45, 2, 2 )
+UI_SetMargin( lvServer0, 19, 20, 15, 0 )
+UI_ListViewSetTitle( lvServer0, 0, 10, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lvServer0, 1, 132, "", 0, 0, 0, 0 )
+UI_ListSetItemMargin( lvServer0, 10, 9 )
+UI_SetListRowHeight( lvServer0, 23 )
+UI_SetListIsMouseFollow( lvServer0, true)
+UI_ListLoadSelectImage( lvServer0, "texture/ui/ui2/server.png", 180, 24, 0, 383 )
+UI_SetImageAlpha( lvServer0, 134 )
+UI_SetListFontColor( lvServer0, COLOR_WHITE, COLOR_WHITE )
+
+-- Сервера правая колонка
+lvServer1 = UI_CreateListView( frmServer, "lvServer1", 200, 150, 220, 45, 2, 2 )
+UI_SetMargin( lvServer1, 19, 20, 15, 0 )
+UI_ListViewSetTitle( lvServer1, 0, 10, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lvServer1, 1, 132, "", 0, 0, 0, 0 )
+UI_ListSetItemMargin( lvServer1, 10, 9 )
+UI_SetListRowHeight( lvServer1, 23 )
+UI_SetListIsMouseFollow( lvServer1, true)
+UI_ListLoadSelectImage( lvServer1, "texture/ui/ui2/server.png", 180, 24, 0, 383 )
+UI_SetImageAlpha( lvServer1, 134 )
+UI_SetListFontColor( lvServer1, COLOR_WHITE, COLOR_WHITE )
+
+-- Назад
+btnNo = UI_CreateCompent( frmServer, BUTTON_TYPE, "btnNo", 93, 27, 183, 260 )
+UI_LoadButtonImage( btnNo, "texture/ui/ui2/server.png", 93, 27, 0, 353, true )
+
+-----------------------------------------------------------------------
+-- Авторизация
+-----------------------------------------------------------------------
+frmAccount = UI_CreateForm( "frmAccount", false, 252, 291, 310, 160 + 110, false, false )
+UI_AddFormToTemplete( frmAccount, FORM_LOGIN )
+UI_SetFormStyle( frmAccount, 2 )
+UI_FormSetIsEscClose( frmAccount, false )
+
+-- Фон формы
+imgAccout = UI_CreateCompent( frmAccount, IMAGE_TYPE, "imgAccout", 252, 291, 0, 0 )
+UI_LoadImage( imgAccout, "texture/ui/ui2/login.png", NORMAL, 252, 291, 0, 0 )
+
+-- Лого
+imgLogo1 = UI_CreateCompent( frmAccount, IMAGE_TYPE, "imgLogo1", 256, 256, -117, -197 )
+imgLogo2 = UI_CreateCompent( frmAccount, IMAGE_TYPE, "imgLogo2", 256, 256, 139, -173 )
+
+-- Запомнить логин
+chkID = UI_CreateCompent( frmAccount, CHECK_TYPE, "chkID", 17, 18, 33, 137 )
+UI_LoadImage( chkID, "texture/ui/ui2/login.png", UNCHECKED, 17, 18, 27, 332 )
+UI_LoadImage( chkID, "texture/ui/ui2/login.png", CHECKED, 17, 18, 3, 332 )
+UI_SetHint( chkID, "\199\224\239\238\236\237\232\242\252 \232\236\255 \243\247\229\242\237\238\233 \231\224\239\232\241\232." )
+
+-- Кнопка входа
+btnYes = UI_CreateCompent( frmAccount, BUTTON_TYPE, "btnYes", 186, 37, 32, 178 )
+UI_LoadButtonImage( btnYes, "texture/ui/ui2/login.png", 186, 37, 3, 380, TRUE )
+UI_SetHint( btnYes, "\205\224\230\236\232\242\229 \247\242\238 \225\251 \224\226\242\238\240\232\231\238\226\224\242\252\241\255 \226 \226\224\248\229\233 \243\247\229\242\237\238\233 \231\224\239\232\241\232." )
+
+
+
+-- Выйти
+btnNo = UI_CreateCompent( frmAccount, BUTTON_TYPE, "btnNo", 93, 27, 83, 245 )
+UI_LoadButtonImage( btnNo, "texture/ui/ui2/server.png", 93, 27, 0, 353, true )
+
+-- Ввод логина
+edtID = UI_CreateCompent( frmAccount, EDIT_TYPE, "edtID", 150, 12, 70, 68 )
+UI_SetTextColor( edtID, COLOR_GREEN )
+UI_SetEditCursorColor( edtID, COLOR_WHITE )
+UI_SetEditMaxNum( edtID, 20 )
+UI_SetEditMaxNumVisible( edtID, 20 )
+UI_SetHint( edtID, "\207\238\235\229 \226\226\238\228\224 \232\236\229\237\232 \243\247\229\242\237\238\233 \231\224\239\232\241\232." )
+
+
+-- Ввод пароля
+edtPassword = UI_CreateCompent( frmAccount, EDIT_TYPE, "edtPassword", 150, 12, 70, 107 )
+UI_SetTextColor( edtPassword, COLOR_RED )
+UI_SetEditCursorColor( edtPassword, COLOR_WHITE )
+UI_SetEditMaxNum( edtPassword, 20 )
+UI_SetEditMaxNumVisible( edtPassword, 20 )
+UI_SetHint( edtPassword, "\207\238\235\229 \226\226\238\228\224 \239\224\240\238\235\255 \238\242 \243\247\229\242\237\238\233 \231\224\239\232\241\232." )
+
+-- Кнопка клавиатуры
+btnKeyboard = UI_CreateCompent( frmAccount, BUTTON_TYPE, "btnKeyboard", 18, 18, 200, 137 )
+UI_LoadButtonImage( btnKeyboard, "texture/ui/ui2/login.png", 18, 18, 3, 356, TRUE )
+UI_SetHint( btnKeyboard, "\205\224\230\236\232\242\229 \247\242\238 \225\251 \239\238\234\224\231\224\242\252 \232\235\232 \241\234\240\251\242\252 \234\235\224\226\232\224\242\243\240\243." )
+
+-----------------------------------------------------------------------
+-- ���彡��ͨ��
+-----------------------------------------------------------------------	
+-- ��������ͨ�����
+frmAnnounce = UI_CreateForm( "frmAnnounce", FALSE, 198, 207, 396, 190, FALSE, FALSE )
+UI_LoadFormImage( frmAnnounce, "texture/ui/Game.bmp", 198, 207, 0, 0, "", 0, 0 )
+UI_AddFormToTemplete( frmAnnounce, FORM_LOGIN )
+UI_SetFormStyle( frmAnnounce, 2 )
+--UI_SetAlpha( frmAnnounce, 200 )
+UI_FormSetIsEscClose( frmAnnounce, FALSE )
+
+
+-- ���ؽ���title
+imgAnnTitle = UI_CreateCompent( frmAnnounce, IMAGE_TYPE, "imgAnnTitle", 73, 13, 10, 4 )
+UI_LoadImage( imgAnnTitle, "texture/ui/Word.dds", NORMAL, 73, 13, 0, 58 )
+
+
+--����ȷ����ť
+btnYes = UI_CreateCompent( frmAnnounce, BUTTON_TYPE, "btnYes", 41, 19, 100, 180 )
+UI_LoadButtonImage( btnYes, "texture/ui/PublicC.tga", 41, 19, 0, 0, TRUE )
+UI_SetAlign( btnYes, caWidthCenter )
+
+labYes = UI_CreateCompent( frmAnnounce, LABELEX_TYPE, "labYes", 24, 10, 109, 324 )
+UI_SetCaption( labYes, "" )
+UI_SetTextColor( labYes, COLOR_WHITE )
+UI_SetLabelExFont( labYes, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-----------------------------------------------------------------------
+-- Coded by Billy | GUI by Foxseiz
+-----------------------------------------------------------------------
+
+frmRegister = UI_CreateForm( "frmRegister", FALSE, 268, 170, 310, 160, FALSE, FALSE )
+UI_AddFormToTemplete( frmRegister, FORM_LOGIN )
+UI_SetFormStyle( frmRegister, 2 )
+UI_FormSetIsEscClose( frmRegister, FALSE )
+
+imgAccout = UI_CreateCompent( frmRegister, IMAGE_TYPE, "imgAccout", 268, 170, 0, 0 )
+UI_LoadImage( imgAccout, "texture/ui/custom/register.png", NORMAL, 268, 170, 0, 0 )
+UI_SetImageAlpha(imgAccout,235)
+
+labTitle = UI_CreateCompent( frmRegister, LABELEX_TYPE, "labTitle", 400, 150, 10, 3 )
+UI_SetCaption( labTitle, "Account Registration")
+UI_SetTextColor( labTitle, COLOR_BLACK )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+labID = UI_CreateCompent( frmRegister, LABELEX_TYPE, "labID", 23, 11, 18, 50 )
+UI_SetCaption( labID, "Account" )
+UI_SetTextColor( labID, COLOR_BLACK )
+UI_SetLabelExFont( labID, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+labPass = UI_CreateCompent( frmRegister, LABELEX_TYPE, "labPass", 23, 11, 18, 74 )
+UI_SetCaption( labPass, "Password" )
+UI_SetTextColor( labPass, COLOR_BLACK )
+UI_SetLabelExFont( labPass, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+labPass2 = UI_CreateCompent( frmRegister, LABELEX_TYPE, "labPass2", 23, 11, 18, 98 )
+UI_SetCaption( labPass2, "Re-Password" )
+UI_SetTextColor( labPass2, COLOR_BLACK )
+UI_SetLabelExFont( labPass2, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+labEmail = UI_CreateCompent( frmRegister, LABELEX_TYPE, "labEmail", 23, 11, 18, 122 )
+UI_SetCaption( labEmail, "Email" )
+UI_SetTextColor( labEmail, COLOR_BLACK )
+UI_SetLabelExFont( labEmail, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- IMAGES FOR FIELD
+-- imgID = UI_CreateCompent( frmRegister, IMAGE_TYPE, "imgID", 87, 18, 70, 28 )
+-- UI_LoadImage( imgID, "texture/ui/PublicC.tga", NORMAL, 87, 18, 99, 235 )
+
+-- imgPass = UI_CreateCompent( frmRegister, IMAGE_TYPE, "imgPass", 87, 18, 70, 50 )
+-- UI_LoadImage( imgPass, "texture/ui/PublicC.tga", NORMAL, 87, 18, 99, 235 )
+
+-- imgPass2 = UI_CreateCompent( frmRegister, IMAGE_TYPE, "imgPass2", 87, 18, 70, 72 )
+-- UI_LoadImage( imgPass2, "texture/ui/PublicC.tga", NORMAL, 87, 18, 99, 235 )
+
+-- imgEmail = UI_CreateCompent( frmRegister, IMAGE_TYPE, "imgEmail", 87, 18, 70, 94 )
+-- UI_LoadImage( imgEmail, "texture/ui/PublicC.tga", NORMAL, 87, 18, 99, 235 )
+
+btnRegYes = UI_CreateCompent( frmRegister, BUTTON_TYPE, "btnRegYes", 41, 19, 82, 148 )
+UI_LoadButtonImage( btnRegYes, "texture/ui/custom/coButtons.png", 41, 19, 0, 152, TRUE )
+
+btnRegNo = UI_CreateCompent( frmRegister, BUTTON_TYPE, "btnRegNo", 41, 19, 148, 148 )
+UI_LoadButtonImage( btnRegNo, "texture/ui/custom/coButtons.png", 41, 19, 0, 133, TRUE )
+
+-- YES/NO BUTTONS
+labYes = UI_CreateCompent( frmRegister, LABELEX_TYPE, "labYes", 42, 10, 107, 155 )
+UI_SetCaption( labYes, "" )
+UI_SetTextColor( labYes, COLOR_WHITE )
+UI_SetLabelExFont( labYes, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+labNo = UI_CreateCompent( frmRegister, LABELEX_TYPE, "labNo", 42, 10, 152, 155 )
+UI_SetCaption( labNo, "" )
+UI_SetTextColor( labNo, COLOR_WHITE )
+UI_SetLabelExFont( labNo, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+-- TYPING BOXES
+edtRegID = UI_CreateCompent( frmRegister, EDIT_TYPE, "edtRegID", 130, 12, 120, 51 )
+UI_SetTextColor( edtRegID, COLOR_BLACK )
+UI_SetEditMaxNum( edtRegID, 20 )
+UI_SetEditMaxNumVisible( edtRegID, 12 )
+
+edtRegPassword = UI_CreateCompent( frmRegister, EDIT_TYPE, "edtRegPassword", 130, 12, 120, 75 )
+UI_SetTextColor( edtRegPassword, COLOR_BLACK )
+UI_SetEditMaxNum( edtRegPassword, 20 )
+UI_SetEditMaxNumVisible( edtRegPassword, 12 )
+
+edtRegPassword2 = UI_CreateCompent( frmRegister, EDIT_TYPE, "edtRegPassword2", 130, 12, 120, 99 )
+UI_SetTextColor( edtRegPassword2, COLOR_BLACK )
+UI_SetEditMaxNum( edtRegPassword2, 20 )
+UI_SetEditMaxNumVisible( edtRegPassword2, 12 )
+
+edtRegEmail = UI_CreateCompent( frmRegister, EDIT_TYPE, "edtRegEmail", 130, 12, 120, 123 )
+UI_SetTextColor( edtRegEmail, COLOR_BLACK )
+UI_SetEditMaxNum( edtRegEmail, 254 )
+UI_SetEditMaxNumVisible( edtRegEmail, 12 )
+
+
+-----------------------------------------------------------------------
+-- Клавиатура
+-----------------------------------------------------------------------	
+frmKeyboard = UI_CreateForm( "frmKeyboard", true, 295, 170, 450, 95, true, true )
+UI_AddFormToTemplete( frmKeyboard, FORM_LOGIN )
+UI_SetFormStyle( frmKeyboard, 2 )
+UI_FormSetIsEscClose( frmKeyboard, false )
+UI_SetIsShow( frmKeyboard, true )
+
+-- Фон формы
+imgKeyboard = UI_CreateCompent( frmKeyboard, IMAGE_TYPE, "imgKeyboard", 295, 170, 0, 0 )
+UI_LoadImage( imgKeyboard, "texture/ui/ui2/keyboard.png", NORMAL, 295, 170, 0, 0 )
+
+
+-- Первый ряд
+btnNum = {}
+KbRow = {"1","2","3","4","5","6","7","8","9","0"}
+for i=1,10,1 do
+	btnNum[i] = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnNum" .. KbRow[i], 25, 19, 10 + 28 * (i - 1), 46 )
+	UI_LoadButtonImage( btnNum[i], "texture/ui/ui2/keyboard.png", 25, 19, 329, 5 + 19 * (i - 1), true )
+end
+
+-- Второй ряд
+btnLetter = {}
+KbRow = {"Q","W","E","R","T","Y","U","I","O","P"}
+for i=1,10,1 do
+	btnLetter[i] = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetter" .. KbRow[i], 25, 19, 10 + 28 * (i - 1), 70 )
+	UI_LoadButtonImage( btnLetter[i], "texture/ui/ui2/keyboard.png", 25, 19, 0, 214 + 19 * (i - 1), true )
+end
+
+-- Третий ряд
+btnLetter = {}
+KbRow = {"A","S","D","F","G","H","J","K","L"}
+for i=1,9,1 do
+	btnLetter[i] = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetter" .. KbRow[i], 25, 19, 24 + 28 * (i - 1), 94 )
+	UI_LoadButtonImage( btnLetter[i], "texture/ui/ui2/keyboard.png", 25, 19, 102, 214 + 19 * (i - 1), true )
+end
+
+-- Четвертый ряд
+btnLetter = {}
+KbRow = {"Z","X","C","V","B","N","M"}
+for i=1,7,1 do
+	btnLetter[i] = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnLetter" .. KbRow[i], 25, 19, 52 + 28 * (i - 1), 118)
+	UI_LoadButtonImage( btnLetter[i], "texture/ui/ui2/keyboard.png", 25, 19, 204, 214 + 19 * (i - 1), true )
+end
+
+-- CapsLock
+chkShift = UI_CreateCompent( frmKeyboard, CHECK_TYPE, "chkShift", 32, 25, 10, 118 )
+UI_LoadImage( chkShift, "texture/ui/ui2/keyboard.png", UNCHECKED, 32, 25, 312, 205 )
+UI_LoadImage( chkShift, "texture/ui/ui2/keyboard.png", CHECKED, 32, 25, 376, 205 )
+
+-- BackSpace
+btnDel = UI_CreateCompent( frmKeyboard, BUTTON_TYPE, "btnDel", 32, 25, 255, 118)
+UI_LoadButtonImage( btnDel, "texture/ui/ui2/keyboard.png", 32, 25, 313, 233, true )
+
+
+-----------------------------------------------------------------------
+-- ����FORM1 -added by Arcol
+-----------------------------------------------------------------------	
+frmTest1 = UI_CreateForm( "frmTest1_Arcol", FALSE, 160, 120, 600, 200, FALSE, FALSE )
+UI_LoadFormImage( frmTest1, "texture/ui/Test1.bmp", 160, 120, 0, 0, "", 0, 0 )
+UI_AddFormToTemplete( frmTest1, FORM_LOGIN )
+UI_SetIsDrag( frmTest1, TRUE )
+
+-----------------------------------------------------------------------
+-- ����FORM2 -added by Arcol
+-----------------------------------------------------------------------	
+frmTest2 = UI_CreateForm( "frmTest2_Arcol", FALSE, 160, 120, 600, 400, FALSE, FALSE )
+UI_LoadFormImage( frmTest2, "texture/ui/Test2.bmp", 160, 120, 0, 0, "", 0, 0 )
+UI_AddFormToTemplete( frmTest2, FORM_LOGIN )
+UI_SetIsDrag( frmTest2, TRUE )
+labTest = UI_CreateCompent( frmTest2, LABELEX_TYPE, "labTest", 24, 10, 20, 90 )
+UI_SetCaption( labTest, "Speed Test -by Arcol" )
+UI_SetTextColor( labTest, COLOR_BLACK )
+UI_SetLabelExFont( labTest, DEFAULT_FONT, TRUE, COLOR_BLACK )
+
+
+
+
+-----------------------------------------------------------------------
+-- Секретный пароль
+-----------------------------------------------------------------------	
+frmDoublePwdCreate = UI_CreateForm("frmDoublePwdCreate", false, 393, 332, 200, 200, false, false)
+UI_AddFormToTemplete( frmDoublePwdCreate, FORM_SELECT )
+UI_SetFormStyle( frmDoublePwdCreate, 2 )
+UI_FormSetIsEscClose( frmDoublePwdCreate, false)
+UI_SetIsDrag( frmDoublePwdCreate, false)
+UI_ShowForm( frmDoublePwdCreate, false)
+
+-- Фон формы
+imgDoublePwdCreate = UI_CreateCompent( frmDoublePwdCreate, IMAGE_TYPE,"imgDoublePwdCreate", 393, 332, 0, -82)
+UI_LoadImage(imgDoublePwdCreate, "texture/ui/ui2/secret.png", NORMAL , 393, 332, 476, 427)
+
+-- ОК
+btnYes = UI_CreateCompent( frmDoublePwdCreate, BUTTON_TYPE, "btnYes", 93, 28, 160, 202 )
+UI_LoadButtonImage( btnYes, "texture/ui/ui2/secret.png", 93, 28, 0, 185, true )
+UI_FormSetEnterButton(frmDoublePwdCreate, btnYes)
+
+-- Отмена
+btnClear = UI_CreateCompent( frmDoublePwdCreate, BUTTON_TYPE, "btnClear", 93, 28, 260, 202 )
+UI_LoadButtonImage( btnClear, "texture/ui/ui2/secret.png", 93, 28, 0, 216, true )
+
+-- Код
+edtDoublePwdCreate = UI_CreateCompent(frmDoublePwdCreate, EDIT_TYPE,"edtDoublePwdCreate", 160, 19, 185 , 130)
+UI_SetEditMaxNum( edtDoublePwdCreate, 12 )
+UI_SetEditMaxNumVisible(edtDoublePwdCreate,12)
+UI_SetTextColor( edtDoublePwdCreate, COLOR_RED )
+UI_SetEditCursorColor( edtDoublePwdCreate, COLOR_WHITE )
+
+-- Повтор
+edtDoublePwdCreateRetry = UI_CreateCompent(frmDoublePwdCreate, EDIT_TYPE,"edtDoublePwdCreateRetry", 160, 19, 185, 176)
+UI_SetEditMaxNum( edtDoublePwdCreateRetry, 12 )
+UI_SetEditMaxNumVisible(edtDoublePwdCreateRetry,12)
+UI_SetTextColor( edtDoublePwdCreateRetry, COLOR_RED )
+UI_SetEditCursorColor( edtDoublePwdCreateRetry, COLOR_WHITE )
+
+
+-----------------------------------------------------------------------
+-- Секретный пароль. Смена
+-----------------------------------------------------------------------	
+frmDoublePwdAlter = UI_CreateForm("frmDoublePwdAlter", true, 392, 210, 200, 200, true, true)
+UI_ShowForm(frmDoublePwdAlter, false)
+UI_SetFormStyle( frmDoublePwdAlter, 2 )
+UI_SetIsDrag(frmDoublePwdAlter, false)
+UI_AddFormToTemplete(frmDoublePwdAlter, FORM_SELECT )
+UI_FormSetIsEscClose(frmDoublePwdAlter, true)
+
+-- Фон формы
+imgDoublePwdAlter = UI_CreateCompent(frmDoublePwdAlter, IMAGE_TYPE,"imgDoublePwdAlter", 392, 210, 0, 82)
+UI_LoadImage( imgDoublePwdAlter, "texture/ui/ui2/secret.png", NORMAL, 392, 210, 0, 501)
+
+-- ОК
+btnYes = UI_CreateCompent( frmDoublePwdAlter, BUTTON_TYPE, "btnYes", 93, 28, 160, 242 )
+UI_LoadButtonImage( btnYes, "texture/ui/ui2/secret.png", 93, 28, 0, 185, true )
+UI_FormSetEnterButton(frmDoublePwdAlter, btnYes)
+
+-- Отмена
+btnClear = UI_CreateCompent( frmDoublePwdAlter, BUTTON_TYPE, "btnClear", 93, 28, 260, 242 )
+UI_LoadButtonImage( btnClear, "texture/ui/ui2/secret.png", 93, 28, 0, 216, true )
+
+-- Старый пароль
+edtDoublePwdAlterOld = UI_CreateCompent(frmDoublePwdAlter, EDIT_TYPE,"edtDoublePwdAlterOld", 160, 19, 195, 116)
+UI_SetEditMaxNum( edtDoublePwdAlterOld, 12 )
+UI_SetEditMaxNumVisible(edtDoublePwdAlterOld,12)
+UI_SetTextColor( edtDoublePwdAlterOld, COLOR_RED )
+UI_SetEditCursorColor( edtDoublePwdAlterOld, COLOR_GREEN )
+
+-- Новый пароль
+edtDoublePwdAlterNew = UI_CreateCompent(frmDoublePwdAlter, EDIT_TYPE,"edtDoublePwdAlterNew", 160, 19, 195, 159)
+UI_SetEditMaxNum( edtDoublePwdAlterNew, 12 )
+UI_SetEditMaxNumVisible(edtDoublePwdAlterNew,12)
+UI_SetTextColor( edtDoublePwdAlterNew, COLOR_RED )
+UI_SetEditCursorColor( edtDoublePwdAlterNew, COLOR_GREEN )
+
+-- Повтор пароля
+edtDoublePwdAlterNewRetry = UI_CreateCompent(frmDoublePwdAlter, EDIT_TYPE,"edtDoublePwdAlterNewRetry", 160, 19, 195, 202)
+UI_SetEditMaxNum( edtDoublePwdAlterNewRetry, 12 )
+UI_SetEditMaxNumVisible(edtDoublePwdAlterNewRetry,12)
+UI_SetTextColor( edtDoublePwdAlterNewRetry, COLOR_RED )
+UI_SetEditCursorColor( edtDoublePwdAlterNewRetry, COLOR_GREEN )
+
+-----------------------------------------------------------------------
+-- Ввод секретного пароля
+-----------------------------------------------------------------------	
+frmDoublePwd = UI_CreateForm("frmDoublePwd", true, 392, 166, 180, -85, true, true)
+UI_ShowForm( frmDoublePwd, false )
+UI_SetFormStyle( frmDoublePwd, 2 )
+UI_AddFormToTemplete( frmDoublePwd, FORM_SELECT )
+UI_SetIsDrag(frmDoublePwd, false)
+UI_FormSetIsEscClose( frmDoublePwd, true)
+
+-- Фон формы
+imgDoublePwd = UI_CreateCompent(frmDoublePwd, IMAGE_TYPE,"imgDoublePwd", 392, 166, 0, 85)
+UI_LoadImage( imgDoublePwd, "texture/ui/ui2/secret.png", NORMAL, 392, 166, 0, 721)
+
+-- Секретный код
+edtDoublePwd = UI_CreateCompent(frmDoublePwd, EDIT_TYPE,"edtDoublePwd", 160, 19, 185, 158)
+UI_SetEditMaxNum(edtDoublePwd, 12 )
+UI_SetEditMaxNumVisible(edtDoublePwd,12)
+UI_SetTextColor( edtDoublePwd, COLOR_RED )
+UI_SetEditCursorColor( edtDoublePwd, COLOR_GREEN )
+
+-- ОК
+btnYes = UI_CreateCompent( frmDoublePwd, BUTTON_TYPE, "btnYes", 93, 28, 85, 202 )
+UI_LoadButtonImage( btnYes, "texture/ui/ui2/secret.png", 93, 28, 0, 185, true )
+UI_FormSetEnterButton(frmDoublePwd, btnYes)
+
+-- Отмена
+btnClear = UI_CreateCompent( frmDoublePwd, BUTTON_TYPE, "btnClear", 93, 28, 195, 202 )
+UI_LoadButtonImage( btnClear, "texture/ui/ui2/secret.png", 93, 28, 0, 216, true )
+
+
+-----------------------------------------------------------------------
+-- Цифровая клавиатура
+-----------------------------------------------------------------------	
+frmDoublePwdInput = UI_CreateForm("frmDoublePwdInput", true, 163, 139, 392, 300, true,true)
+UI_ShowForm(frmDoublePwdInput, false )
+UI_AddAllFormTemplete( frmDoublePwdInput)
+UI_SetIsDrag(frmDoublePwdInput, false)
+UI_FormSetIsEscClose(frmDoublePwdInput, true)
+
+-- Фон формы
+imgDoublePwdInput = UI_CreateCompent(frmDoublePwdInput, IMAGE_TYPE,"imgDoublePwdInput", 163, 139, 0, 85)
+UI_LoadImage( imgDoublePwdInput, "texture/ui/ui2/secret.png", NORMAL, 163, 139, 416, 7)
+
+-- Кнопки цифр
+btnNum1 = UI_CreateCompent( frmDoublePwdInput, BUTTON_TYPE, "btnNum1", 25, 19, 25, 107 )
+UI_LoadButtonImage( btnNum1, "texture/ui/ui2/secret.png", 25, 19, 502, 207, true )
+btnNum2 = UI_CreateCompent( frmDoublePwdInput, BUTTON_TYPE, "btnNum2", 25, 19, 67, 107 )
+UI_LoadButtonImage( btnNum2, "texture/ui/ui2/secret.png", 25, 19, 502, 226, true )
+btnNum3 = UI_CreateCompent( frmDoublePwdInput, BUTTON_TYPE, "btnNum3", 25, 19, 109, 107 )
+UI_LoadButtonImage( btnNum3, "texture/ui/ui2/secret.png", 25, 19, 502, 245, true )
+btnNum4 = UI_CreateCompent( frmDoublePwdInput, BUTTON_TYPE, "btnNum4", 25, 19, 25, 132 )
+UI_LoadButtonImage( btnNum4, "texture/ui/ui2/secret.png", 25, 19, 502, 264, true )
+btnNum5 = UI_CreateCompent( frmDoublePwdInput, BUTTON_TYPE, "btnNum5", 25, 19, 66, 132 )
+UI_LoadButtonImage( btnNum5, "texture/ui/ui2/secret.png", 25, 19, 502, 283, true )
+btnNum6 = UI_CreateCompent( frmDoublePwdInput, BUTTON_TYPE, "btnNum6", 25, 19, 109, 133 )
+UI_LoadButtonImage( btnNum6, "texture/ui/ui2/secret.png", 25, 19, 502, 302, true )
+btnNum7 = UI_CreateCompent( frmDoublePwdInput, BUTTON_TYPE, "btnNum7", 25, 19, 25, 156 )
+UI_LoadButtonImage( btnNum7, "texture/ui/ui2/secret.png", 25, 19, 502, 321, true )
+btnNum8 = UI_CreateCompent( frmDoublePwdInput, BUTTON_TYPE, "btnNum8", 25, 19, 67, 157 )
+UI_LoadButtonImage( btnNum8, "texture/ui/ui2/secret.png", 25, 19, 502, 340, true )
+btnNum9 = UI_CreateCompent( frmDoublePwdInput, BUTTON_TYPE, "btnNum9", 25, 19, 109, 158 )
+UI_LoadButtonImage( btnNum9, "texture/ui/ui2/secret.png", 25, 19, 502, 359, true )
+btnNum0 = UI_CreateCompent( frmDoublePwdInput, BUTTON_TYPE, "btnNum0", 25, 19, 25, 182 )
+UI_LoadButtonImage( btnNum0, "texture/ui/ui2/secret.png", 25, 19, 502, 378, true )
+
+-- Очистить
+btnClear = UI_CreateCompent( frmDoublePwdInput, BUTTON_TYPE, "btnClear", 79, 22, 55, 182 )
+UI_LoadButtonImage( btnClear, "texture/ui/ui2/secret.png", 79, 22, 0, 291, true )
+
+-----------------------------------------------------------------------
+-- �������������ܴ���
+-----------------------------------------------------------------------	
+frmDoublePwdInfo =  UI_CreateForm("frmDoublePwdInfo", TRUE, 378, 129, 200, 329, TRUE,TRUE)
+UI_ShowForm(frmDoublePwdInfo, TRUE )
+UI_AddFormToTemplete( frmDoublePwdInfo, FORM_SELECT )
+UI_SetIsDrag(frmDoublePwdInfo, FALSE)
+
+--UI_FormSetHotKey( frmDoublePwdInfo, ALT_KEY, HOTKEY_Z ) 
+
+imgWelcomeNotice1 = UI_CreateCompent(frmDoublePwdInfo, IMAGE_TYPE,"imgWelcomeNotice1", 256, 122, 0, 0)
+UI_LoadImage( imgWelcomeNotice1, "texture/ui/Keyboard1.tga", NORMAL, 256,122, 0, 0)
+UI_SetImageAlpha(imgWelcomeNotice1,220)
+
+imgWelcomeNotice2 = UI_CreateCompent(frmDoublePwdInfo, IMAGE_TYPE,"imgWelcomeNotice2", 122, 122, 256, 0)
+UI_LoadImage( imgWelcomeNotice2, "texture/ui/Keyboard1.tga", NORMAL, 122,122, 69, 123)
+UI_SetImageAlpha(imgWelcomeNotice2,220)
+
+labText1  = UI_CreateCompent( frmDoublePwdInfo, LABELEX_TYPE, "labText1", 400, 150, 10, 5 )
+labText2  = UI_CreateCompent( frmDoublePwdInfo, LABELEX_TYPE, "labText2", 400, 150, 10, 25 )
+labText3  = UI_CreateCompent( frmDoublePwdInfo, LABELEX_TYPE, "labText3", 400, 150, 10, 45 )
+labText4  = UI_CreateCompent( frmDoublePwdInfo, LABELEX_TYPE, "labText4", 400, 150, 10, 65 )
+labText5  = UI_CreateCompent( frmDoublePwdInfo, LABELEX_TYPE, "labText5", 400, 150, 10, 85 )
+--labText6  = UI_CreateCompent( frmDoublePwdInfo, LABELEX_TYPE, "labText6", 400, 150, 10, 105 )
+UI_SetCaption( labText1, "Dear player, you have not create a security code.")
+UI_SetCaption( labText2, "Please select a security code to keep your account safe.")
+UI_SetCaption( labText3, "You will require the security code to")
+UI_SetCaption( labText4, "delete character or unlock inventory")
+UI_SetCaption( labText5, "Please remember your security code well!")
+--UI_SetCaption( labText6,"Requires a valid Security Code to delete character or withdraw inventory items")
+UI_SetTextColor( labText1, COLOR_BLACK )
+UI_SetLabelExFont( labText1, DEFAULT_FONT, TRUE, COLOR_WHITE )
+UI_SetTextColor( labText2, COLOR_BLACK )
+UI_SetLabelExFont( labText2, DEFAULT_FONT, TRUE, COLOR_WHITE )
+UI_SetTextColor( labText3, COLOR_BLACK )
+UI_SetLabelExFont( labText3, DEFAULT_FONT, TRUE, COLOR_WHITE )
+UI_SetTextColor( labText4, COLOR_BLACK )
+UI_SetLabelExFont( labText4, DEFAULT_FONT, TRUE, COLOR_WHITE )
+UI_SetTextColor( labText5, COLOR_BLACK )
+UI_SetLabelExFont( labText5, DEFAULT_FONT, TRUE, COLOR_WHITE )
+--UI_SetTextColor( labText6, COLOR_BLACK )
+--UI_SetLabelExFont( labText6, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+
+-----------------------------------------------------------------------
+-- Логотип поверх фона формы входа
+-----------------------------------------------------------------------	
+frmPathLogo = UI_CreateForm("frmPathLogo", TRUE, 256, 129, 50 , 450, TRUE,TRUE)
+UI_ShowForm(frmPathLogo, FALSE )
+UI_AddAllFormTemplete( frmPathLogo)
+UI_SetIsDrag(frmPathLogo, FALSE)
+UI_FormSetIsEscClose(frmPathLogo, FALSE)
+
+imgPathLogo = UI_CreateCompent(frmPathLogo, IMAGE_TYPE,"imgPathLogo", 256, 129, 0, 0)
+--UI_LoadImage( imgPathLogo, "texture/ui/ui2/PathLogo.tga", NORMAL, 256,129, 0, 0)
+
+-----------------------------------------------------------------------
+-- Сообщение о том, что нам открывается волшебный мир игры
+-----------------------------------------------------------------------	
+frmWelcomeNotice = UI_CreateForm("frmWelcomeNotice", true, 512, 174, 0 , 0, true,true)
+UI_ShowForm(frmWelcomeNotice, false )
+UI_SetIsDrag(frmWelcomeNotice, false)
+UI_FormSetIsEscClose(frmWelcomeNotice, false)
+UI_SetFormStyle(frmWelcomeNotice,2)
+UI_AddFormToTemplete( frmWelcomeNotice, FORM_SELECT )
+
+-- Фон формы
+imgWelcomeNotice1 = UI_CreateCompent(frmWelcomeNotice, IMAGE_TYPE,"imgWelcomeNotice1", 512, 174, 0, 250)
+UI_LoadImage( imgWelcomeNotice1, "texture/ui/ui2/StartInfo.png", NORMAL, 512, 174, 0, 189)
+
+
+-- ОК
+btnYes = UI_CreateCompent( frmWelcomeNotice, BUTTON_TYPE, "btnYes", 93, 28, 380, 380 )
+UI_LoadButtonImage( btnYes, "texture/ui/ui2/secret.png", 93, 28, 0, 185, true )
+--UI_SetAlign( btnYes, caWidthCenter )
+
+-----------------------------------------------------------------------
+-- Сообщение после создания персонажа
+-----------------------------------------------------------------------	
+frmCreateOKNotice = UI_CreateForm("frmCreateOKNotice", true, 512, 174, 0 , 0, true,true)
+UI_ShowForm(frmCreateOKNotice, false )
+UI_SetIsDrag(frmCreateOKNotice, false)
+UI_FormSetIsEscClose(frmCreateOKNotice, false)
+UI_SetFormStyle(frmCreateOKNotice,1)
+UI_AddFormToTemplete( frmCreateOKNotice, FORM_SELECT )
+
+imgCreateOKNotice = UI_CreateCompent(frmCreateOKNotice, IMAGE_TYPE,"imgCreateOKNotice", 512, 174, 0, 0)
+UI_LoadImage( imgCreateOKNotice, "texture/ui/ui2/StartInfo.png", NORMAL, 512,174, 0, 0)
+
+
+-- ОК
+btnYes = UI_CreateCompent( frmCreateOKNotice, BUTTON_TYPE, "btnYes", 93, 28, 0, 130 )
+UI_LoadButtonImage( btnYes, "texture/ui/ui2/secret.png", 93, 28, 0, 185, true )
+UI_SetAlign( btnYes, caWidthCenter )
+
+
+-----------------------------------------------------------------------
+-- ����������棬�ý������̨��汾��Ч�������ñ��ݹ���
+-----------------------------------------------------------------------	
+frmChaNameAlter = UI_CreateForm("frmChaNameAlter", TRUE, 500, 170, 0 , 0, TRUE,TRUE)
+UI_ShowForm(frmChaNameAlter, FALSE )
+UI_SetIsDrag(frmChaNameAlter, FALSE)
+UI_FormSetIsEscClose(frmChaNameAlter, FALSE)
+UI_SetFormStyle(frmChaNameAlter,1)
+UI_AddFormToTemplete( frmChaNameAlter, FORM_SELECT )
+
+--���ر���
+imgCreateOKNotice1 = UI_CreateCompent(frmChaNameAlter, IMAGE_TYPE,"imgCreateOKNotice1", 256, 150, 0, 0)
+UI_LoadImage( imgCreateOKNotice1, "texture/ui/newshelp/login_out_01.tga", NORMAL, 256,150, 0, 0)
+UI_SetImageAlpha(imgCreateOKNotice1,220)
+
+--���ر���
+labTitle = UI_CreateCompent( frmChaNameAlter, LABELEX_TYPE, "labTitle", 400, 150, 10, 3 )
+UI_SetCaption( labTitle, "Edit character name")
+UI_SetTextColor( labTitle, COLOR_BLACK )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+--�޸����
+labText1 = UI_CreateCompent( frmChaNameAlter, LABELEX_TYPE, "labText1", 400, 150, 10, 20)
+UI_SetCaption( labText1, "Please change character name")
+UI_SetTextColor( labText1, COLOR_BLACK )
+UI_SetLabelExFont( labText1, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+
+--�½�ɫ��
+labTitle = UI_CreateCompent( frmChaNameAlter, LABELEX_TYPE, "labTitle", 400, 150, 40, 30 )
+UI_SetCaption( labTitle, "New character name")
+UI_SetTextColor( labTitle, COLOR_BLACK )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+--��������
+labTitle = UI_CreateCompent( frmChaNameAlter, LABELEX_TYPE, "labTitle", 400, 150, 40, 50 )
+UI_SetCaption( labTitle, "Edit character name")
+UI_SetTextColor( labTitle, COLOR_BLACK )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+--�޸Ŀ�
+edtChaNameNew = UI_CreateCompent(frmChaNameAlter, EDIT_TYPE,"edtChaNameNew", 66, 14, 140, 30)
+UI_SetEditMaxNum( edtDoublePwdAlterNew, 12 )
+UI_SetEditMaxNumVisible(edtDoublePwdAlterNew,12)
+
+edtChaNameNewRetry = UI_CreateCompent(frmChaNameAlter, EDIT_TYPE,"edtChaNameNewRetry" ,66, 14, 140, 50)
+UI_SetEditMaxNum( edtDoublePwdAlterNewRetry, 12 )
+UI_SetEditMaxNumVisible(edtDoublePwdAlterNewRetry,12)
+
+--ȷ����ȡ����ť
+btnYes = UI_CreateCompent( frmChaNameAlter, BUTTON_TYPE, "btnYes", 41, 19, 50, 120 )
+UI_LoadButtonImage( btnYes, "texture/ui/PublicC.tga", 41, 19, 0, 0, TRUE )
+
+btnClear = UI_CreateCompent( frmChaNameAlter, BUTTON_TYPE, "btnClear", 41, 19, 80, 120 )
+UI_LoadButtonImage( btnClear, "texture/ui/PublicC.tga", 41, 19, 0, 20, TRUE )
+
+
+
+frmModel = UI_CreateForm( "frmModel", FALSE, 280, 450, 0, 0, TRUE, FALSE )
+UI_ShowForm( frmModel, TRUE )
+UI_AddFormToTemplete( frmModel, FORM_LOGIN )
+
+cardBack = UI_CreateCompent( frmModel, IMAGE_TYPE, "cardBack", 280, 450, 0, 0 )
+UI_LoadImage( cardBack, "texture/ui/custom/card.png", NORMAL, 280, 450, 22,120 )
+
+iconBack = UI_CreateCompent( frmModel, IMAGE_TYPE, "iconBack", 130, 130, 0, 0 )
+UI_LoadImage( iconBack, "texture/ui/custom/discord.png", NORMAL, 128, 128, 0,0 )
+
+
+ui3dCha = UI_CreateCompent( frmModel, UI3D_COMPENT, "ui3dCha", 280, 450, 0, 40 )
+ui3dIcon = UI_CreateCompent( frmModel, UI3D_COMPENT, "ui3dIcon", 128, 128, 0, 0 )

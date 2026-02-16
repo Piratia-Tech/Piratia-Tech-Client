@@ -1,0 +1,72 @@
+-----------------------------------------------------------------------
+-- Журнал заданий
+-----------------------------------------------------------------------
+frmMission = UI_CreateForm( "frmMission", FALSE, 389, 476, 470, 160, FALSE, FALSE )
+UI_LoadFormImage( frmMission, "texture/ui/ui2/mission_journal.png", 389, 476, 0, 0, "", 0, 0 )
+UI_FormSetHotKey( frmMission, ALT_KEY, HOTKEY_Q ) 
+UI_ShowForm( frmMission, TRUE )
+UI_AddFormToTemplete( frmMission, FORM_MAIN )
+UI_SetIsDrag( frmMission, TRUE )
+
+
+-- Закрыть
+btnClose = UI_CreateCompent( frmMission, BUTTON_TYPE, "btnClose", 25, 26, 360, 17 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/mission_journal.png", 25, 26, 502, 315, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- Список миссий
+trvMission = UI_CreateCompent( frmMission, TREE_TYPE, "trvMission", 322, 98, 31, 67 )
+UI_SetMemoMaxNumPerRow( trvMission, 1)
+
+UI_SetIsDrag( trvEditor, TRUE )
+
+UI_TreeLoadImage( trvMission, enumTreeAddImage, "texture/ui/ui2/mission_journal.png", 10, 10, 485, 497, 10, 10 )
+UI_TreeLoadImage( trvMission, enumTreeSubImage, "texture/ui/ui2/mission_journal.png", 10, 10, 502, 497, 10, 10 )
+
+--Скролл
+local scrollid = UI_GetScroll( trvMission )
+UI_SetSize( scrollid, 4, 3 )
+
+-- ‘кролл вверх
+local id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 55, true )
+UI_SetSize( id, 13, 9 )
+
+-- ‘кролл ползунок
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/ui2/buttons.png", COMPENT_BACK, 13, 8, 387, 84 )
+UI_SetSize( id, 13, 8 )
+
+-- ‘кролл вниз
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 69, true )
+UI_SetSize( id, 13, 9 )
+
+-- Детали миссии0
+memMiss  = UI_CreateCompent( frmMission, MEMOEX_TYPE, "memMiss", 314, 224, 40, 188 )
+UI_SetCaption( memMiss, "400" )
+UI_SetLabelExFont( memMiss, FONT9, TRUE, COLOR_WHITE )
+UI_SetMemoPageShowNum( memMiss, 15 )
+
+--Скролл
+local scrollid = UI_GetScroll( memMiss )
+UI_SetSize( scrollid, 4, 3 )
+
+-- ‘кролл вверх
+local id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 55, true )
+UI_SetSize( id, 13, 9 )
+
+-- ‘кролл ползунок
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/ui2/buttons.png", COMPENT_BACK, 13, 8, 387, 84 )
+UI_SetSize( id, 13, 8 )
+
+-- ‘кролл вниз
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 69, true )
+UI_SetSize( id, 13, 9 )
+
+-- Отказаться от задания
+btnBreak = UI_CreateCompent( frmMission, BUTTON_TYPE, "btnBreak", 92, 28, 148, 428 )
+UI_LoadButtonImage( btnBreak, "texture/ui/ui2/mission_journal.png", 92, 28, 0, 484, TRUE )

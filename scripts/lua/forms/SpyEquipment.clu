@@ -1,0 +1,57 @@
+---------------------------------------------------------------------------
+------------------------------ Equipment Spy ------------------------------
+---------------------------------------------------------------------------
+frmItemSpy = UI_CreateForm( "frmItemSpy", FALSE, 200, 345, 440, 160, TRUE, FALSE )
+UI_ShowForm( frmItemSpy, FALSE )
+UI_AddFormToTemplete( frmItemSpy, FORM_MAIN )
+UI_SetIsDrag( frmItemSpy, TRUE )
+
+-- SpyEquipment Img
+imgItemTop = UI_CreateCompent( frmItemSpy, IMAGE_TYPE, "imgItemTop", 200,345, 0, 0 )
+UI_LoadImage( imgItemTop, "texture/ui_po/spyeq.png", NORMAL, 200,345, 0, 0 )
+
+-- Button Close
+btnClose = UI_CreateCompent( frmItemSpy, BUTTON_TYPE, "btnClose", 18, 18, 185, 2 )
+UI_LoadButtonImage( btnClose, "texture/UI_PO/btn_sys.png", 21, 21, 0, 0, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- Form Label
+labTitle = UI_CreateCompent( frmItemSpy, LABELEX_TYPE, "labTitle", 400, 150, 50, 3 )
+UI_SetCaption( labTitle, "")
+UI_SetTextColor( labTitle, COLOR_BLACK )
+UI_SetLabelExFont( labTitle, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- Equipment Slots
+cmdArmet 		= UI_CreateCompent( frmItemSpy, COMMAND_ONE_TYPE, 	"cmdArmet"		, 32, 32, 155, 25 )
+cmdBody 		= UI_CreateCompent( frmItemSpy, COMMAND_ONE_TYPE, 	"cmdBody"		, 32, 32, 155, 71 )
+cmdGlove 		= UI_CreateCompent( frmItemSpy, COMMAND_ONE_TYPE, 	"cmdGlove"		, 32, 32, 155, 119 )
+cmdShoes 		= UI_CreateCompent( frmItemSpy, COMMAND_ONE_TYPE, 	"cmdShoes"		, 32, 32, 155, 164 )
+cmdRightHand 	= UI_CreateCompent( frmItemSpy, COMMAND_ONE_TYPE,  "cmdRightHand"	, 32, 32, 155, 257 )
+cmdLeftHand 	= UI_CreateCompent( frmItemSpy, COMMAND_ONE_TYPE, 	"cmdLeftHand"	, 32, 32, 13, 257 )
+cmdCirclet1 	= UI_CreateCompent( frmItemSpy, COMMAND_ONE_TYPE,  "cmdCirclet1"	, 32, 32, 107, 257 )
+cmdCirclet2 	= UI_CreateCompent( frmItemSpy, COMMAND_ONE_TYPE,  "cmdCirclet2"	, 32, 32, 61, 257 )
+cmdNecklace 	= UI_CreateCompent( frmItemSpy, COMMAND_ONE_TYPE, 	"cmdNecklace"	, 32, 32, 153, 211 )
+
+-- SetTag
+UI_SetTag( cmdArmet, enumEQUIP_HEAD )
+UI_SetTag( cmdBody, enumEQUIP_BODY )
+UI_SetTag( cmdNecklace, enumEQUIP_NECK )
+UI_SetTag( cmdRightHand, enumEQUIP_RHAND )
+UI_SetTag( cmdLeftHand, enumEQUIP_LHAND )
+UI_SetTag( cmdGlove, enumEQUIP_GLOVE )
+UI_SetTag( cmdCirclet1, enumEQUIP_HAND1 )
+UI_SetTag( cmdCirclet2, enumEQUIP_HAND2 )
+UI_SetTag( cmdShoes, enumEQUIP_SHOES )
+
+-- PLAYER MODEL
+ui3dEqSpyCha = UI_CreateCompent( frmItemSpy, UI3D_COMPENT, "ui3dEqSpyCha", 0, 0, 75, 230 )
+
+btnLeft3d = UI_CreateCompent( frmItemSpy, BUTTON_TYPE, "btnLeft3d", 32, 38, 10, 200 )
+UI_LoadButtonImage( btnLeft3d, "texture/ui/custom/coButtons.png", 32, 32, 217, 87, TRUE )
+
+btnRight3d = UI_CreateCompent( frmItemSpy, BUTTON_TYPE, "btnRight3d", 32, 38, 109, 200 )
+UI_LoadButtonImage( btnRight3d, "texture/ui/custom/coButtons.png",  32, 32, 217, 119, TRUE )
+
+---------------------------------------------------------------------------
+---------------------------- Equipment Spy End ----------------------------
+---------------------------------------------------------------------------

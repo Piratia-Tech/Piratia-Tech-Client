@@ -1,0 +1,431 @@
+
+function addSystemOption(frm,compName,cap,hint,cap1,cap2,y)
+	labGame = UI_CreateCompent( frm, LABELEX_TYPE, "labGame", 30, 10, 12, y )
+	UI_SetCaption( labGame, cap )
+	UI_SetTextColor( labGame, COLOR_BLACK )
+	UI_SetLabelExFont( labGame, DEFAULT_FONT, TRUE, COLOR_WHITE )
+	UI_SetHint(labGame,hint)
+	
+	labGame = UI_CreateCompent( frm, LABELEX_TYPE, "labGame", 30, 10, 70, y )
+	UI_SetCaption( labGame, cap1 )
+	UI_SetTextColor( labGame, COLOR_BLACK )
+	UI_SetLabelExFont( labGame, DEFAULT_FONT, TRUE, COLOR_WHITE )
+	
+	chkHelpmodel1 = UI_CreateCompent( frm, CHECK_TYPE, "chkHelpmodel1", 10, 10, 102, y )
+	UI_LoadImage( chkHelpmodel1, "texture/ui/QQ2.tga", UNCHECKED, 10, 10, 40, 231 )
+	UI_LoadImage( chkHelpmodel1, "texture/ui/QQ2.tga", CHECKED, 10, 10, 52, 231 )
+	
+	labGame = UI_CreateCompent( frm, LABELEX_TYPE, "labGame", 30, 10, 115, y )
+	UI_SetCaption( labGame, cap2 )
+	UI_SetTextColor( labGame, COLOR_BLACK )
+	UI_SetLabelExFont( labGame, DEFAULT_FONT, TRUE, COLOR_WHITE )
+	
+	
+	chkHelpmodel2 = UI_CreateCompent( frm, CHECK_TYPE, "chkHelpmodel2", 10, 10, 147, y )
+	UI_LoadImage( chkHelpmodel2, "texture/ui/QQ2.tga", UNCHECKED, 10, 10, 40, 231 )
+	UI_LoadImage( chkHelpmodel2, "texture/ui/QQ2.tga", CHECKED, 10, 10, 52, 231 )
+	
+	cbxEffectl = UI_CreateCompent( frm, CHECK_GROUP_TYPE, compName, 0, 0, 0, 0 )
+	UI_AddGroupBox( cbxEffectl, chkHelpmodel1 )
+	UI_AddGroupBox( cbxEffectl, chkHelpmodel2 )
+end
+
+
+
+-----------------------------------------------------------------------
+-- ????
+-----------------------------------------------------------------------
+
+-- ??????
+frmSystem = UI_CreateForm( "frmSystem", FALSE, 190, 274, 150, 200, TRUE, FALSE )
+UI_FormSetHotKey( frmSystem, ALT_KEY, HOTKEY_O ) --'O'
+UI_ShowForm( frmSystem, TRUE )
+UI_AddFormToTemplete( frmSystem, 1 )
+UI_SetIsDrag( frmSystem, TRUE )
+UI_SetFormStyle( frmSystem, 0 )
+--UI_SetAlpha( frmSystem, 200 )
+
+
+-- Фон формы
+imgSystemT = UI_CreateCompent( frmSystem, IMAGE_TYPE, "imgSystemT", 170, 260, 0, 0 )
+UI_LoadImage( imgSystemT, "texture/ui/ui2/system.png", NORMAL, 170, 260, 0, 0 )
+--??????
+btnClose = UI_CreateCompent( frmSystem, BUTTON_TYPE, "btnClose", 28, 28, 141, 2 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/buttons.png", 25, 26, 381, 3, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- Видео
+btnVideo = UI_CreateCompent( frmSystem, BUTTON_TYPE, "btnVideo", 129, 28, 21, 45 )
+UI_LoadButtonImage( btnVideo, "texture/ui/ui2/system.png", 129, 28, 214, 0, false )
+
+-- Аудио
+btnAudio = UI_CreateCompent( frmSystem, BUTTON_TYPE, "btnAudio", 129, 28, 21, 78 )
+UI_LoadButtonImage( btnAudio, "texture/ui/ui2/system.png", 129, 28, 345, 0, false )
+
+-- Игра
+btnGame = UI_CreateCompent( frmSystem, BUTTON_TYPE, "btnGame", 129, 28, 21, 111 )
+UI_LoadButtonImage( btnGame, "texture/ui/ui2/system.png", 129, 28, 478, 0, false )
+
+
+-- Смена персонажа
+btnChange = UI_CreateCompent( frmSystem, BUTTON_TYPE, "btnChange", 129, 28, 21, 144 )
+UI_LoadButtonImage( btnChange, "texture/ui/ui2/system.png", 129, 28, 610, 0, false )
+
+-- Отключение
+btnRelogin = UI_CreateCompent( frmSystem, BUTTON_TYPE, "btnRelogin", 129, 28, 21, 177 )
+UI_LoadButtonImage( btnRelogin, "texture/ui/ui2/system.png", 129, 28, 747, 0, false )
+
+-- Выход
+btnExit = UI_CreateCompent( frmSystem, BUTTON_TYPE, "btnExit", 129, 28, 21, 210 )
+UI_LoadButtonImage( btnExit, "texture/ui/ui2/system.png", 129, 28, 352, 111, false )
+
+-----------------------------------------------------------------------
+-- Настройки звука
+-----------------------------------------------------------------------
+frmAudio = UI_CreateForm( "frmAudio",  false, 318, 147, 397, 500, false, false )
+
+UI_LoadFormImage( frmAudio, "texture/ui/ui2/system.png", 318, 147, 0, 636, "", 0, 0 )
+UI_ShowForm( frmAudio, false )
+UI_AddFormToTemplete( frmAudio, FORM_MAIN )
+UI_SetFormStyle( frmAudio, 0 )
+UI_SetIsDrag( frmAudio, true )
+
+btnClose = UI_CreateCompent( frmAudio, BUTTON_TYPE, "btnClose", 28, 28, 290, 2 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/buttons.png", 25, 26, 381, 3, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- ОК
+btnYes = UI_CreateCompent( frmAudio, BUTTON_TYPE, "btnYes", 93, 28, 51, 99 )
+UI_LoadButtonImage( btnYes, "texture/ui/ui2/secret.png", 93, 28, 0, 185, true )
+UI_FormSetEnterButton(frmFound, btnYes)
+
+-- Отмена
+btnNo = UI_CreateCompent( frmAudio, BUTTON_TYPE, "btnNo", 93, 28, 178, 100 )
+UI_LoadButtonImage( btnNo, "texture/ui/ui2/secret.png", 93, 28, 0, 216, true )
+
+-- Музыка
+proAudioMusic = UI_CreateCompent( frmAudio, PROGRESS_TYPE, "proAudioMusic", 190, 14, 100, 39 )
+UI_LoadScaleImage( proAudioMusic, "texture/ui/ui2/system.png", PROGRESS_PROGRESS, 190, 14, 0, 612, 1.0, 1.0 )
+UI_SetProgressActiveMouse( proAudioMusic, 1 )
+
+-- Звуки
+proAudioMidi = UI_CreateCompent( frmAudio, PROGRESS_TYPE, "proAudioMidi", 190, 14, 100, 66 )
+UI_LoadScaleImage( proAudioMidi, "texture/ui/ui2/system.png", PROGRESS_PROGRESS, 190, 14, 0, 612, 1.0, 1.0 )
+UI_SetProgressActiveMouse( proAudioMidi, 1 )
+
+-----------------------------------------------------------------------
+-- Настройки видео
+-----------------------------------------------------------------------
+frmVideo = UI_CreateForm( "frmVideo", FALSE, 318, 285, 150, 150, TRUE, FALSE )
+UI_ShowForm( frmVideo, FALSE )
+UI_AddFormToTemplete( frmVideo, 1 )
+UI_SetIsDrag( frmVideo, TRUE )
+UI_SetFormStyle( frmVideo, 0 )
+UI_FormSetHotKey( frmVideo, ALT_KEY, HOTKEY_X )
+
+-- Фон формы
+imgVideoT = UI_CreateCompent( frmVideo, IMAGE_TYPE, "imgVideoT", 318, 285, 0, 0 )
+UI_LoadImage( imgVideoT, "texture/ui/ui2/system.png", NORMAL, 318, 285, 0, 291 )
+
+-- Заголовок
+
+btnClose = UI_CreateCompent( frmVideo, BUTTON_TYPE, "btnClose", 28, 28, 288, 2 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/buttons.png", 25, 26, 381, 3, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- ОК
+btnYes = UI_CreateCompent( frmVideo, BUTTON_TYPE, "btnYes", 93, 28, 63, 232 )
+UI_LoadButtonImage( btnYes, "texture/ui/ui2/secret.png", 93, 28, 0, 185, true )
+UI_FormSetEnterButton(frmFound, btnYes)
+
+-- Отмена
+btnNo = UI_CreateCompent( frmVideo, BUTTON_TYPE, "btnNo", 93, 28, 173, 231 )
+UI_LoadButtonImage( btnNo, "texture/ui/ui2/secret.png", 93, 28, 0, 216, true )
+
+-- Графика
+chkTextureHigh = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkTextureHigh", 14, 14, 143, 54 )
+UI_LoadImage( chkTextureHigh, "texture/ui/ui2/system.png", UNCHECKED, 14, 14, 202, 264 )
+UI_LoadImage( chkTextureHigh, "texture/ui/ui2/system.png", CHECKED, 14, 14, 220, 264 )
+
+chkTextureNormal = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkTextureNormal", 14, 14, 209, 54 )
+UI_LoadImage( chkTextureNormal, "texture/ui/ui2/system.png", UNCHECKED, 14, 14, 202, 264 )
+UI_LoadImage( chkTextureNormal, "texture/ui/ui2/system.png", CHECKED, 14, 14, 220, 264 )
+
+chkTextureLow = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkTextureLow", 14, 14, 274, 54 )
+UI_LoadImage( chkTextureLow, "texture/ui/ui2/system.png", UNCHECKED, 14, 14, 202, 264 )
+UI_LoadImage( chkTextureLow, "texture/ui/ui2/system.png", CHECKED, 14, 14, 220, 264 )
+
+cbxTexture = UI_CreateCompent( frmVideo, CHECK_GROUP_TYPE, "cbxTexture", 0, 0, 0, 0 )
+UI_AddGroupBox( cbxTexture, chkTextureHigh )
+UI_AddGroupBox( cbxTexture, chkTextureNormal )
+UI_AddGroupBox( cbxTexture, chkTextureLow )
+
+-- Эффекты
+chkMovieOn = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkMovieOn", 14, 14, 209, 80 )
+UI_LoadImage( chkMovieOn, "texture/ui/ui2/system.png", UNCHECKED, 14, 14, 202, 264 )
+UI_LoadImage( chkMovieOn, "texture/ui/ui2/system.png", CHECKED, 14, 14, 220, 264 )
+
+chkMovieOff = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkMovieOff", 14, 14, 274, 80 )
+UI_LoadImage( chkMovieOff, "texture/ui/ui2/system.png", UNCHECKED, 14, 14, 202, 264 )
+UI_LoadImage( chkMovieOff, "texture/ui/ui2/system.png", CHECKED, 14, 14, 220, 264 )
+
+cbxMovie = UI_CreateCompent( frmVideo, CHECK_GROUP_TYPE, "cbxMovie", 0, 0, 0, 0 )
+UI_AddGroupBox( cbxMovie, chkMovieOn )
+UI_AddGroupBox( cbxMovie, chkMovieOff )
+
+-- Камера
+chkCameraOn = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkCameraOn", 14, 14, 209, 105 )
+UI_LoadImage( chkCameraOn, "texture/ui/ui2/system.png", UNCHECKED, 14, 14, 202, 264 )
+UI_LoadImage( chkCameraOn, "texture/ui/ui2/system.png", CHECKED, 14, 14, 220, 264 )
+
+chkCameraOff = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkCameraOff", 14, 14, 274, 105 )
+UI_LoadImage( chkCameraOff, "texture/ui/ui2/system.png", UNCHECKED, 14, 14, 202, 264 )
+UI_LoadImage( chkCameraOff, "texture/ui/ui2/system.png", CHECKED, 14, 14, 220, 264 )
+
+cbxCamera = UI_CreateCompent( frmVideo, CHECK_GROUP_TYPE, "cbxCamera", 0, 0, 0, 0 )
+UI_AddGroupBox( cbxCamera, chkCameraOn )
+UI_AddGroupBox( cbxCamera, chkCameraOff )
+
+--------------??      ?   ?
+--?????
+chkViewFar = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkViewFar", 10, 10, 102, 106 )
+--UI_LoadImage( chkViewFar, "texture/ui/QQ2.tga", UNCHECKED, 10, 10, 40, 231 )
+--UI_LoadImage( chkViewFar, "texture/ui/QQ2.tga", CHECKED, 10, 10, 52, 231 )
+
+--?????
+chkViewNear = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkViewNear", 10, 10, 134, 106 )
+--UI_LoadImage( chkViewNear, "texture/ui/QQ2.tga", UNCHECKED, 10, 10, 40, 231 )
+--UI_LoadImage( chkViewNear, "texture/ui/QQ2.tga", CHECKED, 10, 10, 52, 231 )
+
+--??CHKGROUP
+cbxView = UI_CreateCompent( frmVideo, CHECK_GROUP_TYPE, "cbxView", 0, 0, 0, 0 )
+UI_AddGroupBox( cbxView, chkViewFar )
+UI_AddGroupBox( cbxView, chkViewNear )
+
+---------------------------------------------------------------------------
+-- Тени
+chkTrailOn = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkTrailOn", 14, 14, 209, 130 )
+UI_LoadImage( chkTrailOn, "texture/ui/ui2/system.png", UNCHECKED, 14, 14, 202, 264 )
+UI_LoadImage( chkTrailOn, "texture/ui/ui2/system.png", CHECKED, 14, 14, 220, 264 )
+
+chkTrailOff = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkTrailOff", 14, 14, 274, 130 )
+UI_LoadImage( chkTrailOff, "texture/ui/ui2/system.png", UNCHECKED, 14, 14, 202, 264 )
+UI_LoadImage( chkTrailOff, "texture/ui/ui2/system.png", CHECKED, 14, 14, 220, 264 )
+
+cbxTrail = UI_CreateCompent( frmVideo, CHECK_GROUP_TYPE, "cbxTrail", 0, 0, 0, 0 )
+UI_AddGroupBox( cbxTrail, chkTrailOn )
+UI_AddGroupBox( cbxTrail, chkTrailOff )
+
+--------------------------------------------------------------------------
+-- Палитра
+chkColor32 = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkColor32", 14, 14, 209, 154 )
+UI_LoadImage( chkColor32, "texture/ui/ui2/system.png", UNCHECKED, 14, 14, 202, 264 )
+UI_LoadImage( chkColor32, "texture/ui/ui2/system.png", CHECKED, 14, 14, 220, 264 )
+
+chkColor16 = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkColor16", 14, 14, 274, 154 )
+UI_LoadImage( chkColor16, "texture/ui/ui2/system.png", UNCHECKED, 14, 14, 202, 264 )
+UI_LoadImage( chkColor16, "texture/ui/ui2/system.png", CHECKED, 14, 14, 220, 264 )
+
+cbxColor = UI_CreateCompent( frmVideo, CHECK_GROUP_TYPE, "cbxColor", 0, 0, 0, 0 )
+UI_AddGroupBox( cbxColor, chkColor32 )
+UI_AddGroupBox( cbxColor, chkColor16 )
+
+--------------?????
+chk1024 = UI_CreateCompent( frmVideo, CHECK_TYPE, "chk1024", 14, 14, 209, 204 )
+UI_LoadImage( chk1024, "texture/ui/ui2/system.png", UNCHECKED, 14, 14, 202, 264 )
+UI_LoadImage( chk1024, "texture/ui/ui2/system.png", CHECKED, 14, 14, 220, 264 )
+
+
+--??800*600
+chk800 = UI_CreateCompent( frmVideo, CHECK_TYPE, "chk800", 14, 14, 274, 204 )
+UI_LoadImage( chk800, "texture/ui/ui2/system.png", UNCHECKED, 14, 14, 202, 264 )
+UI_LoadImage( chk800, "texture/ui/ui2/system.png", CHECKED, 14, 14, 220, 264)
+
+--??CHKGROUP
+cbxSize = UI_CreateCompent( frmVideo, CHECK_GROUP_TYPE, "cbxSize", 0, 0, 0, 0 )
+UI_AddGroupBox( cbxSize, chk800 )
+UI_AddGroupBox( cbxSize, chk1024 )
+
+----------------------------------------------------------------------------------
+-- Полный экран
+chkFull = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkFull", 14, 14, 209, 179 )
+UI_LoadImage( chkFull, "texture/ui/ui2/system.png", UNCHECKED, 14, 14, 202, 264 )
+UI_LoadImage( chkFull, "texture/ui/ui2/system.png", CHECKED, 14, 14, 220, 264 )
+
+chkWindow = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkWindow", 14, 14, 274, 179 )
+UI_LoadImage( chkWindow, "texture/ui/ui2/system.png", UNCHECKED, 14, 14, 202, 264 )
+UI_LoadImage( chkWindow, "texture/ui/ui2/system.png", CHECKED, 14, 14, 220, 264 )
+
+cbxModel = UI_CreateCompent( frmVideo, CHECK_GROUP_TYPE, "cbxModel", 0, 0, 0, 0 )
+UI_AddGroupBox( cbxModel, chkFull )
+UI_AddGroupBox( cbxModel, chkWindow )
+
+-- Качество
+chkHigh = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkHigh", 14, 14, 143, 30 )
+UI_LoadImage( chkHigh, "texture/ui/ui2/system.png", UNCHECKED, 14, 14, 202, 264 )
+UI_LoadImage( chkHigh, "texture/ui/ui2/system.png", CHECKED, 14, 14, 220, 264 )
+
+chkNormal = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkNormal", 14, 14, 209, 30 )
+UI_LoadImage( chkNormal, "texture/ui/ui2/system.png", UNCHECKED, 14, 14, 202, 264 )
+UI_LoadImage( chkNormal, "texture/ui/ui2/system.png", CHECKED, 14, 14, 220, 264 )
+
+chkLow = UI_CreateCompent( frmVideo, CHECK_TYPE, "chkLow", 14, 14, 274, 30 )
+UI_LoadImage( chkLow, "texture/ui/ui2/system.png", UNCHECKED, 14, 14, 202, 264 )
+UI_LoadImage( chkLow, "texture/ui/ui2/system.png", CHECKED, 14, 14, 220, 264 )
+
+--??CHKGROUP
+cbxQuality = UI_CreateCompent( frmVideo, CHECK_GROUP_TYPE, "cbxQuality", 0, 0, 0, 0 )
+UI_AddGroupBox( cbxQuality, chkHigh )
+UI_AddGroupBox( cbxQuality, chkNormal )
+UI_AddGroupBox( cbxQuality, chkLow )
+
+function addSystemOption(frm,compName,cap,cap3,cap1,cap2,y)
+
+	labGame = UI_CreateCompent( frm, LABELEX_TYPE, "labGame", 30, 10, 20, y )
+	UI_SetCaption( labGame, cap )
+	UI_SetTextColor( labGame, COLOR_WHITE )
+	
+	labGame = UI_CreateCompent( frm, LABELEX_TYPE, "labGame", 30, 10, 150, y )
+	UI_SetCaption( labGame, cap3 )
+	UI_SetTextColor( labGame, COLOR_WHITE )
+--------------------------------------------------------------
+	
+	labGame = UI_CreateCompent( frm, LABELEX_TYPE, "labGame", 30, 10, 650, y )
+	UI_SetCaption( labGame, cap1 )
+	UI_SetTextColor( labGame, COLOR_WHITE )
+	
+	chkHelpmodel1 = UI_CreateCompent( frm, CHECK_TYPE, "chkHelpmodel1", 14, 14, 635, y )
+	UI_LoadImage( chkHelpmodel1, "texture/ui/ui2/system.png", UNCHECKED, 14, 14, 202, 264 )--
+	UI_LoadImage( chkHelpmodel1, "texture/ui/ui2/system.png", CHECKED, 14, 14, 220, 264 )
+	
+	labGame = UI_CreateCompent( frm, LABELEX_TYPE, "labGame", 30, 10, 730, y )
+	UI_SetCaption( labGame, cap2 )
+	UI_SetTextColor( labGame, COLOR_WHITE )
+	
+	chkHelpmodel2 = UI_CreateCompent( frm, CHECK_TYPE, "chkHelpmodel2", 14, 14, 715, y )
+	UI_LoadImage( chkHelpmodel2, "texture/ui/ui2/system.png", UNCHECKED, 14, 14, 202, 264 )--
+	UI_LoadImage( chkHelpmodel2, "texture/ui/ui2/system.png", CHECKED, 14, 14, 220, 264 )
+	
+-----------------------------------------------------------------------	
+	
+	cbxEffectl = UI_CreateCompent( frm, CHECK_GROUP_TYPE, compName, 0, 0, 0, 0 )
+	UI_AddGroupBox( cbxEffectl, chkHelpmodel1 )
+	UI_AddGroupBox( cbxEffectl, chkHelpmodel2 )
+end
+
+-----------------------------------------------------------------------
+-- Настройки игры
+-----------------------------------------------------------------------
+frmGame = UI_CreateForm( "frmGame", FALSE, 845, 437, 100, 100, TRUE, FALSE )
+UI_ShowForm( frmGame, FALSE )
+UI_AddFormToTemplete( frmGame, 1 )
+UI_SetIsDrag( frmGame, TRUE )
+UI_SetFormStyle( frmGame, 0 )
+UI_FormSetHotKey( frmGame, ALT_KEY, HOTKEY_Z )
+
+-- Фон формы
+imgVideoT = UI_CreateCompent( frmGame, IMAGE_TYPE, "imgVideoT", 845, 437, 0, 0 )
+UI_LoadImage( imgVideoT, "texture/ui/ui2/system.png", NORMAL, 845, 437, 325, 206 )
+
+
+btnClose = UI_CreateCompent( frmGame, BUTTON_TYPE, "btnClose", 16, 16, 828, 2 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/buttons.png", 25, 26, 381, 3, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- ОК
+btnYes = UI_CreateCompent( frmGame, BUTTON_TYPE, "btnYes", 93, 28, 377, 392 )
+UI_LoadButtonImage( btnYes, "texture/ui/ui2/system.png", 93, 28, 357, 784, true )
+
+-- Отмена
+btnNo = UI_CreateCompent( frmGame, BUTTON_TYPE, "btnNo", 93, 28, 494, 392 )
+UI_LoadButtonImage( btnNo, "texture/ui/ui2/secret.png", 93, 28, 0, 216, true )
+UI_SetButtonModalResult( btnNo, BUTTON_CLOSE )
+
+
+------------------------------------------------------------
+
+-------------
+--simplified game options
+-------------
+addSystemOption(frmGame,"cbxRunmodel","Движение","Use Server Movement","Выкл","Вкл",46)
+addSystemOption(frmGame,"cbxLockmodel","Авто-лок","Заблокировать инвентярь при выходе","Выкл","Вкл",66)
+addSystemOption(frmGame,"cbxHelpmodel","Помощь","Показать помощь","Спрятать","Показать",86)
+addSystemOption(frmGame,"cbxAppmodel","Апарели","Показать апарели","Спрятать","Показать",106)
+addSystemOption(frmGame,"cbxStatemodel","Статы","Показать иконки статов","Спрятать","Показать",126)
+addSystemOption(frmGame,"cbxIs60Fpsl","ФПС","Поменять фпс","30","60",146)
+addSystemOption(frmGame,"cbxMeleeModel","Атака","Не активно/Активно нажатие на цели","Выкл","Вкл",166)
+addSystemOption(frmGame,"cbxRightClick","Правый клик","Не активно/Активно правый клик на предметы","Выкл","Вкл",186)
+addSystemOption(frmGame,"cbxIsTop1CamMode","Камера","Обзор камеры","Выкл","Вкл",206)
+addSystemOption(frmGame,"cbxIsFairyShow","Феи","Показать феи","Спрятать","Показать",226)
+addSystemOption(frmGame,"cbxIsWingShow","Крылья","Показать крылья","Спрятать","Показать",246)
+addSystemOption(frmGame,"cbxIsOtherShow","Другое","Другие эффекты","Выкл","Вкл",266)
+addSystemOption(frmGame,"cbxIsItemNameShow","Название предметов","Не активно/Активно название предметов","Выкл","Вкл",286)
+addSystemOption(frmGame,"cbxIsChaNameShow","Ники","Показывать ники","Выкл","Вкл",306)
+addSystemOption(frmGame,"cbxIsMobNameShow","Имена мобов","Показывать имена мобов","Выкл","Вкл",326)
+
+
+
+
+-----------------------------------------------------------------------
+-- Подтверждение смены персонажа
+-----------------------------------------------------------------------
+frmAskChange = UI_CreateForm( "frmAskChange", false, 255, 148, 397, 500, false, false )
+UI_LoadFormImage( frmAskChange, "texture/ui/ui2/alert.png", 255, 148, 263, 0, "", 0, 0 )
+UI_ShowForm( frmAskChange, false )
+UI_AddFormToTemplete( frmAskChange, FORM_MAIN )
+UI_SetFormStyle( frmAskChange, 0 )
+
+
+btnClose = UI_CreateCompent( frmAskChange, BUTTON_TYPE, "btnClose", 28, 28, 225, 2 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/buttons.png", 25, 26, 381, 3, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- ОК
+btnYes = UI_CreateCompent( frmAskChange, BUTTON_TYPE, "btnYes", 93, 28, 30, 108 )
+UI_LoadButtonImage( btnYes, "texture/ui/ui2/secret.png", 93, 28, 0, 185, true )
+
+-- Нет
+btnNo = UI_CreateCompent( frmAskChange, BUTTON_TYPE, "btnNo", 93, 28, 130, 108 )
+UI_LoadButtonImage( btnNo, "texture/ui/ui2/secret.png", 93, 28, 0, 216, true )
+
+-----------------------------------------------------------------------
+-- Подтверждение выхода с аккаунта
+-----------------------------------------------------------------------
+frmAskRelogin = UI_CreateForm( "frmAskRelogin", false, 255, 148, 397, 500, false, false )
+UI_LoadFormImage( frmAskRelogin, "texture/ui/ui2/alert.png", 255, 148, 521, 0, "", 0, 0 )
+UI_ShowForm( frmAskRelogin, false )
+UI_AddFormToTemplete( frmAskRelogin, FORM_MAIN )
+UI_SetFormStyle( frmAskRelogin, 0 )
+
+btnClose = UI_CreateCompent( frmAskRelogin, BUTTON_TYPE, "btnClose", 28, 28, 225, 2 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/buttons.png", 25, 26, 381, 3, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- ОК
+btnYes = UI_CreateCompent( frmAskRelogin, BUTTON_TYPE, "btnYes", 93, 28, 30, 108 )
+UI_LoadButtonImage( btnYes, "texture/ui/ui2/secret.png", 93, 28, 0, 185, true )
+
+-- Нет
+btnNo = UI_CreateCompent( frmAskRelogin, BUTTON_TYPE, "btnNo", 93, 28, 130, 108 )
+UI_LoadButtonImage( btnNo, "texture/ui/ui2/secret.png", 93, 28, 0, 216, true )
+
+-----------------------------------------------------------------------
+-- Подтверждение выхода из игры
+-----------------------------------------------------------------------
+frmAskExit = UI_CreateForm( "frmAskExit",  false, 255, 148, 397, 500, false, false )
+UI_LoadFormImage( frmAskExit, "texture/ui/ui2/alert.png", 255, 148, 781, 0, "", 0, 0 )
+UI_ShowForm( frmAskExit, false )
+UI_AddFormToTemplete( frmAskExit, FORM_MAIN )
+UI_SetFormStyle( frmAskExit, 0 )
+
+btnClose = UI_CreateCompent( frmAskExit, BUTTON_TYPE, "btnClose", 28, 28, 225, 2 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/buttons.png", 25, 26, 381, 3, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- ОК
+btnYes = UI_CreateCompent( frmAskExit, BUTTON_TYPE, "btnYes", 93, 28, 30, 108 )
+UI_LoadButtonImage( btnYes, "texture/ui/ui2/secret.png", 93, 28, 0, 185, true )
+
+-- Нет
+btnNo = UI_CreateCompent( frmAskExit, BUTTON_TYPE, "btnNo", 93, 28, 130, 108 )
+UI_LoadButtonImage( btnNo, "texture/ui/ui2/secret.png", 93, 28, 0, 216, true )

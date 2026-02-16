@@ -1,0 +1,903 @@
+-----------------------------------------------------------------------
+-- Окно торговли между персонажами
+-----------------------------------------------------------------------	
+frmPlayertrade = UI_CreateForm( "frmPlayertrade", false, 357, 521, 240, 468, true, false )
+UI_ShowForm( frmPlayertrade, true )
+UI_SetIsDrag( frmPlayertrade, true )
+UI_AddFormToTemplete( frmPlayertrade, FORM_MAIN )
+UI_SetFormStyle( frmPlayertrade, 1 )
+UI_FormSetIsEscClose( frmPlayertrade, false )
+
+-- Фон формы
+imgBakTop = UI_CreateCompent( frmPlayertrade, IMAGE_TYPE, "imgBakTop", 357, 521, 0, 0 )
+UI_LoadImage( imgBakTop, "texture/ui/ui2/playertrade.png", NORMAL, 357, 521, 0, 0 )
+
+
+
+-- Close Button
+btnClose = UI_CreateCompent( frmPlayertrade, BUTTON_TYPE, "btnClose", 28, 28, 327, 0 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/buttons.png", 25, 26, 381, 3, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- Кто с кем барыжит
+labPlayertradeName = UI_CreateCompent( frmPlayertrade, LABELEX_TYPE, "labPlayertradeName", 264, 11, 150, 18 )
+UI_SetCaption( labPlayertradeName, "\210\238\240\227\238\226\235\255 \236\229\230\228\243 \1\2" )
+UI_SetTextColor( labPlayertradeName, COLOR_WHITE )
+
+-- Вы получаете
+grdBuy = UI_CreateCompent( frmPlayertrade, GOODS_GRID_TYPE, "grdBuy", 296, 120, 30, 81 ) 
+UI_SetGridSpace( grdBuy, 17, 17 )
+UI_SetGridContent( grdBuy, 2, 6 )
+UI_SetGridUnitSize( grdBuy, 34, 34 )
+UI_SetMargin( grdBuy, 4, 4, 4, 4 )
+
+
+-- Голд
+labOtherGold = UI_CreateCompent( frmPlayertrade, LABELEX_TYPE, "labOtherGold", 47, 11, 88, 191 )
+UI_SetCaption( labOtherGold, "0" )
+UI_SetTextColor( labOtherGold, COLOR_WHITE )
+
+
+labOtherIMP = UI_CreateCompent( frmPlayertrade, LABELEX_TYPE, "labOtherIMP", 47, 11, 88, 223 )
+UI_SetCaption( labOtherIMP, "0" )
+UI_SetTextColor( labOtherIMP, COLOR_WHITE )
+
+-- Индикатор, что нажата ОК
+chkYes = UI_CreateCompent( frmPlayertrade, CHECK_TYPE, "chkYes", 11, 12, 124, 202 )
+
+
+-- Индикатор, что нажата Торг
+chkTrade = UI_CreateCompent( frmPlayertrade, CHECK_TYPE, "chkTrade", 11, 12, 168, 202 )
+
+-- Вы отдаете
+grdSale = UI_CreateCompent( frmPlayertrade, GOODS_GRID_TYPE, "grdSale", 296, 120, 26, 284 ) 
+UI_SetGridSpace( grdSale, 17, 17 )
+UI_SetGridContent( grdSale, 2, 6 )
+UI_SetGridUnitSize( grdSale, 34, 34 )
+UI_SetMargin( grdSale, 4, 4, 4, 4 )
+
+
+-- Голд
+labSelfGold = UI_CreateCompent( frmPlayertrade, LABELEX_TYPE, "labSelfGold", 47, 11, 88, 391 )
+UI_SetCaption( labSelfGold, "0" )
+UI_SetTextColor( labSelfGold, COLOR_WHITE )
+
+-- IMP
+labSelfIMP = UI_CreateCompent( frmPlayertrade, LABELEX_TYPE, "labSelfIMP", 47, 11, 88, 420 )
+UI_SetCaption( labSelfIMP, "0" )
+UI_SetTextColor( labSelfIMP, COLOR_WHITE )
+
+-- Выбор голда
+btnGold = UI_CreateCompent( frmPlayertrade, BUTTON_TYPE, "btnGold", 88, 25, 230, 382 )
+UI_LoadButtonImage( btnGold, "texture/ui/ui2/playertrade.png", 93, 29, 0, 605, TRUE )
+UI_SetHint( btnGold, "\217\229\235\234\237\232\242\229, \247\242\238\225\251 \226\237\229\241\242\232 \231\238\235\238\242\238 \228\235\255 \242\238\240\227\238\226\235\232" )
+
+
+-- IMP Button
+btnIMP = UI_CreateCompent( frmPlayertrade, BUTTON_TYPE, "btnIMP", 88, 25, 230, 410 )
+UI_LoadButtonImage( btnIMP, "texture/ui/ui2/playertrade.png", 93, 29, 0, 725, TRUE )
+UI_SetHint( btnIMP, "\205\224\230\236\232\242\229 \231\228\229\241\252, \247\242\238\225\251 \226\226\229\241\242\232 \234\238\235\235\232\247\229\241\242\226\238 \202\240\232\241\242\224\235\238\226 \228\235\255 \242\238\240\227\238\226\235\232" )
+
+
+-- OK
+btnYes = UI_CreateCompent( frmPlayertrade, BUTTON_TYPE, "btnYes", 93, 29, 26, 473 )
+UI_LoadButtonImage( btnYes, "texture/ui/ui2/playertrade.png", 93, 29, 0, 635, TRUE )
+
+-- Торг
+btnTrade = UI_CreateCompent( frmPlayertrade, BUTTON_TYPE, "btnTrade", 93, 29, 132, 473 )
+UI_LoadButtonImage( btnTrade, "texture/ui/ui2/playertrade.png", 93, 29, 0, 695, TRUE )
+
+-- Отмена
+btnNo = UI_CreateCompent( frmPlayertrade, BUTTON_TYPE, "btnNo", 93, 29, 238, 473 )
+UI_LoadButtonImage( btnNo, "texture/ui/ui2/playertrade.png", 93, 29, 0, 665, TRUE )
+
+
+-----------------------------------------------------------------------
+-- диалог добавить в друзья
+-----------------------------------------------------------------------
+
+frmAcceptFrnd = UI_CreateForm( "frmAcceptFrnd",  false, 255, 148, 397, 500, false, false )
+UI_LoadFormImage( frmAcceptFrnd, "texture/ui/ui2/alert.png", 255, 148, 0, 0, "", 0, 0 )
+UI_ShowForm( frmAcceptFrnd, false )
+UI_AddFormToTemplete( frmAcceptFrnd, FORM_MAIN )
+UI_SetFormStyle( frmAcceptFrnd, 0 )
+UI_SetIsDrag( frmAcceptFrnd, true )
+
+-- Заголовок
+labTitle = UI_CreateCompent( frmAcceptFrnd, LABELEX_TYPE, "labTitle", 23, 11, 33, 13 )
+UI_SetCaption( labTitle, "\199\224\239\240\238\241 \226 \228\240\243\231\252\255" )
+UI_SetTextColor( labTitle, COLOR_WHITE )
+
+
+
+btnClose = UI_CreateCompent( frmAcceptFrnd, BUTTON_TYPE, "btnClose", 14, 14, 239, 2 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/alert.png", 14, 14, 0, 151, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- Текст сообщения
+labFrndName = UI_CreateCompent( frmAcceptFrnd, LABELEX_TYPE, "labFrndName", 23, 11, 24, 50 )
+UI_SetCaption( labFrndName, "имя персонажа" )
+UI_SetTextColor( labFrndName, COLOR_WHITE )
+
+
+-- Текст сообщения
+labFrnd = UI_CreateCompent( frmAcceptFrnd, LABELEX_TYPE, "labFrnd", 23, 11, 24, 62 )
+UI_SetCaption( labFrnd, "добавить в друзья?" )
+UI_SetTextColor( labFrnd, COLOR_WHITE )
+
+-- Кнопка ОК
+btnYes = UI_CreateCompent( frmAcceptFrnd, BUTTON_TYPE, "btnYes", 93, 29, 30, 105 )
+UI_LoadButtonImage( btnYes, "texture/ui/ui2/alert.png", 93, 29, 0, 167, TRUE )
+
+-- Кнопка Отмена
+btnNo = UI_CreateCompent( frmAcceptFrnd, BUTTON_TYPE, "btnNo", 93, 29, 130, 105 )
+UI_LoadButtonImage( btnNo, "texture/ui/ui2/alert.png", 93, 29, 0, 197, TRUE )
+
+-----------------------------------------------------------------------
+-- диалог приглашения в отряд
+-----------------------------------------------------------------------
+
+frmAcceptGroup = UI_CreateForm( "frmAcceptGroup",  false, 255, 148, 397, 500, false, false )
+UI_LoadFormImage( frmAcceptGroup, "texture/ui/ui2/alert.png", 255, 148, 0, 0, "", 0, 0 )
+UI_ShowForm( frmAcceptGroup, false )
+UI_AddFormToTemplete( frmAcceptGroup, FORM_MAIN )
+UI_SetFormStyle( frmAcceptGroup, 0 )
+UI_SetIsDrag( frmAcceptGroup, true )
+
+
+-- Заголовок
+labTitle = UI_CreateCompent( frmAcceptGroup, LABELEX_TYPE, "labTitle", 23, 11, 33, 13 )
+UI_SetCaption( labTitle, "\196\238\225\224\226\235\229\237\232\229 \226 \238\242\240\255\228" )
+UI_SetTextColor( labTitle, COLOR_WHITE )
+
+
+-- Закрыть
+btnClose = UI_CreateCompent( frmAcceptGroup, BUTTON_TYPE, "btnClose", 14, 14, 239, 2 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/alert.png", 14, 14, 0, 151, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- Текст сообщения
+labGroupName = UI_CreateCompent( frmAcceptGroup, LABELEX_TYPE, "labGroupName", 23, 11, 24, 50 )
+UI_SetCaption( labGroupName, "имя персонажа" )
+UI_SetTextColor( labGroupName, COLOR_WHITE )
+
+
+-- Текст сообщения
+labGroup = UI_CreateCompent( frmAcceptGroup, LABELEX_TYPE, "labGroup", 23, 11, 24, 62 )
+UI_SetCaption( labGroup, "добавить в друзья" )
+UI_SetTextColor( labGroup, COLOR_WHITE )
+
+-- Кнопка ОК
+btnYes = UI_CreateCompent( frmAcceptGroup, BUTTON_TYPE, "btnYes", 93, 29, 30, 105 )
+UI_LoadButtonImage( btnYes, "texture/ui/ui2/alert.png", 93, 29, 0, 167, TRUE )
+
+-- Кнопка Отмена
+btnNo = UI_CreateCompent( frmAcceptGroup, BUTTON_TYPE, "btnNo", 93, 29, 130, 105 )
+UI_LoadButtonImage( btnNo, "texture/ui/ui2/alert.png", 93, 29, 0, 197, TRUE )
+
+-----------------------------------------------------------------------
+-- Первый член отряда
+-----------------------------------------------------------------------	
+frmTeamMenber1 = UI_CreateForm( "frmTeamMenber1", false, 127, 46, 2, 156, true, false )
+UI_ShowForm( frmTeamMenber1, false )
+UI_SetIsDrag( frmTeamMenber1, false )
+UI_AddFormToTemplete( frmTeamMenber1, FORM_MAIN )
+UI_FormSetIsEscClose( frmTeamMenber1, false )
+
+--фон для лица
+imgBackDropTeam1 = UI_CreateCompent( frmTeamMenber1, IMAGE_TYPE, "imgBackDropTeam1", 32, 32, 7, 7 )
+
+-- Лицо
+d3dHead = UI_CreateCompent( frmTeamMenber1, UI3D_COMPENT_TYPE, "d3dHead", 24, 24, 10, 10 )
+d3dDown = UI_CreateCompent( frmTeamMenber1, UI3D_COMPENT_TYPE, "d3dDown", 166, 33, 0, 0 )
+
+
+-- Изображение формы
+imgMain = UI_CreateCompent( frmTeamMenber1, IMAGE_TYPE, "imgMain", 127, 46, 0, 0 )
+UI_LoadImage( imgMain, "texture/ui/ui2/target.png", NORMAL, 127, 46, 0, 115 )
+
+
+-- Уровень
+labFLv = UI_CreateCompent( frmTeamMenber1, LABELEX_TYPE, "labFLv", lvlRadius_x, lvlRadius_y, 41, 28 )
+UI_SetTextColor( labFLv, COLOR_WHITE )
+UI_SetLabelExFont( labFLv, FONT10, true, COLOR_BLACK )
+UI_SetCaption( labFLv, "99" )
+
+-- Имя персонажа
+labMenber1Name = UI_CreateCompent( frmTeamMenber1, LABELEX_TYPE, "labMenber1Name", 1, 1, 63, 32 )
+UI_SetCaption( labMenber1Name, "PartyMember" )
+UI_SetTextColor( labMenber1Name, COLOR_WHITE )
+UI_SetLabelExFont( labMenber1Name, FONT9, true, COLOR_BLACK )
+
+-- Полоска ЖЗ
+proTeamMenber1HP = UI_CreateCompent( frmTeamMenber1, PROGRESS_TYPE, "proTeamMenber1HP", 77, 7, 45, 7 )
+UI_LoadScaleImage( proTeamMenber1HP, "texture/ui/ui2/target.png", PROGRESS_PROGRESS, 77, 7, 0, 208, 1, 1.0 )
+UI_SetHint( proTeamMenber1HP, "\199\228\238\240\238\226\252\229" )
+UI_SetProgressHintStyle( proTeamMenber1HP, PROGRESS_HINT_NUM )
+
+-- Полоска МН
+proTeamMenber1SP = UI_CreateCompent( frmTeamMenber1, PROGRESS_TYPE, "proTeamMenber1SP", 62, 5, 46, 20 )
+UI_LoadImage( proTeamMenber1SP, "texture/ui/ui2/target.png", PROGRESS_PROGRESS, 62, 5, 0, 217 )
+UI_SetHint( proTeamMenber1SP, "\204\224\237\224" )
+UI_SetProgressHintStyle( proTeamMenber1SP, PROGRESS_HINT_NUM )
+
+-- Иконка класса
+imgobj = UI_CreateCompent( frmTeamMenber1, IMAGE_TYPE, "imgobj", 9, 9, 23, 21 )
+
+-- Иконка лидера отряда
+imgLeader = UI_CreateCompent( frmTeamMenber1, IMAGE_TYPE, "imgLeader", 9, 9, 30, -8 )
+UI_LoadImage( imgLeader, "texture/ui/ui2/target.png", NORMAL, 9, 9, 0, 321 )
+
+
+-----------------------------------------------------------------------
+-- Второй член отряда
+-----------------------------------------------------------------------	
+frmTeamMenber2 = UI_CreateForm( "frmTeamMenber2", false, 127, 46, 2, 206, true, false )
+UI_ShowForm( frmTeamMenber2, false )
+UI_SetIsDrag( frmTeamMenber2, false )
+UI_AddFormToTemplete( frmTeamMenber2, FORM_MAIN )
+UI_FormSetIsEscClose( frmTeamMenber2, false )
+
+--фон для лица
+imgBackDropTeam2 = UI_CreateCompent( frmTeamMenber2, IMAGE_TYPE, "imgBackDropTeam2", 32, 32, 7, 7 )
+
+-- Лицо
+d3dHead = UI_CreateCompent( frmTeamMenber2, UI3D_COMPENT_TYPE, "d3dHead", 24, 24, 10, 10 )
+d3dDown = UI_CreateCompent( frmTeamMenber2, UI3D_COMPENT_TYPE, "d3dDown", 166, 33, 0, 0 )
+
+
+-- Изображение формы
+imgMain = UI_CreateCompent( frmTeamMenber2, IMAGE_TYPE, "imgMain", 127, 46, 0, 0 )
+UI_LoadImage( imgMain, "texture/ui/ui2/target.png", NORMAL, 127, 46, 0, 115 )
+
+
+-- Уровень
+labFLv = UI_CreateCompent( frmTeamMenber2, LABELEX_TYPE, "labFLv", lvlRadius_x, lvlRadius_y, 41, 28 )
+UI_SetTextColor( labFLv, COLOR_WHITE )
+UI_SetLabelExFont( labFLv, FONT10, true, COLOR_BLACK )
+UI_SetCaption( labFLv, "99" )
+
+-- Имя персонажа
+labMenber2Name = UI_CreateCompent( frmTeamMenber2, LABELEX_TYPE, "labMenber2Name", 1, 1, 63, 32 )
+UI_SetCaption( labMenber2Name, "PartyMember" )
+UI_SetTextColor( labMenber2Name, COLOR_WHITE )
+UI_SetLabelExFont( labMenber2Name, FONT9, true, COLOR_BLACK )
+
+-- Полоска ЖЗ
+proTeamMenber2HP = UI_CreateCompent( frmTeamMenber2, PROGRESS_TYPE, "proTeamMenber2HP", 77, 7, 45, 7 )
+UI_LoadScaleImage( proTeamMenber2HP, "texture/ui/ui2/target.png", PROGRESS_PROGRESS, 77, 7, 0, 208, 1, 1.0 )
+UI_SetHint( proTeamMenber2HP, "\199\228\238\240\238\226\252\229" )
+UI_SetProgressHintStyle( proTeamMenber2HP, PROGRESS_HINT_NUM )
+
+-- Полоска МН
+proTeamMenber2SP = UI_CreateCompent( frmTeamMenber2, PROGRESS_TYPE, "proTeamMenber2SP", 62, 5, 46, 20 )
+UI_LoadImage( proTeamMenber2SP, "texture/ui/ui2/target.png", PROGRESS_PROGRESS, 62, 5, 0, 217 )
+UI_SetHint( proTeamMenber2SP, "\204\224\237\224" )
+UI_SetProgressHintStyle( proTeamMenber2SP, PROGRESS_HINT_NUM )
+
+-- Иконка класса
+imgobj = UI_CreateCompent( frmTeamMenber2, IMAGE_TYPE, "imgobj", 9, 9, 23, 21 )
+
+-- Иконка лидера отряда
+imgLeader = UI_CreateCompent( frmTeamMenber2, IMAGE_TYPE, "imgLeader", 9, 9, 30, -8 )
+UI_LoadImage( imgLeader, "texture/ui/ui2/target.png", NORMAL, 9, 9, 0, 321 )
+
+-----------------------------------------------------------------------
+-- Третий член отряда
+-----------------------------------------------------------------------	
+frmTeamMenber3 = UI_CreateForm( "frmTeamMenber3", false, 127, 46, 2, 256, true, false )
+UI_ShowForm( frmTeamMenber3, false )
+UI_SetIsDrag( frmTeamMenber3, false )
+UI_AddFormToTemplete( frmTeamMenber3, FORM_MAIN )
+UI_FormSetIsEscClose( frmTeamMenber3, false )
+
+--фон для лица
+imgBackDropTeam3 = UI_CreateCompent( frmTeamMenber3, IMAGE_TYPE, "imgBackDropTeam3", 32, 32, 7, 7 )
+
+-- Лицо
+d3dHead = UI_CreateCompent( frmTeamMenber3, UI3D_COMPENT_TYPE, "d3dHead", 24, 24, 10, 10 )
+d3dDown = UI_CreateCompent( frmTeamMenber3, UI3D_COMPENT_TYPE, "d3dDown", 166, 33, 0, 0 )
+
+
+-- Изображение формы
+imgMain = UI_CreateCompent( frmTeamMenber3, IMAGE_TYPE, "imgMain", 127, 46, 0, 0 )
+UI_LoadImage( imgMain, "texture/ui/ui2/target.png", NORMAL, 127, 46, 0, 115 )
+
+
+-- Уровень
+labFLv = UI_CreateCompent( frmTeamMenber3, LABELEX_TYPE, "labFLv", lvlRadius_x, lvlRadius_y, 41, 28 )
+UI_SetTextColor( labFLv, COLOR_WHITE )
+UI_SetLabelExFont( labFLv, FONT10, true, COLOR_BLACK )
+UI_SetCaption( labFLv, "99" )
+
+-- Имя персонажа
+labMenber3Name = UI_CreateCompent( frmTeamMenber3, LABELEX_TYPE, "labMenber3Name", 1, 1, 63, 32 )
+UI_SetCaption( labMenber3Name, "PartyMember" )
+UI_SetTextColor( labMenber3Name, COLOR_WHITE )
+UI_SetLabelExFont( labMenber3Name, FONT9, true, COLOR_BLACK )
+
+-- Полоска ЖЗ
+proTeamMenber3HP = UI_CreateCompent( frmTeamMenber3, PROGRESS_TYPE, "proTeamMenber3HP", 77, 7, 45, 7 )
+UI_LoadScaleImage( proTeamMenber3HP, "texture/ui/ui2/target.png", PROGRESS_PROGRESS, 77, 7, 0, 208, 1, 1.0 )
+UI_SetHint( proTeamMenber3HP, "\199\228\238\240\238\226\252\229" )
+UI_SetProgressHintStyle( proTeamMenber3HP, PROGRESS_HINT_NUM )
+
+-- Полоска МН
+proTeamMenber3SP = UI_CreateCompent( frmTeamMenber3, PROGRESS_TYPE, "proTeamMenber3SP", 62, 5, 46, 20 )
+UI_LoadImage( proTeamMenber3SP, "texture/ui/ui2/target.png", PROGRESS_PROGRESS, 62, 5, 0, 217 )
+UI_SetHint( proTeamMenber3SP, "\204\224\237\224" )
+UI_SetProgressHintStyle( proTeamMenber3SP, PROGRESS_HINT_NUM )
+
+-- Иконка класса
+imgobj = UI_CreateCompent( frmTeamMenber3, IMAGE_TYPE, "imgobj", 9, 9, 23, 21 )
+
+-- Иконка лидера отряда
+imgLeader = UI_CreateCompent( frmTeamMenber3, IMAGE_TYPE, "imgLeader", 9, 9, 30, -8 )
+UI_LoadImage( imgLeader, "texture/ui/ui2/target.png", NORMAL, 9, 9, 0, 321 )
+
+
+-----------------------------------------------------------------------
+-- Четвертый член отряда
+-----------------------------------------------------------------------	
+frmTeamMenber4 = UI_CreateForm( "frmTeamMenber4", false, 127, 46, 2, 306, true, false )
+UI_ShowForm( frmTeamMenber4, false )
+UI_SetIsDrag( frmTeamMenber4, false )
+UI_AddFormToTemplete( frmTeamMenber4, FORM_MAIN )
+UI_FormSetIsEscClose( frmTeamMenber4, false )
+
+--фон для лица
+imgBackDropTeam4 = UI_CreateCompent( frmTeamMenber4, IMAGE_TYPE, "imgBackDropTeam4", 32, 32, 7, 7 )
+
+-- Лицо
+d3dHead = UI_CreateCompent( frmTeamMenber4, UI3D_COMPENT_TYPE, "d3dHead", 24, 24, 10, 10 )
+d3dDown = UI_CreateCompent( frmTeamMenber4, UI3D_COMPENT_TYPE, "d3dDown", 166, 33, 0, 0 )
+
+
+-- Изображение формы
+imgMain = UI_CreateCompent( frmTeamMenber4, IMAGE_TYPE, "imgMain", 127, 46, 0, 0 )
+UI_LoadImage( imgMain, "texture/ui/ui2/target.png", NORMAL, 127, 46, 0, 115 )
+
+
+-- Уровень
+labFLv = UI_CreateCompent( frmTeamMenber4, LABELEX_TYPE, "labFLv", lvlRadius_x, lvlRadius_y, 41, 28 )
+UI_SetTextColor( labFLv, COLOR_WHITE )
+UI_SetLabelExFont( labFLv, FONT10, true, COLOR_BLACK )
+UI_SetCaption( labFLv, "99" )
+
+-- Имя персонажа
+labMenber4Name = UI_CreateCompent( frmTeamMenber4, LABELEX_TYPE, "labMenber4Name", 1, 1, 63, 32 )
+UI_SetCaption( labMenber4Name, "PartyMember" )
+UI_SetTextColor( labMenber4Name, COLOR_WHITE )
+UI_SetLabelExFont( labMenber4Name, FONT9, true, COLOR_BLACK )
+
+-- Полоска ЖЗ
+proTeamMenber4HP = UI_CreateCompent( frmTeamMenber4, PROGRESS_TYPE, "proTeamMenber4HP", 77, 7, 45, 7 )
+UI_LoadScaleImage( proTeamMenber4HP, "texture/ui/ui2/target.png", PROGRESS_PROGRESS, 77, 7, 0, 208, 1, 1.0 )
+UI_SetHint( proTeamMenber4HP, "\199\228\238\240\238\226\252\229" )
+UI_SetProgressHintStyle( proTeamMenber4HP, PROGRESS_HINT_NUM )
+
+-- Полоска МН
+proTeamMenber4SP = UI_CreateCompent( frmTeamMenber4, PROGRESS_TYPE, "proTeamMenber4SP", 62, 5, 46, 20 )
+UI_LoadImage( proTeamMenber4SP, "texture/ui/ui2/target.png", PROGRESS_PROGRESS, 62, 5, 0, 217 )
+UI_SetHint( proTeamMenber4SP, "\204\224\237\224" )
+UI_SetProgressHintStyle( proTeamMenber4SP, PROGRESS_HINT_NUM )
+
+-- Иконка класса
+imgobj = UI_CreateCompent( frmTeamMenber4, IMAGE_TYPE, "imgobj", 9, 9, 23, 21 )
+
+-- Иконка лидера отряда
+imgLeader = UI_CreateCompent( frmTeamMenber4, IMAGE_TYPE, "imgLeader", 9, 9, 30, -8 )
+UI_LoadImage( imgLeader, "texture/ui/ui2/target.png", NORMAL, 9, 9, 0, 321 )
+
+
+-----------------------------------------------------------------------
+-- Пятый член отряда
+-----------------------------------------------------------------------	
+frmTeamMenber5 = UI_CreateForm( "frmTeamMenber5", false, 127, 46, 2, 356, true, false )
+UI_ShowForm( frmTeamMenber5, false )
+UI_SetIsDrag( frmTeamMenber5, false )
+UI_AddFormToTemplete( frmTeamMenber5, FORM_MAIN )
+UI_FormSetIsEscClose( frmTeamMenber5, false )
+
+--фон для лица
+imgBackDropTeam5 = UI_CreateCompent( frmTeamMenber5, IMAGE_TYPE, "imgBackDropTeam5", 32, 32, 7, 7 )
+
+-- Лицо
+d3dHead = UI_CreateCompent( frmTeamMenber5, UI3D_COMPENT_TYPE, "d3dHead", 24, 24, 10, 10 )
+d3dDown = UI_CreateCompent( frmTeamMenber5, UI3D_COMPENT_TYPE, "d3dDown", 166, 33, 0, 0 )
+
+
+-- Изображение формы
+imgMain = UI_CreateCompent( frmTeamMenber5, IMAGE_TYPE, "imgMain", 127, 46, 0, 0 )
+UI_LoadImage( imgMain, "texture/ui/ui2/target.png", NORMAL, 127, 46, 0, 115 )
+
+
+-- Уровень
+labFLv = UI_CreateCompent( frmTeamMenber5, LABELEX_TYPE, "labFLv", lvlRadius_x, lvlRadius_y, 41, 28 )
+UI_SetTextColor( labFLv, COLOR_WHITE )
+UI_SetLabelExFont( labFLv, FONT10, true, COLOR_BLACK )
+UI_SetCaption( labFLv, "99" )
+
+-- Имя персонажа
+labMenber5Name = UI_CreateCompent( frmTeamMenber5, LABELEX_TYPE, "labMenber5Name", 1, 1, 63, 32 )
+UI_SetCaption( labMenber5Name, "PartyMember" )
+UI_SetTextColor( labMenber5Name, COLOR_WHITE )
+UI_SetLabelExFont( labMenber5Name, FONT9, true, COLOR_BLACK )
+
+-- Полоска ЖЗ
+proTeamMenber5HP = UI_CreateCompent( frmTeamMenber5, PROGRESS_TYPE, "proTeamMenber5HP", 77, 7, 45, 7 )
+UI_LoadScaleImage( proTeamMenber5HP, "texture/ui/ui2/target.png", PROGRESS_PROGRESS, 77, 7, 0, 208, 1, 1.0 )
+UI_SetHint( proTeamMenber5HP, "\199\228\238\240\238\226\252\229" )
+UI_SetProgressHintStyle( proTeamMenber5HP, PROGRESS_HINT_NUM )
+
+-- Полоска МН
+proTeamMenber5SP = UI_CreateCompent( frmTeamMenber5, PROGRESS_TYPE, "proTeamMenber5SP", 62, 5, 46, 20 )
+UI_LoadImage( proTeamMenber5SP, "texture/ui/ui2/target.png", PROGRESS_PROGRESS, 62, 5, 0, 217 )
+UI_SetHint( proTeamMenber5SP, "\204\224\237\224" )
+UI_SetProgressHintStyle( proTeamMenber5SP, PROGRESS_HINT_NUM )
+
+-- Иконка класса
+imgobj = UI_CreateCompent( frmTeamMenber5, IMAGE_TYPE, "imgobj", 9, 9, 23, 21 )
+
+-- Иконка лидера отряда
+imgLeader = UI_CreateCompent( frmTeamMenber5, IMAGE_TYPE, "imgLeader", 9, 9, 30, -8 )
+UI_LoadImage( imgLeader, "texture/ui/ui2/target.png", NORMAL, 9, 9, 0, 321 )
+
+
+-----------------------------------------------------------------------
+-- Контекстное меню
+-----------------------------------------------------------------------
+mainMouseRight = UI_CreateCompent( frmMain800, MENU_TYPE, "mainMouseRight", 115, 100, 240, 468 )
+UI_MenuLoadImage( mainMouseRight, TRUE, FALSE, "texture/ui/ui2/right.png", 5, 5, 10, 10, "texture/ui/ui2/right.png", 5, 5 )
+UI_SetMargin( mainMouseRight, 10, 5, 5, 5 )
+
+UI_MenuLoadSelect( mainMouseRight, "texture/ui/ui2/chat.png", 79, 13, 94, 73  )
+
+UI_MenuAddText( mainMouseRight, "Trade" )
+UI_MenuAddText( mainMouseRight, "Add Friend" )
+UI_MenuAddText( mainMouseRight, "Party Invite" )
+UI_MenuAddText( mainMouseRight, "Leave Party" )
+UI_MenuAddText( mainMouseRight, "PM" )
+UI_MenuAddText( mainMouseRight, "Cargo Trade" )
+UI_MenuAddText( mainMouseRight, "View Stall" )
+UI_MenuAddText( mainMouseRight, "1 VS 1" )
+UI_MenuAddText( mainMouseRight, "M VS M" )
+UI_MenuAddText( mainMouseRight, "Mentor" )
+UI_MenuAddText( mainMouseRight, "Disciple" )
+UI_MenuAddText( mainMouseRight, "Check Eq" )
+UI_MenuAddText( mainMouseRight, "Block" )
+UI_MenuAddText( mainMouseRight, "Unblock" )
+UI_MenuAddText( mainMouseRight, "Manage" )
+UI_MenuAddText( mainMouseRight, "Follow" )
+
+--UI_MenuAddText( mainMouseRight, "Lock Item" )
+
+-----------------------------------------------------------------------
+-- Диалог Воскрешения при гибели персонажа
+-----------------------------------------------------------------------
+frmRelive = UI_CreateForm( "frmRelive",  false, 218, 101, 397, 500, true, false )
+UI_LoadFormImage( frmRelive, "texture/ui/ui2/death.png", 218, 101, 0, 0, "", 0, 0 )
+UI_ShowForm( frmRelive, false )
+UI_AddFormToTemplete( frmRelive, FORM_MAIN )
+UI_SetFormStyle( frmRelive, 0 )
+UI_SetIsDrag( frmRelive, true )
+UI_FormSetIsEscClose( frmRelive, false )
+
+-- кнопка окей
+btnReCity = UI_CreateCompent( frmRelive, BUTTON_TYPE, "btnReCity", 85, 25, 65, 69 )
+UI_LoadButtonImage( btnReCity, "texture/ui/ui2/death.png", 93, 29, 0, 104, true )
+
+-----------------------------------------------------------------------
+-- ?????????
+-----------------------------------------------------------------------
+frmTime = UI_CreateForm( "frmTime",  FALSE, 185, 101, 397, 500, TRUE, FALSE )
+UI_LoadFormImage( frmTime, "texture/ui/sure.dds", 185, 101, 0, 0, "", 0, 0 )
+UI_ShowForm( frmTime, FALSE )
+UI_AddFormToTemplete( frmTime, FORM_MAIN )
+UI_SetFormStyle( frmTime, 0 )
+UI_SetIsDrag( frmTime, TRUE )
+--UI_SetAlpha( frmTime, 200 )
+--UI_FormSetHotKey( frmTime, ALT_KEY, HOTKEY_X ) 
+
+--??????????
+labTime = UI_CreateCompent( frmTime, LABELEX_TYPE, "labTime", 1, 1, 58, 40 )
+--UI_SetCaption( labTime, "Do you want to Revive in town" )
+UI_SetTextColor( labTime, COLOR_BLACK)
+UI_SetLabelExFont( labTime, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+-- ???????title
+imgTime = UI_CreateCompent( frmTime, IMAGE_TYPE, "imgTime", 36, 13, 8, 4 )
+UI_LoadImage( imgTime, "texture/ui/Word.dds", NORMAL, 36, 13, 211, 161 )
+
+--?????????t
+btnNo = UI_CreateCompent( frmTime, BUTTON_TYPE, "btnNo", 41, 19, 74, 78 )
+UI_LoadButtonImage( btnNo, "texture/ui/PublicC.tga", 41, 19, 0, 20, TRUE )
+
+
+-----------------------------------------------------------------------
+-- Ларек
+-----------------------------------------------------------------------	
+frmBooth = UI_CreateForm( "frmBooth", false, 406, 284, 100, 100, true, false )
+UI_ShowForm( frmBooth, false )
+UI_AddFormToTemplete( frmBooth, FORM_MAIN )
+UI_SetIsDrag( frmBooth, true )
+UI_FormSetIsEscClose( frmFound, false )
+
+-- Фон формы
+imgBak = UI_CreateCompent( frmBooth, IMAGE_TYPE, "imgBak", 406, 284, 0, 0 )
+UI_LoadImage( imgBak, "texture/ui/ui2/stall.png", NORMAL, 406, 284, 0, 0 )
+
+
+local TradeDescription = UI_CreateCompent( frmBooth, LABELEX_TYPE, "TradeDescription", 400, 150, 18, 255 )
+UI_SetCaption( TradeDescription, "")
+UI_SetTextColor( TradeDescription, COLOR_WHITE )
+
+-- Close Button
+btnClose = UI_CreateCompent( frmBooth, BUTTON_TYPE, "btnClose", 28, 28, 376, 0 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/buttons.png", 25, 26, 381, 3, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- Имя владельца лавки
+lblOwnerName = UI_CreateCompent( frmBooth, LABELEX_TYPE, "lblOwnerName", 94, 31, 240, 19 )
+UI_SetCaption( lblOwnerName, "Trader name" )
+UI_SetTextColor( lblOwnerName, COLOR_WHITE )
+
+-- Название лавки
+edtBoothName = UI_CreateCompent( frmBooth, EDIT_TYPE, "edtBoothName", 264, 13, 259, 47 )
+UI_SetEditMaxNum( edtBoothName, 32 )
+UI_SetTextColor( edtBoothName, COLOR_WHITE )
+UI_SetEditCursorColor( edtBoothName, COLOR_GREEN )
+
+-- Сетка товаров
+grdBoothItem = UI_CreateCompent( frmBooth, GOODS_GRID_TYPE, "grdBoothItem", 394, 180, 10, 63 ) 
+UI_SetGridSpace( grdBoothItem, 1, 1 )
+UI_SetGridContent( grdBoothItem, 4, 3 )
+UI_SetGridUnitSize( grdBoothItem, 128, 85 )
+UI_SetMargin( grdBoothItem, 0, 6, 0, 0 )
+
+--Скролл
+local scrollid = UI_GetScroll( grdBoothItem )
+UI_SetSize( scrollid, 20, 1 )
+
+-- Скролл вверх
+local id = UI_GetScrollObj( scrollid, SCROLL_UP )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 55, true )
+UI_SetSize( id, 13, 9 )
+
+-- Скролл ползунок
+id = UI_GetScrollObj( scrollid, SCROLL_SCROLL )
+UI_LoadImage( id, "texture/ui/ui2/buttons.png", COMPENT_BACK, 13, 8, 387, 84 )
+UI_SetSize( id, 13, 8 )
+
+-- Скролл вниз
+id = UI_GetScrollObj( scrollid, SCROLL_DOWN )
+UI_LoadButtonImage( id, "texture/ui/ui2/buttons.png", 13, 9, 387, 69, true )
+UI_SetSize( id, 13, 9 )
+
+
+btnSetupBooth = UI_CreateCompent( frmBooth, BUTTON_TYPE, "btnSetupBooth", 92, 27, 149, 242 )
+UI_LoadButtonImage( btnSetupBooth, "texture/ui/ui2/stall.png", 92, 27, 0, 294, TRUE )
+
+btnPullStakes = UI_CreateCompent( frmBooth, BUTTON_TYPE, "btnPullStakes", 92, 27, 149, 242 )
+UI_LoadButtonImage( btnPullStakes, "texture/ui/ui2/stall.png", 92, 27, 0, 323, TRUE )
+
+----set offline stall 
+btnOffLineStall = UI_CreateCompent( frmBooth, BUTTON_TYPE, "btnOffLineStall", 92, 27, 270, 242 )
+UI_LoadButtonImage( btnOffLineStall, "texture/ui/ui2/stall.png", 92, 27, 0, 359, TRUE )
+
+
+-----------------------------------------------------------------------
+-- Прически у парикмахера
+-----------------------------------------------------------------------
+frmHead = UI_CreateForm( "frmHead", false, 512, 460, 100, 100, true, false )
+UI_ShowForm( frmHead, false )
+UI_AddFormToTemplete( frmHead, FORM_MAIN )
+UI_FormSetIsEscClose( frmHead, false )
+UI_SetFormStyle( frmHead, 0 )
+
+-- Фон формы
+imgFoundTop = UI_CreateCompent( frmHead, IMAGE_TYPE, "imgFoundTop", 512, 460, 0, 0 )
+UI_LoadImage( imgFoundTop, "texture/ui/ui2/hair.png", NORMAL, 512, 460, 0, 0 )
+
+-- Close Button
+btnClose = UI_CreateCompent( frmHead, BUTTON_TYPE, "btnClose", 28, 28, 485, 3 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/buttons.png", 25, 26, 381, 3, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- Цвет
+labHairColor = UI_CreateCompent( frmHead, LABELEX_TYPE, "labHairColor", 163, 15, 325, 68 )
+UI_SetCaption( labHairColor, "------" )
+UI_SetTextColor( labHairColor, COLOR_GREEN )
+
+-- Левая кнопка Цвет
+btnLeftColor = UI_CreateCompent( frmHead, BUTTON_TYPE, "btnLeftColor", 10, 15, 292, 65 )
+UI_LoadButtonImage( btnLeftColor, "texture/ui/ui2/character.png", 10, 15, 218, 469, true )
+
+-- Правая кнопка Цвет
+btnRightColor = UI_CreateCompent( frmHead, BUTTON_TYPE, "btnRightColor", 10, 15, 485, 65 )
+UI_LoadButtonImage( btnRightColor, "texture/ui/ui2/character.png", 10, 15, 261, 469, true )
+
+-- Стиль
+labHair = UI_CreateCompent( frmHead, LABELEX_TYPE, "labHair", 163, 15, 325, 117 )
+UI_SetCaption( labHair, "----" )
+UI_SetTextColor( labHair, COLOR_GREEN )
+
+-- Левая кнопка Стиль
+btnLeftHair = UI_CreateCompent( frmHead, BUTTON_TYPE, "btnLeftHair", 10, 15, 292, 116 )
+UI_LoadButtonImage( btnLeftHair, "texture/ui/ui2/character.png", 10, 15, 218, 469, true )
+
+-- Правая кнопка Стиль
+btnRightHair = UI_CreateCompent( frmHead, BUTTON_TYPE, "btnRightHair", 10, 15, 485, 116 )
+UI_LoadButtonImage( btnRightHair, "texture/ui/ui2/character.png", 10, 15, 261, 469, true )
+
+-- Персонаж
+ui3dCreateCha = UI_CreateCompent( frmHead, UI3D_COMPENT, "ui3dCreateCha", 255, 275, 14, 105 )
+
+-- Поворот налево
+btnLeft3d = UI_CreateCompent( frmHead, BUTTON_TYPE, "btnLeft3d", 31, 31, 69, 382 )
+UI_LoadButtonImage( btnLeft3d, "texture/ui/ui2/character.png", 31, 31, 0, 467, true )
+
+-- Поворот направо
+btnRight3d = UI_CreateCompent( frmHead, BUTTON_TYPE, "btnRight3d", 31, 31, 215, 383 )
+UI_LoadButtonImage( btnRight3d, "texture/ui/ui2/character.png",  31, 31, 107, 467, true )
+
+-- Деньги
+labHairMoney = UI_CreateCompent( frmHead, LABELEX_TYPE, "labHairMoney", 65, 12, 375, 252 )
+UI_SetCaption( labHairMoney, "99999999" )
+UI_SetTextColor( labHairMoney, COLOR_WHITE )
+
+-- ОК
+btnYes = UI_CreateCompent( frmHead, BUTTON_TYPE, "btnYes", 93, 28, 293, 413 )
+UI_LoadButtonImage( btnYes, "texture/ui/ui2/secret.png", 93, 28, 0, 185, true )
+UI_FormSetEnterButton(frmHead, btnYes)
+
+-- Отмена
+btnNo = UI_CreateCompent( frmHead, BUTTON_TYPE, "btnNo", 93, 28, 390, 413 )
+UI_LoadButtonImage( btnNo, "texture/ui/ui2/secret.png", 93, 28, 0, 216, true )
+
+-- Необходимые предметы
+UI_CreateCompent( frmHead, COMMAND_ONE_TYPE, "cmdHead1", 32, 32, 310, 170 )
+UI_CreateCompent( frmHead, COMMAND_ONE_TYPE, "cmdHead2", 32, 32, 356, 170 )
+UI_CreateCompent( frmHead, COMMAND_ONE_TYPE, "cmdHead3", 32, 32, 402, 170 )
+UI_CreateCompent( frmHead, COMMAND_ONE_TYPE, "cmdHead4", 32, 32, 448, 170 )
+
+-----------------------------------------------------------------------
+-- ????????PK????
+-----------------------------------------------------------------------	
+-- ?????????????
+frmTeamPK = UI_CreateForm( "frmTeamPK", FALSE, 376, 431, 159, 468, TRUE, FALSE )
+--UI_FormSetHotKey( frmTeamPK, ALT_KEY, HOTKEY_Z )
+UI_ShowForm( frmTeamPK, TRUE )
+UI_SetIsDrag( frmTeamPK, TRUE )
+UI_AddFormToTemplete( frmTeamPK, FORM_MAIN )
+UI_SetFormStyle( frmTeamPK, 1 )---???????
+UI_FormSetIsEscClose( frmTeamPK, TRUE )
+
+-- ?????????
+imgBakTop1 = UI_CreateCompent( frmTeamPK, IMAGE_TYPE, "imgBakTop1", 256, 256, 0, 0 )
+UI_LoadImage( imgBakTop1, "texture/ui/PK1.tga", NORMAL, 256, 256, 0, 0 )
+
+imgBakTop2 = UI_CreateCompent( frmTeamPK, IMAGE_TYPE, "imgBakTop2", 120, 256, 256, 0 )
+UI_LoadImage( imgBakTop2, "texture/ui/PK2.tga", NORMAL, 120, 256, 0, 0 )
+
+--imgBakTop3 = UI_CreateCompent( frmTeamPK, IMAGE_TYPE, "imgBakTop3", 46, 256, 512, 0 )
+--UI_LoadImage( imgBakTop3, "texture/ui/PK4.tga", NORMAL, 46, 256, 0, 0 )
+
+imgBakDown1 = UI_CreateCompent( frmTeamPK, IMAGE_TYPE, "imgBakDown1", 256, 175, 0, 256 )
+UI_LoadImage( imgBakDown1, "texture/ui/PK3.tga", NORMAL, 256, 175, 0, 0 )
+
+imgBakDown2 = UI_CreateCompent( frmTeamPK, IMAGE_TYPE, "imgBakDown2", 120, 175, 256, 256 )
+UI_LoadImage( imgBakDown2, "texture/ui/PK4.tga", NORMAL, 120, 175, 0, 0 )
+
+--imgBakDown3 = UI_CreateCompent( frmTeamPK, IMAGE_TYPE, "imgBakDown3", 46, 26, 512, 256 )
+--UI_LoadImage( imgBakDown3, "texture/ui/PK3.tga", NORMAL, 46, 26, 210, 52 )
+
+--????PK???title
+labPKtitle = UI_CreateCompent( frmTeamPK, LABELEX_TYPE, "labPKtitle", 207, 12, 87, 7 )
+UI_SetCaption( labPKtitle, "" )
+UI_SetTextColor( labPKtitle, COLOR_BLACK )
+UI_SetLabelExFont( labPKtitle, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+--????????t
+btnClose = UI_CreateCompent( frmTeamPK, BUTTON_TYPE, "btnClose", 14, 14, 340, 3 )
+UI_LoadButtonImage( btnClose, "texture/ui/PublicC.tga", 14, 14, 116, 175, TRUE )
+
+--????PK???????lab
+labPKmap = UI_CreateCompent( frmTeamPK, LABELEX_TYPE, "labPKmap", 100, 12, 256, 31 )
+UI_SetCaption( labPKmap, "" )
+UI_SetTextColor( labPKmap, COLOR_BLACK )
+UI_SetLabelExFont( labPKmap, DEFAULT_FONT, TRUE, COLOR_WHITE )
+
+
+----------team1????б?
+lstTeam0 = UI_CreateListView( frmTeamPK, "lstTeam0", 296, 115, 44, 87, 5, 2 )
+UI_SetListRowHeight( lstTeam0, 21 )
+UI_SetListFontColor( lstTeam0, COLOR_BLACK, COLOR_BLACK )
+UI_SetListIsMouseFollow( lstTeam0, TRUE)
+--UI_SetMargin( lstTeam0, 2,2,2,2 )
+UI_SetIsShow( lstTeam0, TRUE )
+id = UI_GetScroll( lstTeam0 )
+UI_SetIsEnabled( id, FALSE )
+UI_ListViewSetTitle( lstTeam0, 0, 105, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstTeam0, 1, 76, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstTeam0, 2, 39, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstTeam0, 3, 34, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstTeam0, 4, 12, "", 0, 0, 0, 0 )
+UI_AddListText( lstTeam0, "Eight characters or therefore" )
+UI_AddListText( lstTeam0, "Eight characters or therefore" )
+UI_AddListText( lstTeam0, "Eight characters or therefore" )
+UI_AddListText( lstTeam0, "Eight characters or therefore" )
+UI_AddListText( lstTeam0, "Eight characters or therefore" )
+
+----------team2????б?
+lstTeam1 = UI_CreateListView( frmTeamPK, "lstTeam1", 296, 115, 44, 264, 5, 2 )
+UI_SetListRowHeight( lstTeam1, 21 )
+UI_SetListFontColor( lstTeam1, COLOR_BLACK, COLOR_BLACK )
+UI_SetListIsMouseFollow( lstTeam1, TRUE)
+--UI_SetMargin( lstTeam1, 2,2,2,2 )
+UI_SetIsShow( lstTeam1, TRUE )
+id = UI_GetScroll( lstTeam1 )
+UI_SetIsEnabled( id, FALSE )
+UI_ListViewSetTitle( lstTeam1, 0, 105, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstTeam1, 1, 76, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstTeam1, 2, 39, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstTeam1, 3, 34, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstTeam1, 4, 12, "", 0, 0, 0, 0 )
+UI_AddListText( lstTeam1, "Eight characters or therefore" )
+UI_AddListText( lstTeam1, "Eight characters or therefore" )
+UI_AddListText( lstTeam1, "Eight characters or therefore" )
+UI_AddListText( lstTeam1, "Eight characters or therefore" )
+UI_AddListText( lstTeam1, "Eight characters or therefore" )
+
+
+--?????????t
+btnYes = UI_CreateCompent( frmTeamPK, BUTTON_TYPE, "btnYes", 41, 19, 224, 382 )
+UI_LoadButtonImage( btnYes, "texture/ui/PublicC.tga", 41, 19, 0, 0, TRUE )
+
+
+--?????????t
+btnNo = UI_CreateCompent( frmTeamPK, BUTTON_TYPE, "btnNo", 41, 19, 279, 382 )
+UI_LoadButtonImage( btnNo, "texture/ui/PublicC.tga", 41, 19, 0, 20, TRUE )
+
+
+
+
+-----------------------------------------------------------------------
+---------------/////////Таргет /////////////////////-------------------
+-----------------------------------------------------------------------
+frmTargetInfo = UI_CreateForm( "frmTargetInfo", FALSE, 196, 48, 560, 0, TRUE, FALSE )
+UI_ShowForm( frmTargetInfo, FALSE )
+UI_AddFormToTemplete( frmTargetInfo, FORM_MAIN )
+UI_FormSetIsEscClose( frmTargetInfo, FALSE ) 
+
+frmTargetInfoHP = UI_CreateCompent( frmTargetInfo, PROGRESS_TYPE, "frmTargetInfoHP", 144, 6, 46, 17 )
+UI_LoadScaleImage( frmTargetInfoHP, "texture/ui/ui2/target.png", PROGRESS_PROGRESS, 144, 6, 0, 277, 1.0, 1.0 )
+UI_SetHint( frmTargetInfoHP, "\198\232\231\237\232:" )
+
+frmTargetInfoName = UI_CreateCompent( frmTargetInfo, LABELEX_TYPE, "frmTargetInfoName", 149, 9, 42, 1 )
+UI_SetTextColor( frmTargetInfoName, COLOR_WHITE )
+UI_SetLabelExFont( frmTargetInfoName, TARGET_FONT2, TRUE, COLOR_BLACK )
+
+labTargetLv = UI_CreateCompent( frmTargetInfo, LABELEX_TYPE, "labTargetLv", 28, 12, 38, 26 )
+UI_SetTextColor( labTargetLv, COLOR_WHITE )
+UI_SetLabelExFont( labTargetLv, TARGET_FONT, TRUE, COLOR_BLACK )
+UI_SetCaption( labTargetLv, "200" )
+
+
+d3dTarget = UI_CreateCompent( frmTargetInfo, UI3D_COMPENT_TYPE, "d3dTarget", 25, 25, 7, 10 )
+
+btnOpenDrop = UI_CreateCompent( frmTargetInfo, BUTTON_TYPE, "btnOpenDrop", 16, 15, 197, 8 )
+UI_LoadButtonImage( btnOpenDrop, "texture/ui/ui2/target.png", 16, 15, 0, 335, TRUE )
+UI_SetHint( btnOpenDrop, "\205\224\230\236\232\242\229 \237\224 \232\234\238\237\234\243\n\228\235\255 \242\238\227\238 \247\242\238 \225\251\n \243\226\232\228\229\242\252 \232\237\244\238\240\236\224\246\232\254\n\238 \236\238\237\241\242\240\229" )
+
+--Create Mob Drop Info
+frmMobInfoDrop = UI_CreateForm( "frmMobInfoDrop", FALSE, 456, 449, 160, 60, TRUE, FALSE )
+
+-- Item Slots Background
+imgSlots = UI_CreateCompent( frmMobInfoDrop, IMAGE_TYPE, "imgSlots", 456, 449, 160, 60 )
+
+
+UI_LoadFormImage( frmMobInfoDrop, "texture/ui/ui2/InfoDrop.png", 456, 449, 0, 0, "", 0, 0 )
+UI_ShowForm( frmMobInfoDrop, FALSE )
+UI_SetIsDrag( frmMobInfoDrop, TRUE )
+UI_AddFormToTemplete( frmMobInfoDrop, FORM_MAIN )
+UI_FormSetIsEscClose( frmMobInfoDrop, FALSE )
+UI_SetFormStyleEx( frmMobInfoDrop, 9 , 250, 59)
+UI_FormSetIsEscClose( frmMobInfoDrop, TRUE )
+
+-- Close Button
+btnClose = UI_CreateCompent( frmMobInfoDrop, BUTTON_TYPE, "btnClose", 28, 28, 427, 24 )
+UI_LoadButtonImage( btnClose, "texture/ui/ui2/buttons.png", 25, 26, 381, 3, TRUE )
+UI_SetButtonModalResult( btnClose, BUTTON_CLOSE )
+
+-- Drop Items List
+lstItemDrop = UI_CreateListView( frmMobInfoDrop, "lstItemDrop", 183, 380, 26, 57, 10, 10 )
+UI_SetPos( lstItemDrop, 25, 90 )
+UI_SetSize( lstItemDrop, 196, 308 )
+UI_SetListRowHeight( lstItemDrop, 40 )
+UI_SetMargin( lstItemDrop, 1, 5, 5, 5 )		
+UI_FormSetIsEscClose( lstItemDrop, TRUE )
+UI_ListViewSetTitle( lstItemDrop, 0, 40, "", 0, 0, 0, 0 )
+UI_ListViewSetTitle( lstItemDrop, 1, 0, "", 0, 0, 0, 0 )
+UI_FormSetIsEscClose( lstItemDrop, TRUE )
+UI_SetListIsMouseFollow( lstItemDrop, TRUE)
+
+-- Drop Label
+lablDropN  = UI_CreateCompent(frmMobInfoDrop, LABELEX_TYPE, "lablDropN", 277, 13, 59, 63)
+UI_SetCaption(lablDropN, "Name")
+UI_SetTextColor(lablDropN, COLOR_WHITE)
+UI_SetLabelExFont(lablDropN, DEFAULT_FONT, TRUE, COLOR_BLACK)
+
+-- Create Monster Lines 
+imgLines = UI_CreateCompent( frmMobInfoDrop, IMAGE_TYPE, "imgLines", 160, 260, 22, 50 )
+--UI_LoadImage( imgLines, "texture/ui/custom/frmMobInfoDropC.png", NORMAL, 160, 260, 353, 0 )
+
+--Здоровье монстра
+labMobHP  = UI_CreateCompent(frmMobInfoDrop, LABELEX_TYPE, "labMobHP", 83, 12, 340, 165)
+--UI_SetCaption(labMobHP, "-")
+UI_SetTextColor(labMobHP, COLOR_WHITE)
+UI_SetLabelExFont(labMobHP, DEFAULT_FONT, TRUE)
+
+---Опыт с монстра
+labMobExp  = UI_CreateCompent(frmMobInfoDrop, LABELEX_TYPE, "labMobExp", 83, 12, 340, 139)
+--UI_SetCaption(labMobExp, "-")
+UI_SetTextColor(labMobExp, COLOR_WHITE)
+UI_SetLabelExFont(labMobExp, DEFAULT_FONT, TRUE)
+
+--Уровень монстра
+labMobLevel  = UI_CreateCompent(frmMobInfoDrop, LABELEX_TYPE, "labMobLevel", 83, 12, 340, 113)
+UI_SetCaption(labMobLevel, "-")
+UI_SetTextColor(labMobLevel, COLOR_WHITE)
+UI_SetLabelExFont(labMobLevel, DEFAULT_FONT, TRUE)
+
+--Скорость бега
+labMobSpeed  = UI_CreateCompent(frmMobInfoDrop, LABELEX_TYPE, "labMobSpeed", 83, 12, 340, 347)
+--UI_SetCaption(labMobSpeed, "-")
+UI_SetTextColor(labMobSpeed, COLOR_WHITE)
+UI_SetLabelExFont(labMobSpeed, DEFAULT_FONT, TRUE)
+
+--Уклонение
+labMobDodge  = UI_CreateCompent(frmMobInfoDrop, LABELEX_TYPE, "labMobDodge", 83, 12, 340, 295)
+--UI_SetCaption(labMobDodge, "-")
+UI_SetTextColor(labMobDodge, COLOR_WHITE)
+UI_SetLabelExFont(labMobDodge, DEFAULT_FONT, TRUE)
+
+
+--Шанс урона монстра
+labMobHitRate  = UI_CreateCompent(frmMobInfoDrop, LABELEX_TYPE, "labMobHitRate",83, 12, 340, 269)
+--UI_SetCaption(labMobHitRate, "-")
+UI_SetTextColor(labMobHitRate, COLOR_WHITE)
+UI_SetLabelExFont(labMobHitRate, DEFAULT_FONT, TRUE)
+
+--Защита
+labMobDef  = UI_CreateCompent(frmMobInfoDrop, LABELEX_TYPE, "labMobDef",83, 12, 340, 243)
+--UI_SetCaption(labMobDef, "-")
+UI_SetTextColor(labMobDef, COLOR_WHITE)
+UI_SetLabelExFont(labMobDef, DEFAULT_FONT, TRUE)
+
+--Физическое сопротивление
+labMobPR  = UI_CreateCompent(frmMobInfoDrop, LABELEX_TYPE, "labMobPR", 83, 12, 340, 217)
+--UI_SetCaption(labMobPR, "-")
+UI_SetTextColor(labMobPR, COLOR_WHITE)
+UI_SetLabelExFont(labMobPR, DEFAULT_FONT, TRUE)
+
+--Скорость атаки
+labMobASpeed  = UI_CreateCompent(frmMobInfoDrop, LABELEX_TYPE, "labMobASpeed", 83, 12, 340, 321)
+--UI_SetCaption(labMobASpeed, "-")
+UI_SetTextColor(labMobASpeed, COLOR_WHITE)
+UI_SetLabelExFont(labMobASpeed, DEFAULT_FONT, TRUE)
+ 
+--Атака монстра
+labMobAttack  = UI_CreateCompent(frmMobInfoDrop, LABELEX_TYPE, "labMobAttack", 83, 12, 340, 191)
+--UI_SetCaption(labMobAttack, "-")
+UI_SetTextColor(labMobAttack, COLOR_WHITE)
+UI_SetLabelExFont(labMobAttack, DEFAULT_FONT, TRUE)
+
+-- Tabs --
+--Create page
+pgeMobInfo = UI_CreateCompent( frmMobInfoDrop, PAGE_TYPE, "pgeMobInfo", 172, 25, 0, 0 )
+UI_SetPageButton( pgeMobInfo, PAGE_BUTTON_CUSTOM, 48, 16 )
+
+
+
+
